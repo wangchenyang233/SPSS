@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="探索奇瑞商用车的各项价值内容。">
+    <meta name="keywords" content="商用车, 价值, 奇瑞, 智能服务">
+    <title>价值内容</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 特定页面样式 */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .value-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: left;
+            position: relative;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .value-card h3 {
+            font-size: 18px;
+            color: #00796b;
+            margin-bottom: 10px;
+        }
+
+        .value-card p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .value-card .details {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            transition: max-height 0.3s ease;
+            overflow: hidden;
+        }
+
+        .value-card.show .details {
+            display: block;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #no-results {
+            display: none;
+            color: #f44336;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .value-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/奇瑞商标.webp" alt="奇瑞汽车公司商标" loading="lazy">
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="scenes.html">场景介绍</a></li>
+                <li><a href="#">配置选择</a></li>
+                <li><a href="#">解决方案分析</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="title">奇瑞商用车价值内容</h1>
+
+            <!-- 搜索功能 -->
+            <div class="search-container">
+                <input type="text" id="searchValue" placeholder="搜索价值内容" oninput="searchValues()" />
+                <p id="no-results">未找到相关内容。</p>
+            </div>
+
+            <div class="value-grid" id="value-grid">
+                <!-- 每个价值项的卡片 -->
+                <!-- 示例卡片开始 -->
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>车辆安全<br>Vehicle Safety</h3>
+                    <p>车辆结构、功能、电池、电气等安全配置以及碰撞和制动控制系统等方面保障驾乘人员安全的能力 硬件符合ISO26262 诊断系统 电池管理 车体结构 ESC ABS稳定性。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：城市道路、高速公路；<br>概率：碰撞事故减少80%。</p>
+                    </div>
+                </div>
+                <!-- 示例卡片结束 -->
+
+                <!-- 以下是新增的价值项卡片 -->
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>信息安全<br>Cybersecurity</h3>
+                    <p>车辆信息系统实行数据保护、保障更新OTA安全、抵御网络攻击的能力 未授权访问 泄露 安全漏洞 入侵。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：车联网环境；<br>概率：防止数据泄露率达到95%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>智能驾驶安全<br>Automated Driving Safety</h3>
+                    <p>车辆在智能驾驶模式下保障安全的能力，包括环境感知可靠性、决策算法安全性、人机交互安全性。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：自动驾驶高速公路；<br>概率：事故率降低70%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>空间利用率<br>Utilization</h3>
+                    <p>通过优化车辆内部空间布局，提高货物或乘客的容纳能力，提升车辆的整体利用效率。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：城市配送；<br>概率：空间利用率提高30%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>承载性<br>Carrying Capacity</h3>
+                    <p>车辆的载重能力，包括最大承载重量和持续承载能力，确保运输效率和安全。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：长途运输；<br>概率：载重能力提升25%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>适应性<br>Adaptability</h3>
+                    <p>车辆在不同道路条件和环境下的适应能力，包括地形适应性和气候适应性。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：复杂地形；<br>概率：适应性提升40%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>耐用性<br>Durability</h3>
+                    <p>车辆在长期使用中的可靠性和稳定性，减少维护和更换频率。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：长时间运营；<br>概率：故障率降低50%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>可靠性<br>Reliability</h3>
+                    <p>确保车辆在各种条件下稳定运行，减少故障和停机时间。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：高负荷运营；<br>概率：可靠性提升60%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>设计感<br>Design</h3>
+                    <p>车辆的外观和内部设计，提升品牌形象和用户体验。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：市场竞争；<br>概率：设计满意度提高35%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>易用性<br>Ease of Use</h3>
+                    <p>车辆的操作简便性，包括驾驶界面和控制系统的用户友好性。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：日常使用；<br>概率：用户操作错误率减少70%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>友好性<br>Friendliness</h3>
+                    <p>车辆对用户的友好程度，包括舒适性、静音性和人机交互体验。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：长途驾驶；<br>概率：用户满意度提高80%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>个性化<br>Personalization</h3>
+                    <p>根据用户偏好定制车辆设置和功能，提升用户的专属体验。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：个性化需求；<br>概率：用户满意度提升50%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>偏好性<br>Preference</h3>
+                    <p>车辆配置和功能满足不同用户的偏好，提供多样化的选择。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：多样化市场；<br>概率：市场覆盖率提升45%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>场景化<br>Scenario</h3>
+                    <p>根据不同使用场景优化车辆功能，提供针对性的解决方案。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：不同应用场景；<br>概率：功能适应性提升60%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>主动便利<br>Active Convenience</h3>
+                    <p>通过智能系统和自动化功能提升驾驶和使用的便利性。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：日常驾驶；<br>概率：操作便利性提升70%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>生态便利<br>Ecological Convenience</h3>
+                    <p>车辆在生态环境中的便利性，包括环保设计和绿色技术应用。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：环保法规；<br>概率：碳排放减少60%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>人工智能程度<br>Artificial Intelligence Degree</h3>
+                    <p>车辆中人工智能技术的应用程度，提升自动化和智能化水平。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：智能驾驶；<br>概率：智能化功能覆盖率提升80%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>产业互联<br>Industrial Connectivity</h3>
+                    <p>车辆与产业链各环节的互联互通，提升整体运营效率。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：供应链管理；<br>概率：运营效率提升50%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>移动端互联<br>Mobile Connectivity</h3>
+                    <p>车辆与移动设备的无缝连接，提升用户的移动体验。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：移动办公；<br>概率：连接稳定性提升90%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>车辆端互联<br>HMI Connectivity</h3>
+                    <p>车辆内部各系统的互联互通，提升人机交互体验和系统协同效率。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：智能车载系统；<br>概率：系统响应时间减少50%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>低碳<br>Low Carbon</h3>
+                    <p>通过采用低碳技术和优化能源使用，减少车辆的碳排放。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：环保法规；<br>概率：碳排放减少40%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>能源有效性<br>Energy Efficiency</h3>
+                    <p>车辆在能源使用上的高效性，降低能耗，提高续航能力。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：长途驾驶；<br>概率：能源消耗降低30%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>循环性<br>Circularity</h3>
+                    <p>车辆设计和生产中的循环经济理念，促进资源的可持续利用和回收。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：资源回收利用；<br>概率：材料回收率提升70%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>成本控制<br>Cost Control</h3>
+                    <p>通过优化生产和运营流程，降低车辆的整体成本，提升市场竞争力。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：市场竞争；<br>概率：成本降低20%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>效率<br>Efficiency</h3>
+                    <p>车辆在各项功能和操作上的高效性，提升整体运营效率。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：物流运输；<br>概率：运营效率提升35%。</p>
+                    </div>
+                </div>
+
+                <div class="value-card" tabindex="0" onclick="toggleDetails(this)" onkeypress="if(event.key === 'Enter') toggleDetails(this)">
+                    <h3>省时<br>Time Saving</h3>
+                    <p>通过优化车辆性能和智能系统，节省用户的时间，提高生产力。</p>
+                    <button onclick="toggleDetails(this.parentElement)">查看详情</button>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：日常运输；<br>概率：时间节省25%。</p>
+                    </div>
+                </div>
+                <!-- 更多卡片可以在此添加 -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        上海理工大学智能产品服务系统团队 | 调查 | 
+        邮箱联系: <a href="mailto:chenyangwang@gmail.com">chenyangwang@gmail.com</a> | 
+        <a href="#">简体中文</a> | <a href="#">English</a>
+    </footer>
+
+    <script>
+        // 搜索价值内容
+        function searchValues() {
+            const query = document.getElementById('searchValue').value.toLowerCase();
+            const valueCards = document.querySelectorAll('.value-card');
+            let anyVisible = false;
+            valueCards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const description = card.querySelector('p').innerText.toLowerCase();
+                if (title.includes(query) || description.includes(query)) {
+                    card.style.display = 'block';
+                    anyVisible = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+        }
+
+        // 显示或隐藏场景与概率信息
+        function toggleDetails(card) {
+            card.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

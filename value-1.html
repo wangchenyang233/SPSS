@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="探索奇瑞商用车的各项价值内容。">
+    <meta name="keywords" content="商用车, 价值, 奇瑞, 智能服务">
+    <title>价值内容</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 特定页面样式 */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .value-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: left;
+            position: relative;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .value-card h3 {
+            font-size: 18px;
+            color: #00796b;
+            margin-bottom: 10px;
+        }
+
+        .value-card p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .value-card .details {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/奇瑞商标.png" alt="奇瑞商标" loading="lazy">
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="scenes.html">场景介绍</a></li>
+                <li><a href="#">配置选择</a></li>
+                <li><a href="#">解决方案分析</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="title">奇瑞商用车价值内容</div>
+
+            <!-- 搜索功能 -->
+            <div class="search-container">
+                <input type="text" id="searchValue" placeholder="搜索价值内容" oninput="searchValues()" />
+            </div>
+
+            <div class="value-grid" id="value-grid">
+                <!-- 每个价值项的卡片 -->
+                <div class="value-card" onclick="toggleDetails(this)">
+                    <h3>车辆安全<br>Vehicle Safety</h3>
+                    <p>车辆结构、功能、电池、电气等安全配置以及碰撞和制动控制系统等方面保障驾乘人员安全的能力 硬件符合ISO26262 诊断系统 电池管理 车体结构 ESC ABS稳定性。</p>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：城市道路、高速公路；<br>概率：碰撞事故减少80%。</p>
+                    </div>
+                </div>
+                <div class="value-card" onclick="toggleDetails(this)">
+                    <h3>信息安全<br>Cybersecurity</h3>
+                    <p>车辆信息系统实行数据保护、保障更新OTA安全、抵御网络攻击的能力 未授权访问 泄露 安全漏洞 入侵。</p>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：车联网环境；<br>概率：防止数据泄露率达到95%。</p>
+                    </div>
+                </div>
+                <div class="value-card" onclick="toggleDetails(this)">
+                    <h3>智能驾驶安全<br>Automated Driving Safety</h3>
+                    <p>车辆在智能驾驶模式下保障安全的能力，包括环境感知可靠性、决策算法安全性、人机交互安全性。</p>
+                    <div class="details">
+                        <h4>场景与概率:</h4>
+                        <p>场景：自动驾驶高速公路；<br>概率：事故率降低70%。</p>
+                    </div>
+                </div>
+                <!-- 更多卡片... -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        上海理工大学智能产品服务系统团队 | 调查 | 
+        邮箱联系: <a href="mailto:chenyangwang@gmail.com">chenyangwang@gmail.com</a> | 
+        <a href="#">简体中文</a> | <a href="#">English</a>
+    </footer>
+
+    <script>
+        // 搜索价值内容
+        function searchValues() {
+            const query = document.getElementById('searchValue').value.toLowerCase();
+            const valueCards = document.querySelectorAll('.value-card');
+            valueCards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const description = card.querySelector('p').innerText.toLowerCase();
+                if (title.includes(query) || description.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 显示或隐藏场景与概率信息
+        function toggleDetails(card) {
+            const details = card.querySelector('.details');
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+            } else {
+                details.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

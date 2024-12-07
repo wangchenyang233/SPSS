@@ -1,0 +1,118 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="探索奇瑞的智能产品服务系统-价值驱动场景的。">
+    <meta name="keywords" content="商用车, 奇瑞, 互联服务, 配置选择, 解决方案分析">
+    <title>互联服务平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 特定页面样式 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            grid-template-rows: auto;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+            text-align: left;
+        }
+
+        /* 中间的项卡突出显示，去掉背景颜色变化，只保留放大效果 */
+        .grid-item.middle {
+            transform: scale(1.05);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .grid-item h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #00796b;
+        }
+
+        .grid-item p {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/奇瑞商标.png" alt="奇瑞商标" loading="lazy">
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="scenes.html">场景介绍</a></li>
+                <li><a href="#">配置选择</a></li>
+                <li><a href="#">解决方案分析</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="title">SPSS - 奇瑞商用车智能产品服务系统平台</div>
+            <div class="grid">
+                <a href="value.html" class="grid-item">
+                    <h3>价值</h3>
+                    <p>深度解析奇瑞商用车的价值</p>
+                </a>
+                <a href="scenes.html" class="grid-item middle">
+                    <h3>场景</h3>
+                    <p>按特征划分的使用情境</p>
+                </a>
+                <a href="features.html" class="grid-item">
+                    <h3>特征</h3>
+                    <p>车型特征对比</p>
+                </a>
+                <a href="idmi.html" class="grid-item">
+                    <h3>ID.MI.</h3>
+                    <p>客户体验与产品质量</p>
+                </a>
+                <a href="analysis.html" class="grid-item middle">
+                    <h3>分析</h3>
+                    <p>特征对比与安装率</p>
+                </a>
+                <a href="reports.html" class="grid-item">
+                    <h3>报告</h3>
+                    <p>每月市场亮点</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        上海理工大学智能产品服务系统团队 | 调查 | 
+        邮箱联系: <a href="mailto:chenyangwang@gmail.com">chenyangwang@gmail.com</a> | 
+        <a href="#">简体中文</a> | <a href="#">English</a>
+    </footer>
+</body>
+</html>
