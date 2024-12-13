@@ -1,0 +1,1427 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>产品特征展示</title>
+        <style>
+            /* 全局样式 */
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f8fafc;
+                color: #333;
+            }
+
+            header {
+                background-color: #004d40;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            a {
+                color: #b2dfdb;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+
+            .title {
+                font-size: 32px;
+                font-weight: bold;
+                color: #004d40;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            /* 图片展示样式 */
+            .image-row {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+
+            .image-item {
+                text-align: center;
+                flex: 1;
+                max-width: 300px;
+            }
+
+            .image-item img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .image-item img:hover {
+                transform: scale(1.05);
+            }
+
+            .image-item p {
+                margin-top: 10px;
+                font-size: 18px;
+                color: #004d40;
+                font-weight: bold;
+            }
+
+            /* 搜索框样式 */
+            .search-box {
+                display: block;
+                margin: 0 auto 30px;
+                padding: 12px 20px;
+                width: 100%;
+                max-width: 500px;
+                border: 1px solid #ccc;
+                border-radius: 25px;
+                font-size: 16px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            /* 卡片网格样式 */
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+            }
+
+            .grid-item {
+                background: white;
+                border-radius: 15px;
+                padding: 20px;
+                box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-align: left;
+                cursor: pointer;
+            }
+
+            .grid-item:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .grid-item h3 {
+                font-size: 20px;
+                font-weight: bold;
+                color: #004d40;
+                margin: 0 0 10px;
+            }
+
+            .grid-item p {
+                font-size: 16px;
+                color: #555;
+            }
+
+            /* 响应式设计 */
+            @media (max-width: 768px) {
+                .grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                .image-row {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .image-item {
+                    margin-bottom: 20px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            产品特征展示
+            <br>
+            <a href="index.html">返回首页</a>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="title">产品</div>
+
+                <!-- 图片展示 -->
+                <div class="image-row">
+                    <div class="image-item">
+                        <img src="image1.jpg" alt="图片 1">
+                        <p>L1H1</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="image2.jpg" alt="图片 2">
+                        <p>L2H3</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="L3CC" alt="图片 3">
+                        <p>图片名称 3</p>
+                    </div>
+                </div>
+
+                <!-- 搜索框 -->
+                <input type="text" id="searchBox" class="search-box" placeholder="🔍 搜索产品特征..." oninput="filterFeatures()">
+
+                <!-- 产品特征网格 -->
+                <div class="grid" id="features-grid">
+    
+        <div class="grid-item" data-id="1">
+            <h3>特征 ID: 1</h3>
+            <p>360°全景影像系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="2">
+            <h3>特征 ID: 2</h3>
+            <p>ABS系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="3">
+            <h3>特征 ID: 3</h3>
+            <p>ADAS智能辅助驾驶</p>
+        </div>
+        
+        <div class="grid-item" data-id="4">
+            <h3>特征 ID: 4</h3>
+            <p>AEB紧急制动</p>
+        </div>
+        
+        <div class="grid-item" data-id="5">
+            <h3>特征 ID: 5</h3>
+            <p>AI语音交互系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="6">
+            <h3>特征 ID: 6</h3>
+            <p>AI语音交互系统（可进行个性化对话）</p>
+        </div>
+        
+        <div class="grid-item" data-id="7">
+            <h3>特征 ID: 7</h3>
+            <p>ATTENTION ASSIST注意力辅助系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="8">
+            <h3>特征 ID: 8</h3>
+            <p>BSD盲区监测</p>
+        </div>
+        
+        <div class="grid-item" data-id="9">
+            <h3>特征 ID: 9</h3>
+            <p>DMS疲劳监测</p>
+        </div>
+        
+        <div class="grid-item" data-id="10">
+            <h3>特征 ID: 10</h3>
+            <p>E-Call自动紧急呼叫系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="11">
+            <h3>特征 ID: 11</h3>
+            <p>EPB电子手刹</p>
+        </div>
+        
+        <div class="grid-item" data-id="12">
+            <h3>特征 ID: 12</h3>
+            <p>EPB自动驻车</p>
+        </div>
+        
+        <div class="grid-item" data-id="13">
+            <h3>特征 ID: 13</h3>
+            <p>FACE ID账户系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="14">
+            <h3>特征 ID: 14</h3>
+            <p>L2级智能辅助驾驶</p>
+        </div>
+        
+        <div class="grid-item" data-id="15">
+            <h3>特征 ID: 15</h3>
+            <p>LCA+LKA变道辅助及车道保持</p>
+        </div>
+        
+        <div class="grid-item" data-id="16">
+            <h3>特征 ID: 16</h3>
+            <p>LDW车道偏离预警</p>
+        </div>
+        
+        <div class="grid-item" data-id="17">
+            <h3>特征 ID: 17</h3>
+            <p>MBUX多媒体系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="18">
+            <h3>特征 ID: 18</h3>
+            <p>MTBF（平均无故障工作时间）</p>
+        </div>
+        
+        <div class="grid-item" data-id="19">
+            <h3>特征 ID: 19</h3>
+            <p>OTA升级系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="20">
+            <h3>特征 ID: 20</h3>
+            <p>TPMS胎压监测系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="21">
+            <h3>特征 ID: 21</h3>
+            <p>TSR限速提示</p>
+        </div>
+        
+        <div class="grid-item" data-id="22">
+            <h3>特征 ID: 22</h3>
+            <p>V2X万物互联</p>
+        </div>
+        
+        <div class="grid-item" data-id="23">
+            <h3>特征 ID: 23</h3>
+            <p>X-CALL系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="24">
+            <h3>特征 ID: 24</h3>
+            <p>安全形式数据统计</p>
+        </div>
+        
+        <div class="grid-item" data-id="25">
+            <h3>特征 ID: 25</h3>
+            <p>保养间隔</p>
+        </div>
+        
+        <div class="grid-item" data-id="26">
+            <h3>特征 ID: 26</h3>
+            <p>残值</p>
+        </div>
+        
+        <div class="grid-item" data-id="27">
+            <h3>特征 ID: 27</h3>
+            <p>侧风辅助</p>
+        </div>
+        
+        <div class="grid-item" data-id="28">
+            <h3>特征 ID: 28</h3>
+            <p>侧移门宽度</p>
+        </div>
+        
+        <div class="grid-item" data-id="29">
+            <h3>特征 ID: 29</h3>
+            <p>超大隐私玻璃设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="30">
+            <h3>特征 ID: 30</h3>
+            <p>车道保持辅助系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="31">
+            <h3>特征 ID: 31</h3>
+            <p>车顶搁架和可选隔间</p>
+        </div>
+        
+        <div class="grid-item" data-id="32">
+            <h3>特征 ID: 32</h3>
+            <p>车顶型号可选</p>
+        </div>
+        
+        <div class="grid-item" data-id="33">
+            <h3>特征 ID: 33</h3>
+            <p>车队管理定制化服务</p>
+        </div>
+        
+        <div class="grid-item" data-id="34">
+            <h3>特征 ID: 34</h3>
+            <p>车队管理全方位服务</p>
+        </div>
+        
+        <div class="grid-item" data-id="35">
+            <h3>特征 ID: 35</h3>
+            <p>车队管理系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="36">
+            <h3>特征 ID: 36</h3>
+            <p>车队管理系统和远程操作</p>
+        </div>
+        
+        <div class="grid-item" data-id="37">
+            <h3>特征 ID: 37</h3>
+            <p>车联网云平台</p>
+        </div>
+        
+        <div class="grid-item" data-id="38">
+            <h3>特征 ID: 38</h3>
+            <p>车辆安全防盗预警系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="39">
+            <h3>特征 ID: 39</h3>
+            <p>车辆安全监测和警报系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="40">
+            <h3>特征 ID: 40</h3>
+            <p>车辆残值评估与动态预测</p>
+        </div>
+        
+        <div class="grid-item" data-id="41">
+            <h3>特征 ID: 41</h3>
+            <p>车辆端互联</p>
+        </div>
+        
+        <div class="grid-item" data-id="42">
+            <h3>特征 ID: 42</h3>
+            <p>车辆健康报告</p>
+        </div>
+        
+        <div class="grid-item" data-id="43">
+            <h3>特征 ID: 43</h3>
+            <p>车辆健康监测系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="44">
+            <h3>特征 ID: 44</h3>
+            <p>车辆健康实时化、可视化</p>
+        </div>
+        
+        <div class="grid-item" data-id="45">
+            <h3>特征 ID: 45</h3>
+            <p>车辆交接时状态自动检查与提醒</p>
+        </div>
+        
+        <div class="grid-item" data-id="46">
+            <h3>特征 ID: 46</h3>
+            <p>车辆使用过程全程可控、可视、可追溯</p>
+        </div>
+        
+        <div class="grid-item" data-id="47">
+            <h3>特征 ID: 47</h3>
+            <p>车辆休息模式</p>
+        </div>
+        
+        <div class="grid-item" data-id="48">
+            <h3>特征 ID: 48</h3>
+            <p>车内储物空间设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="49">
+            <h3>特征 ID: 49</h3>
+            <p>车内储物系统的个性化设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="50">
+            <h3>特征 ID: 50</h3>
+            <p>车内容积</p>
+        </div>
+        
+        <div class="grid-item" data-id="51">
+            <h3>特征 ID: 51</h3>
+            <p>车身稳定系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="52">
+            <h3>特征 ID: 52</h3>
+            <p>车身长度和高度选择</p>
+        </div>
+        
+        <div class="grid-item" data-id="53">
+            <h3>特征 ID: 53</h3>
+            <p>车厢宽度</p>
+        </div>
+        
+        <div class="grid-item" data-id="54">
+            <h3>特征 ID: 54</h3>
+            <p>车载无线充电</p>
+        </div>
+        
+        <div class="grid-item" data-id="55">
+            <h3>特征 ID: 55</h3>
+            <p>车主APP社区</p>
+        </div>
+        
+        <div class="grid-item" data-id="56">
+            <h3>特征 ID: 56</h3>
+            <p>城市/高架辅助驾驶</p>
+        </div>
+        
+        <div class="grid-item" data-id="57">
+            <h3>特征 ID: 57</h3>
+            <p>充电站查询界面</p>
+        </div>
+        
+        <div class="grid-item" data-id="58">
+            <h3>特征 ID: 58</h3>
+            <p>触摸屏与数字仪表盘</p>
+        </div>
+        
+        <div class="grid-item" data-id="59">
+            <h3>特征 ID: 59</h3>
+            <p>导航停车点智能推荐</p>
+        </div>
+        
+        <div class="grid-item" data-id="60">
+            <h3>特征 ID: 60</h3>
+            <p>地板坚固耐磨</p>
+        </div>
+        
+        <div class="grid-item" data-id="61">
+            <h3>特征 ID: 61</h3>
+            <p>地板离地高度</p>
+        </div>
+        
+        <div class="grid-item" data-id="62">
+            <h3>特征 ID: 62</h3>
+            <p>低货台高度530mm</p>
+        </div>
+        
+        <div class="grid-item" data-id="63">
+            <h3>特征 ID: 63</h3>
+            <p>低碳绿色成就分享</p>
+        </div>
+        
+        <div class="grid-item" data-id="64">
+            <h3>特征 ID: 64</h3>
+            <p>低维护成本</p>
+        </div>
+        
+        <div class="grid-item" data-id="65">
+            <h3>特征 ID: 65</h3>
+            <p>电池安全</p>
+        </div>
+        
+        <div class="grid-item" data-id="66">
+            <h3>特征 ID: 66</h3>
+            <p>电池包安全防护设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="67">
+            <h3>特征 ID: 67</h3>
+            <p>电池热管理系统与多合一控制器</p>
+        </div>
+        
+        <div class="grid-item" data-id="68">
+            <h3>特征 ID: 68</h3>
+            <p>电池质保8年49万公里</p>
+        </div>
+        
+        <div class="grid-item" data-id="69">
+            <h3>特征 ID: 69</h3>
+            <p>电动侧移门+电动踏步</p>
+        </div>
+        
+        <div class="grid-item" data-id="70">
+            <h3>特征 ID: 70</h3>
+            <p>电动驱动系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="71">
+            <h3>特征 ID: 71</h3>
+            <p>电动趟门和尾门</p>
+        </div>
+        
+        <div class="grid-item" data-id="72">
+            <h3>特征 ID: 72</h3>
+            <p>电子怀挡</p>
+        </div>
+        
+        <div class="grid-item" data-id="73">
+            <h3>特征 ID: 73</h3>
+            <p>电子稳定程序（ESP）</p>
+        </div>
+        
+        <div class="grid-item" data-id="74">
+            <h3>特征 ID: 74</h3>
+            <p>定制化专业改装</p>
+        </div>
+        
+        <div class="grid-item" data-id="75">
+            <h3>特征 ID: 75</h3>
+            <p>动侧移门+电动踏步</p>
+        </div>
+        
+        <div class="grid-item" data-id="76">
+            <h3>特征 ID: 76</h3>
+            <p>多功能方向盘</p>
+        </div>
+        
+        <div class="grid-item" data-id="77">
+            <h3>特征 ID: 77</h3>
+            <p>多货舱设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="78">
+            <h3>特征 ID: 78</h3>
+            <p>多颗超声波雷达</p>
+        </div>
+        
+        <div class="grid-item" data-id="79">
+            <h3>特征 ID: 79</h3>
+            <p>多媒体系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="80">
+            <h3>特征 ID: 80</h3>
+            <p>多元座椅布局</p>
+        </div>
+        
+        <div class="grid-item" data-id="81">
+            <h3>特征 ID: 81</h3>
+            <p>多种装载门选择</p>
+        </div>
+        
+        <div class="grid-item" data-id="82">
+            <h3>特征 ID: 82</h3>
+            <p>发动机和车身材料</p>
+        </div>
+        
+        <div class="grid-item" data-id="83">
+            <h3>特征 ID: 83</h3>
+            <p>方圆之融设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="84">
+            <h3>特征 ID: 84</h3>
+            <p>辅助驾驶摄像头和毫米波雷达</p>
+        </div>
+        
+        <div class="grid-item" data-id="85">
+            <h3>特征 ID: 85</h3>
+            <p>负载自适应</p>
+        </div>
+        
+        <div class="grid-item" data-id="86">
+            <h3>特征 ID: 86</h3>
+            <p>高承载隐藏式B柱设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="87">
+            <h3>特征 ID: 87</h3>
+            <p>高钢性底盘一体铸造</p>
+        </div>
+        
+        <div class="grid-item" data-id="88">
+            <h3>特征 ID: 88</h3>
+            <p>高强度钢车身</p>
+        </div>
+        
+        <div class="grid-item" data-id="89">
+            <h3>特征 ID: 89</h3>
+            <p>高强度可伸缩负载捆绑环</p>
+        </div>
+        
+        <div class="grid-item" data-id="90">
+            <h3>特征 ID: 90</h3>
+            <p>高效充电系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="91">
+            <h3>特征 ID: 91</h3>
+            <p>高效发动机</p>
+        </div>
+        
+        <div class="grid-item" data-id="92">
+            <h3>特征 ID: 92</h3>
+            <p>高效能源使用</p>
+        </div>
+        
+        <div class="grid-item" data-id="93">
+            <h3>特征 ID: 93</h3>
+            <p>工作成果可视化展现</p>
+        </div>
+        
+        <div class="grid-item" data-id="94">
+            <h3>特征 ID: 94</h3>
+            <p>工作量统计、分析</p>
+        </div>
+        
+        <div class="grid-item" data-id="95">
+            <h3>特征 ID: 95</h3>
+            <p>固定有车位的无人循迹泊车</p>
+        </div>
+        
+        <div class="grid-item" data-id="96">
+            <h3>特征 ID: 96</h3>
+            <p>故障呼叫</p>
+        </div>
+        
+        <div class="grid-item" data-id="97">
+            <h3>特征 ID: 97</h3>
+            <p>轨道系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="98">
+            <h3>特征 ID: 98</h3>
+            <p>核心部件寿命</p>
+        </div>
+        
+        <div class="grid-item" data-id="99">
+            <h3>特征 ID: 99</h3>
+            <p>核心三电防护等级</p>
+        </div>
+        
+        <div class="grid-item" data-id="100">
+            <h3>特征 ID: 100</h3>
+            <p>后空气悬架自适应路况</p>
+        </div>
+        
+        <div class="grid-item" data-id="101">
+            <h3>特征 ID: 101</h3>
+            <p>后座独立空调控制</p>
+        </div>
+        
+        <div class="grid-item" data-id="102">
+            <h3>特征 ID: 102</h3>
+            <p>互联服务系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="103">
+            <h3>特征 ID: 103</h3>
+            <p>货舱定制设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="104">
+            <h3>特征 ID: 104</h3>
+            <p>货舱和货物运输监测系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="105">
+            <h3>特征 ID: 105</h3>
+            <p>货舱监控系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="106">
+            <h3>特征 ID: 106</h3>
+            <p>货舱装载自动排序</p>
+        </div>
+        
+        <div class="grid-item" data-id="107">
+            <h3>特征 ID: 107</h3>
+            <p>货厢容积</p>
+        </div>
+        
+        <div class="grid-item" data-id="108">
+            <h3>特征 ID: 108</h3>
+            <p>基于效率的智能返程路线自动规划</p>
+        </div>
+        
+        <div class="grid-item" data-id="109">
+            <h3>特征 ID: 109</h3>
+            <p>基于效率的智能化任务分配</p>
+        </div>
+        
+        <div class="grid-item" data-id="110">
+            <h3>特征 ID: 110</h3>
+            <p>激光焊接车身结构</p>
+        </div>
+        
+        <div class="grid-item" data-id="111">
+            <h3>特征 ID: 111</h3>
+            <p>集成移动电源</p>
+        </div>
+        
+        <div class="grid-item" data-id="112">
+            <h3>特征 ID: 112</h3>
+            <p>驾驶室设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="113">
+            <h3>特征 ID: 113</h3>
+            <p>驾驶数据</p>
+        </div>
+        
+        <div class="grid-item" data-id="114">
+            <h3>特征 ID: 114</h3>
+            <p>驾驶员监测系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="115">
+            <h3>特征 ID: 115</h3>
+            <p>交通标识识别辅助</p>
+        </div>
+        
+        <div class="grid-item" data-id="116">
+            <h3>特征 ID: 116</h3>
+            <p>交通警示系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="117">
+            <h3>特征 ID: 117</h3>
+            <p>节能驾驶模式</p>
+        </div>
+        
+        <div class="grid-item" data-id="118">
+            <h3>特征 ID: 118</h3>
+            <p>紧急呼叫系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="119">
+            <h3>特征 ID: 119</h3>
+            <p>静音设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="120">
+            <h3>特征 ID: 120</h3>
+            <p>开门预警系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="121">
+            <h3>特征 ID: 121</h3>
+            <p>可拆卸储物箱设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="122">
+            <h3>特征 ID: 122</h3>
+            <p>可调节座椅</p>
+        </div>
+        
+        <div class="grid-item" data-id="123">
+            <h3>特征 ID: 123</h3>
+            <p>可定制的车载配置</p>
+        </div>
+        
+        <div class="grid-item" data-id="124">
+            <h3>特征 ID: 124</h3>
+            <p>可选电池升级</p>
+        </div>
+        
+        <div class="grid-item" data-id="125">
+            <h3>特征 ID: 125</h3>
+            <p>可再生材料使用</p>
+        </div>
+        
+        <div class="grid-item" data-id="126">
+            <h3>特征 ID: 126</h3>
+            <p>可自定义的中控操作拓展</p>
+        </div>
+        
+        <div class="grid-item" data-id="127">
+            <h3>特征 ID: 127</h3>
+            <p>客户车队工作量自动统计</p>
+        </div>
+        
+        <div class="grid-item" data-id="128">
+            <h3>特征 ID: 128</h3>
+            <p>离车自动锁车、关窗</p>
+        </div>
+        
+        <div class="grid-item" data-id="129">
+            <h3>特征 ID: 129</h3>
+            <p>联网升级OTA</p>
+        </div>
+        
+        <div class="grid-item" data-id="130">
+            <h3>特征 ID: 130</h3>
+            <p>灵活货厢空间配置</p>
+        </div>
+        
+        <div class="grid-item" data-id="131">
+            <h3>特征 ID: 131</h3>
+            <p>轮胎</p>
+        </div>
+        
+        <div class="grid-item" data-id="132">
+            <h3>特征 ID: 132</h3>
+            <p>绿色动力选项</p>
+        </div>
+        
+        <div class="grid-item" data-id="133">
+            <h3>特征 ID: 133</h3>
+            <p>耐用发动机</p>
+        </div>
+        
+        <div class="grid-item" data-id="134">
+            <h3>特征 ID: 134</h3>
+            <p>内饰设计和空间布局</p>
+        </div>
+        
+        <div class="grid-item" data-id="135">
+            <h3>特征 ID: 135</h3>
+            <p>能源交易</p>
+        </div>
+        
+        <div class="grid-item" data-id="136">
+            <h3>特征 ID: 136</h3>
+            <p>欧标R29碰撞认证车身</p>
+        </div>
+        
+        <div class="grid-item" data-id="137">
+            <h3>特征 ID: 137</h3>
+            <p>配送点附近停车位推荐</p>
+        </div>
+        
+        <div class="grid-item" data-id="138">
+            <h3>特征 ID: 138</h3>
+            <p>配送点自动识别确认</p>
+        </div>
+        
+        <div class="grid-item" data-id="139">
+            <h3>特征 ID: 139</h3>
+            <p>配送路线自动规划</p>
+        </div>
+        
+        <div class="grid-item" data-id="140">
+            <h3>特征 ID: 140</h3>
+            <p>碰撞后自动制动</p>
+        </div>
+        
+        <div class="grid-item" data-id="141">
+            <h3>特征 ID: 141</h3>
+            <p>碰撞自动断电功能</p>
+        </div>
+        
+        <div class="grid-item" data-id="142">
+            <h3>特征 ID: 142</h3>
+            <p>坡道起步辅助系统(HSA)</p>
+        </div>
+        
+        <div class="grid-item" data-id="143">
+            <h3>特征 ID: 143</h3>
+            <p>前后停车传感器</p>
+        </div>
+        
+        <div class="grid-item" data-id="144">
+            <h3>特征 ID: 144</h3>
+            <p>前排4个杯托</p>
+        </div>
+        
+        <div class="grid-item" data-id="145">
+            <h3>特征 ID: 145</h3>
+            <p>前排多储物空间</p>
+        </div>
+        
+        <div class="grid-item" data-id="146">
+            <h3>特征 ID: 146</h3>
+            <p>前排三人座可变单人床</p>
+        </div>
+        
+        <div class="grid-item" data-id="147">
+            <h3>特征 ID: 147</h3>
+            <p>轻量化设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="148">
+            <h3>特征 ID: 148</h3>
+            <p>全机型的手机互联系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="149">
+            <h3>特征 ID: 149</h3>
+            <p>全天候车辆监测</p>
+        </div>
+        
+        <div class="grid-item" data-id="150">
+            <h3>特征 ID: 150</h3>
+            <p>全天候救援服务</p>
+        </div>
+        
+        <div class="grid-item" data-id="151">
+            <h3>特征 ID: 151</h3>
+            <p>全天候上门服务</p>
+        </div>
+        
+        <div class="grid-item" data-id="152">
+            <h3>特征 ID: 152</h3>
+            <p>全域自适应巡航控制系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="153">
+            <h3>特征 ID: 153</h3>
+            <p>全自动气温控制系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="154">
+            <h3>特征 ID: 154</h3>
+            <p>热泵空调和PM2.5过滤系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="155">
+            <h3>特征 ID: 155</h3>
+            <p>任务分配系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="156">
+            <h3>特征 ID: 156</h3>
+            <p>任务结束自动化能耗计算</p>
+        </div>
+        
+        <div class="grid-item" data-id="157">
+            <h3>特征 ID: 157</h3>
+            <p>任务量统计、分析</p>
+        </div>
+        
+        <div class="grid-item" data-id="158">
+            <h3>特征 ID: 158</h3>
+            <p>三点式安全带</p>
+        </div>
+        
+        <div class="grid-item" data-id="159">
+            <h3>特征 ID: 159</h3>
+            <p>社交平台互动</p>
+        </div>
+        
+        <div class="grid-item" data-id="160">
+            <h3>特征 ID: 160</h3>
+            <p>适应多种城市环境</p>
+        </div>
+        
+        <div class="grid-item" data-id="161">
+            <h3>特征 ID: 161</h3>
+            <p>数字化服务24小时在线</p>
+        </div>
+        
+        <div class="grid-item" data-id="162">
+            <h3>特征 ID: 162</h3>
+            <p>数字化驾驶舱</p>
+        </div>
+        
+        <div class="grid-item" data-id="163">
+            <h3>特征 ID: 163</h3>
+            <p>速度警报</p>
+        </div>
+        
+        <div class="grid-item" data-id="164">
+            <h3>特征 ID: 164</h3>
+            <p>锁车自动关闭车窗功能</p>
+        </div>
+        
+        <div class="grid-item" data-id="165">
+            <h3>特征 ID: 165</h3>
+            <p>碳排量贡献计算</p>
+        </div>
+        
+        <div class="grid-item" data-id="166">
+            <h3>特征 ID: 166</h3>
+            <p>停车位置</p>
+        </div>
+        
+        <div class="grid-item" data-id="167">
+            <h3>特征 ID: 167</h3>
+            <p>头枕</p>
+        </div>
+        
+        <div class="grid-item" data-id="168">
+            <h3>特征 ID: 168</h3>
+            <p>拖车辅助</p>
+        </div>
+        
+        <div class="grid-item" data-id="169">
+            <h3>特征 ID: 169</h3>
+            <p>拖车警报、入侵警报</p>
+        </div>
+        
+        <div class="grid-item" data-id="170">
+            <h3>特征 ID: 170</h3>
+            <p>微车宽体化设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="171">
+            <h3>特征 ID: 171</h3>
+            <p>维保满意度评估</p>
+        </div>
+        
+        <div class="grid-item" data-id="172">
+            <h3>特征 ID: 172</h3>
+            <p>尾门设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="173">
+            <h3>特征 ID: 173</h3>
+            <p>卫星定位服务系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="174">
+            <h3>特征 ID: 174</h3>
+            <p>无屏车联网系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="175">
+            <h3>特征 ID: 175</h3>
+            <p>物流库存信息实时更新</p>
+        </div>
+        
+        <div class="grid-item" data-id="176">
+            <h3>特征 ID: 176</h3>
+            <p>限高路段适应畅行</p>
+        </div>
+        
+        <div class="grid-item" data-id="177">
+            <h3>特征 ID: 177</h3>
+            <p>心率监控系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="178">
+            <h3>特征 ID: 178</h3>
+            <p>新触控人机交互系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="179">
+            <h3>特征 ID: 179</h3>
+            <p>新触控人机交互系统与车载设备的高效配合</p>
+        </div>
+        
+        <div class="grid-item" data-id="180">
+            <h3>特征 ID: 180</h3>
+            <p>信息娱乐系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="181">
+            <h3>特征 ID: 181</h3>
+            <p>行车记录系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="182">
+            <h3>特征 ID: 182</h3>
+            <p>悬挂系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="183">
+            <h3>特征 ID: 183</h3>
+            <p>延长保修期</p>
+        </div>
+        
+        <div class="grid-item" data-id="184">
+            <h3>特征 ID: 184</h3>
+            <p>延长的保养间隔</p>
+        </div>
+        
+        <div class="grid-item" data-id="185">
+            <h3>特征 ID: 185</h3>
+            <p>夜间停放健康度检测</p>
+        </div>
+        
+        <div class="grid-item" data-id="186">
+            <h3>特征 ID: 186</h3>
+            <p>夜间停放时的车辆健康度检测</p>
+        </div>
+        
+        <div class="grid-item" data-id="187">
+            <h3>特征 ID: 187</h3>
+            <p>液冷电池管理系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="188">
+            <h3>特征 ID: 188</h3>
+            <p>移动端互联</p>
+        </div>
+        
+        <div class="grid-item" data-id="189">
+            <h3>特征 ID: 189</h3>
+            <p>异常突发事件的自动报告功能</p>
+        </div>
+        
+        <div class="grid-item" data-id="190">
+            <h3>特征 ID: 190</h3>
+            <p>优化的电池和能源使用技术</p>
+        </div>
+        
+        <div class="grid-item" data-id="191">
+            <h3>特征 ID: 191</h3>
+            <p>优化的空气动力学设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="192">
+            <h3>特征 ID: 192</h3>
+            <p>娱乐中控屏</p>
+        </div>
+        
+        <div class="grid-item" data-id="193">
+            <h3>特征 ID: 193</h3>
+            <p>预测性智能维保</p>
+        </div>
+        
+        <div class="grid-item" data-id="194">
+            <h3>特征 ID: 194</h3>
+            <p>预碰撞辅助与主动制动（PCA）</p>
+        </div>
+        
+        <div class="grid-item" data-id="195">
+            <h3>特征 ID: 195</h3>
+            <p>远程监测与诊断</p>
+        </div>
+        
+        <div class="grid-item" data-id="196">
+            <h3>特征 ID: 196</h3>
+            <p>远程监控与故障处理</p>
+        </div>
+        
+        <div class="grid-item" data-id="197">
+            <h3>特征 ID: 197</h3>
+            <p>远程控制系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="198">
+            <h3>特征 ID: 198</h3>
+            <p>远程启动</p>
+        </div>
+        
+        <div class="grid-item" data-id="199">
+            <h3>特征 ID: 199</h3>
+            <p>远程信息处理</p>
+        </div>
+        
+        <div class="grid-item" data-id="200">
+            <h3>特征 ID: 200</h3>
+            <p>远程诊断与维修</p>
+        </div>
+        
+        <div class="grid-item" data-id="201">
+            <h3>特征 ID: 201</h3>
+            <p>运营效率统计、分析</p>
+        </div>
+        
+        <div class="grid-item" data-id="202">
+            <h3>特征 ID: 202</h3>
+            <p>在线服务系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="203">
+            <h3>特征 ID: 203</h3>
+            <p>长效耐用的车辆配件和设计</p>
+        </div>
+        
+        <div class="grid-item" data-id="204">
+            <h3>特征 ID: 204</h3>
+            <p>整车质保3年20万公里</p>
+        </div>
+        
+        <div class="grid-item" data-id="205">
+            <h3>特征 ID: 205</h3>
+            <p>智慧座舱系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="206">
+            <h3>特征 ID: 206</h3>
+            <p>智能保养提醒</p>
+        </div>
+        
+        <div class="grid-item" data-id="207">
+            <h3>特征 ID: 207</h3>
+            <p>智能报废管理流程</p>
+        </div>
+        
+        <div class="grid-item" data-id="208">
+            <h3>特征 ID: 208</h3>
+            <p>智能补能规划</p>
+        </div>
+        
+        <div class="grid-item" data-id="209">
+            <h3>特征 ID: 209</h3>
+            <p>智能补能提醒</p>
+        </div>
+        
+        <div class="grid-item" data-id="210">
+            <h3>特征 ID: 210</h3>
+            <p>智能车队管理</p>
+        </div>
+        
+        <div class="grid-item" data-id="211">
+            <h3>特征 ID: 211</h3>
+            <p>智能车载系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="212">
+            <h3>特征 ID: 212</h3>
+            <p>智能管家</p>
+        </div>
+        
+        <div class="grid-item" data-id="213">
+            <h3>特征 ID: 213</h3>
+            <p>智能化任务分配</p>
+        </div>
+        
+        <div class="grid-item" data-id="214">
+            <h3>特征 ID: 214</h3>
+            <p>智能驾驶安全系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="215">
+            <h3>特征 ID: 215</h3>
+            <p>智能驾驶辅助系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="216">
+            <h3>特征 ID: 216</h3>
+            <p>智能监控与诊断</p>
+        </div>
+        
+        <div class="grid-item" data-id="217">
+            <h3>特征 ID: 217</h3>
+            <p>智能控温管理技术</p>
+        </div>
+        
+        <div class="grid-item" data-id="218">
+            <h3>特征 ID: 218</h3>
+            <p>智能路径优化</p>
+        </div>
+        
+        <div class="grid-item" data-id="219">
+            <h3>特征 ID: 219</h3>
+            <p>智能启动/停止系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="220">
+            <h3>特征 ID: 220</h3>
+            <p>智能气囊系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="221">
+            <h3>特征 ID: 221</h3>
+            <p>智能停车辅助系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="222">
+            <h3>特征 ID: 222</h3>
+            <p>智能停车系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="223">
+            <h3>特征 ID: 223</h3>
+            <p>智能网联系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="224">
+            <h3>特征 ID: 224</h3>
+            <p>智能钥匙系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="225">
+            <h3>特征 ID: 225</h3>
+            <p>智能钥匙遗留提醒</p>
+        </div>
+        
+        <div class="grid-item" data-id="226">
+            <h3>特征 ID: 226</h3>
+            <p>中央控制台储物功能</p>
+        </div>
+        
+        <div class="grid-item" data-id="227">
+            <h3>特征 ID: 227</h3>
+            <p>轴距</p>
+        </div>
+        
+        <div class="grid-item" data-id="228">
+            <h3>特征 ID: 228</h3>
+            <p>主动紧急制动系统(AEBS)</p>
+        </div>
+        
+        <div class="grid-item" data-id="229">
+            <h3>特征 ID: 229</h3>
+            <p>主动距离辅助系统（DISTRONIC）</p>
+        </div>
+        
+        <div class="grid-item" data-id="230">
+            <h3>特征 ID: 230</h3>
+            <p>主副驾安全气囊</p>
+        </div>
+        
+        <div class="grid-item" data-id="231">
+            <h3>特征 ID: 231</h3>
+            <p>装载容积</p>
+        </div>
+        
+        <div class="grid-item" data-id="232">
+            <h3>特征 ID: 232</h3>
+            <p>自定义车辆动态模式（驾驶模式、转向模式、制动模式）</p>
+        </div>
+        
+        <div class="grid-item" data-id="233">
+            <h3>特征 ID: 233</h3>
+            <p>自定义舒适场景模式</p>
+        </div>
+        
+        <div class="grid-item" data-id="234">
+            <h3>特征 ID: 234</h3>
+            <p>自动变速箱</p>
+        </div>
+        
+        <div class="grid-item" data-id="235">
+            <h3>特征 ID: 235</h3>
+            <p>自动调光灯光</p>
+        </div>
+        
+        <div class="grid-item" data-id="236">
+            <h3>特征 ID: 236</h3>
+            <p>自动驾驶辅助系统</p>
+        </div>
+        
+        <div class="grid-item" data-id="237">
+            <h3>特征 ID: 237</h3>
+            <p>自动控制空调</p>
+        </div>
+        
+        <div class="grid-item" data-id="238">
+            <h3>特征 ID: 238</h3>
+            <p>自动泊车</p>
+        </div>
+        
+        <div class="grid-item" data-id="239">
+            <h3>特征 ID: 239</h3>
+            <p>自动泊车辅助</p>
+        </div>
+        
+        <div class="grid-item" data-id="240">
+            <h3>特征 ID: 240</h3>
+            <p>自动刹车</p>
+        </div>
+        
+        <div class="grid-item" data-id="241">
+            <h3>特征 ID: 241</h3>
+            <p>自动雨刷</p>
+        </div>
+        
+        <div class="grid-item" data-id="242">
+            <h3>特征 ID: 242</h3>
+            <p>最大装载量</p>
+        </div>
+        
+        <div class="grid-item" data-id="243">
+            <h3>特征 ID: 243</h3>
+            <p>座椅加热</p>
+        </div>
+        
+        <div class="grid-item" data-id="244">
+            <h3>特征 ID: 244</h3>
+            <p>座椅最大间距</p>
+        </div>
+        
+                </div>
+            </div>
+        </main>
+
+        <script>
+            // 搜索过滤功能
+            function filterFeatures() {
+                let input = document.getElementById("searchBox").value.toLowerCase();
+                let gridItems = document.querySelectorAll(".grid-item");
+
+                gridItems.forEach(function(item) {
+                    let text = item.textContent || item.innerText;
+                    if (text.toLowerCase().indexOf(input) > -1) {
+                        item.style.display = "";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            }
+        </script>
+
+    </body>
+    </html>
+    
