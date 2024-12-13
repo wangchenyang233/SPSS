@@ -1,159 +1,176 @@
 
-    <!DOCTYPE html>
-    <html lang="zh-CN">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>产品特征展示</title>
-        <style>
-            /* 全局样式 */
-            body {
-                font-family: 'Arial', sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f8fafc;
-                color: #333;
+ <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品特征展示</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: #333;
+        }
+
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* Make the header's positioning context */
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .back-link {
+            position: absolute; /* Fixes the link at the left of the header */
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%); /* Vertically centers the link */
+        }
+
+        .title {
+            text-align: center; /* Centers the title */
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* 图片展示样式 */
+        .image-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .image-item {
+            text-align: center;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .image-item p {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #004d40;
+            font-weight: bold;
+        }
+
+        /* 搜索框样式 */
+        .search-box {
+            display: block;
+            margin: 0 auto 30px;
+            padding: 12px 20px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 卡片网格样式 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #004d40;
+            margin: 0 0 10px;
+        }
+
+        .grid-item p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
             }
 
-            header {
-                background-color: #004d40;
-                color: white;
-                padding: 20px;
-                text-align: center;
-                font-size: 24px;
-                font-weight: bold;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
-
-            a {
-                color: #b2dfdb;
-                text-decoration: none;
-                font-size: 16px;
-            }
-
-            .container {
-                max-width: 1200px;
-                margin: 40px auto;
-                padding: 0 20px;
-            }
-
-            .title {
-                font-size: 32px;
-                font-weight: bold;
-                color: #004d40;
-                text-align: center;
-                margin-bottom: 30px;
-            }
-
-            /* 图片展示样式 */
             .image-row {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                margin-bottom: 30px;
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .image-item {
-                text-align: center;
-                flex: 1;
-                max-width: 300px;
+                margin-bottom: 20px;
             }
+        }
 
-            .image-item img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s ease;
-            }
-
-            .image-item img:hover {
-                transform: scale(1.05);
-            }
-
-            .image-item p {
-                margin-top: 10px;
-                font-size: 18px;
-                color: #004d40;
-                font-weight: bold;
-            }
-
-            /* 搜索框样式 */
-            .search-box {
-                display: block;
-                margin: 0 auto 30px;
-                padding: 12px 20px;
-                width: 100%;
-                max-width: 500px;
-                border: 1px solid #ccc;
-                border-radius: 25px;
-                font-size: 16px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            /* 卡片网格样式 */
+        @media (max-width: 480px) {
             .grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 20px;
+                grid-template-columns: 1fr;
             }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="back-link" href="index.html">返回首页</a>
+        <div class="title">产品特征展示</div>
+    </header>
 
-            .grid-item {
-                background: white;
-                border-radius: 15px;
-                padding: 20px;
-                box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                text-align: left;
-                cursor: pointer;
-            }
+        <!-- 内容部分 -->
+    </div>
+</body>
+</html>
 
-            .grid-item:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-            }
-
-            .grid-item h3 {
-                font-size: 20px;
-                font-weight: bold;
-                color: #004d40;
-                margin: 0 0 10px;
-            }
-
-            .grid-item p {
-                font-size: 16px;
-                color: #555;
-            }
-
-            /* 响应式设计 */
-            @media (max-width: 768px) {
-                .grid {
-                    grid-template-columns: 1fr 1fr;
-                }
-
-                .image-row {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-
-                .image-item {
-                    margin-bottom: 20px;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            产品特征展示
-            <br>
-            <a href="index.html">返回首页</a>
-        </header>
 
         <main>
             <div class="container">
