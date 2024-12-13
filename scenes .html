@@ -145,7 +145,7 @@
         }
     </script>
 </body>
-
+        </header>
 
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="搜索场景..." oninput="filterScenes()">
@@ -153,6 +153,16 @@
 
         <div class="main-container" id="mainContainer">
     
+            <div class="scene-container" onclick="toggleConfig('检查车辆健康状态')">
+                <img src="images/1.png" alt="检查车辆健康状态" class="scene-image">
+                <div class="scene-description">检查车辆健康状态</div>
+                <div id="config-检查车辆健康状态" class="scene-configurations">
+        <div><strong>1. 系统自动提醒功能，根据设定的时间周期推送检查提醒给管理人员和司机。:</strong><ul><li></li></ul></div><div><strong>2. 详细的检查项目清单，涵盖所有必要的检查项。:</strong><ul><li></li></ul></div><div><strong>3. 记录检查结果，并生成定期检查报告，便于数据统计与分析。:</strong><ul><li></li></ul></div><div><strong>4. 异常状态的自动警报功能，确保管理人员能够及时处理问题。:</strong><ul><li></li></ul></div><div><strong>5. 维护记录和历史数据查询功能，便于追踪车辆的维护和保养历史。:</strong><ul><li></li></ul></div><div><strong>6. 根据检查结果生成维护建议或计划，确保车辆处于最佳状态。:</strong><ul><li></li></ul></div></div></div>
+            <div class="scene-container" onclick="toggleConfig('入车前车辆准备')">
+                <img src="images/2.png" alt="入车前车辆准备" class="scene-image">
+                <div class="scene-description">入车前车辆准备</div>
+                <div id="config-入车前车辆准备" class="scene-configurations">
+        <div><strong>1. 座椅调整功能，允许司机根据个人身高和习惯调整座椅位置及倾斜角度。:</strong><ul><li></li></ul></div><div><strong>2. 方向盘高度和角度调节功能，确保司机能获得最佳操控体验。:</strong><ul><li></li></ul></div><div><strong>3. 后视镜调节功能，提供自动或手动调整后视镜的选项，以优化视野。:</strong><ul><li></li></ul></div><div><strong>4. 空调与通风设置功能，确保司机在不同天气条件下的舒适性。:</strong><ul><li></li></ul></div><div><strong>5. 司机个性化设置保存功能，允许司机保存和调用个人偏好配置。:</strong><ul><li></li></ul></div><div><strong>6. 安全检查提示功能，在调节完成后提醒司机检查安全带和其他安全设备的状态。:</strong><ul><li></li></ul></div></div></div>
             <div class="scene-container" onclick="toggleConfig('轻松上下车')">
                 <img src="images/3.png" alt="轻松上下车" class="scene-image">
                 <div class="scene-description">轻松上下车</div>
@@ -188,11 +198,11 @@
                 <div class="scene-description">路线规划</div>
                 <div id="config-路线规划" class="scene-configurations">
         <div><strong>1. 实时数据集成，系统能够实时获取交通、天气、路况等信息，动态调整路径规划。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>2. 最优路径计算，提供多种路径选择，包括最短时间、最低成本和最优安全等方案，满足不同用户需求。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>3. 用户偏好设置，允许用户根据个人偏好设置路径规划选项，如避免高速公路、选择风景路线等。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>4. 路径更新，能够根据实时情况，如突发交通事故或天气变化，及时更新规划路径，并通知用户。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>5. 里程和费用估算，提供详细的行驶里程和费用预估，帮助用户评估运输成本。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>6. 多模态选择，支持多种运输方式（如驾车、步行、骑行等）的路径规划，满足用户多样化需求。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>7. 安全提示，系统能够提示用户沿途的安全隐患或交通管制信息，确保用户安全。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>8. 路径历史记录，用户能够查看历史路径规划记录，以便于后续相似任务的参考和选择。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('车队出行')">
-                <img src="images/33.png" alt="车队出行" class="scene-image">
-                <div class="scene-description">车队出行</div>
-                <div id="config-车队出行" class="scene-configurations">
-        <div><strong>1. 位置监控：通过卫星定位系统追踪车辆的精确位置:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>2. 移动轨迹记录：记录车辆的行驶路线和历史轨迹:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3. 速度和方向监测：实时监测车辆的行驶速度和方向变化:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>4. 状态更新：实时更新车辆的状态信息:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>5. 地理围栏：设置虚拟地理边界，当车辆进入或离开特定区域时触发通知:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>6. 异常行为警报：在检测到如超速、急转弯等异常行为时发送警报:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
+            <div class="scene-container" onclick="toggleConfig('订单管理')">
+                <img src="images/10.png" alt="订单管理" class="scene-image">
+                <div class="scene-description">订单管理</div>
+                <div id="config-订单管理" class="scene-configurations">
+        <div><strong>1. 实时定位，系统能够实时监控车队中每辆车的位置，确保运输过程的安全与高效。:</strong><ul><li></li></ul></div><div><strong>2. 路线同步，支持为车队成员规划相同的出行路线，避免车辆之间的交通冲突，并兼顾客户需求。:</strong><ul><li></li></ul></div><div><strong>3. 信息共享，提供实时信息共享功能，使司机、客户和商户能够及时沟通，包括运输状态、到达时间、路况等信息。:</strong><ul><li></li></ul></div><div><strong>4. 集中调度，支持车队集中调度功能，便于管理人员协调司机的出行计划，并及时调整安排。:</strong><ul><li></li></ul></div><div><strong>5. 客户通知，自动向客户发送运输状态更新通知，包括出发、到达、延误等信息，提升客户体验。:</strong><ul><li></li></ul></div><div><strong>6. 商户确认，商户可以实时查看订单状态，并在需要时确认或调整接收时间，确保货物的安全和及时接收。:</strong><ul><li></li></ul></div><div><strong>7. 安全监控，提供车队行驶过程中的安全监控，实时识别潜在的安全风险，并提醒相关司机。:</strong><ul><li></li></ul></div><div><strong>8. 反馈机制，允许司机、客户和商户对出行过程中的问题进行反馈，以便于后续改进和优化。:</strong><ul><li></li></ul></div></div></div>
             <div class="scene-container" onclick="toggleConfig('包装')">
                 <img src="images/11.png" alt="包装" class="scene-image">
                 <div class="scene-description">包装</div>
@@ -303,6 +313,11 @@
                 <div class="scene-description">能源管理</div>
                 <div id="config-能源管理" class="scene-configurations">
         <div><strong>1. 能耗显示：显示车辆的实时能耗数据，包括每公里电耗、电池剩余电量等:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>2. 电池管理：提供电池状态信息，如电池温度、充电状态、健康状态等:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 充电规划：根据车辆的能源信息，为驾驶员规划充电站点和最佳充电时间:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>4. 驾驶行为分析：分析驾驶习惯对能源消耗的影响，提供节能驾驶的建议:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>5. 能源消耗报告：生成能源消耗报告，帮助用户了解和监控长期的能源使用情况:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
+            <div class="scene-container" onclick="toggleConfig('车队出行')">
+                <img src="images/33.png" alt="车队出行" class="scene-image">
+                <div class="scene-description">车队出行</div>
+                <div id="config-车队出行" class="scene-configurations">
+        <div><strong>1. 位置监控：通过卫星定位系统追踪车辆的精确位置:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>2. 移动轨迹记录：记录车辆的行驶路线和历史轨迹:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3. 速度和方向监测：实时监测车辆的行驶速度和方向变化:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>4. 状态更新：实时更新车辆的状态信息:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>5. 地理围栏：设置虚拟地理边界，当车辆进入或离开特定区域时触发通知:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>6. 异常行为警报：在检测到如超速、急转弯等异常行为时发送警报:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
             <div class="scene-container" onclick="toggleConfig('停车')">
                 <img src="images/34.png" alt="停车" class="scene-image">
                 <div class="scene-description">停车</div>
