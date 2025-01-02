@@ -1,769 +1,536 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>价值维度展示</title>
+    <title>奇瑞商用车数字服务价值体系</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* 页面头部样式 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            background-color: #00796b;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 24px;
+            color: white;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+
+        .sub-title {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 返回按钮样式 */
+        .back-button {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        /* 页面布局 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
         }
-        .container {
+
+        .page-layout {
             display: flex;
-            flex-wrap: wrap;
+            max-width: 1800px;
+            margin: 0 auto;
+            gap: 30px;
+            padding: 0 30px;
+            align-items: flex-start;
+        }
+
+        /* 左侧内容区域 */
+        .content-left {
+            flex: 3;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* 右侧权重计算区域 */
+        .content-right {
+            flex: 1;
+            padding: 20px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            padding: 20px;
-        }
-        .category-box {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 10px;
-            padding: 20px;
-            width: 45%;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-        .category-box:hover {
-            transform: scale(1.05);
-        }
-        details {
-            margin-top: 10px;
-            margin-left: 20px;
-        }
-        summary {
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 5px;
-        }
-        .feature-list {
-            margin-left: 20px;
-            list-style-type: none;
-            padding: 0;
-        }
-        .feature-list li {
-            margin: 5px 0;
+            align-items: center;
         }
 
-        /* Header styles */
-        header {
-            width: 100%;
-            background-color: #00796b;
-            color: #fff;
-            padding: 20px;
-            border-radius: 8px;
+        /* 左侧标题栏 */
+        .title-column {
+            width: 150px;
             display: flex;
-            justify-content: center; /* Centers all content within the header */
-            align-items: center; /* Vertically centers the content */
+            flex-direction: column;
         }
 
-        /* Style for the back button */
-        .back-button {
-            background-color: #00796b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            position: absolute; /* Positioning the button at the left */
-            left: 20px;
+        /* 左侧虚线框 */
+        .title-box {
+            border: 2px dashed #004d99;
+            height: 60px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #004d99;
+            font-size: 14px;
+            background: white;
+            box-sizing: border-box;
         }
 
-        .back-button:hover {
-            background-color: #004d40;
+        /* 主要内容区 */
+        .main-content {
+            flex: 1;
         }
 
-        /* Title styles */
-        .page-title {
-            font-size: 24px;
-            margin: 0;
-            text-align: center; /* Ensures the title is centered */
+        /* 价值分类行 */
+        .category-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .category-item {
+            flex: 1;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            color: #004d99;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        /* 一级维度组合框 */
+        .primary-box-group {
+            background: white;
+            border: 1px solid #004d99;
+            border-radius: 4px;
+            height: 60px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #004d99;
+            font-size: 14px;
+            box-sizing: border-box;
+            padding: 0 15px;
+        }
+
+        /* 价值维度网格 */
+        .value-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .value-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 二级框容器 */
+        .secondary-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* 二级框 */
+        .secondary-box {
+            background: white;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #004d99;
+            border-radius: 4px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* 评分输入框 */
+        .score-input {
+            width: 60px;
+            padding: 4px;
+            text-align: center;
+            border: 1px solid #004d99;
+            border-radius: 4px;
+        }
+
+        /* 计算按钮 */
+        .calculate-btn {
+            width: 80%;
+            margin: 20px 0;
+        }
+
+        /* 图表容器 */
+        .chart-container {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
-    <header>
-        <button class="back-button" onclick="goBack()">返回首页</button>
-        <h1 class="page-title">价值维度展示</h1>
-    </header>
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <a href="index.html" class="back-button">返回首页</a>
+        <h1 class="main-title">奇瑞商用车数字服务价值体系</h1>
+        <div class="sub-title">价值评估表</div>
+    </div>
 
-    <div class="container">
-        <!-- 第一行：行业创新 & 环境影响 -->
-        <div class="category-box" id="category-1">
-            <h2>行业影响 Industry Impact</h2>
-            <div>
-                <details>
-                    <summary>安全性 Safty</summary>
-                    <details>
-                        <summary>车辆安全 Vehicle safty</summary>
-                        <ul class="feature-list">
-                            <li>激光焊接车身结构</li>
-<li>欧标R29碰撞认证车身</li>
-<li>高承载隐藏式B柱设计</li>
-<li>高强度钢车身</li>
-<li>电池安全</li>
-<li>电池包安全防护设计</li>
-<li>电池热管理系统与多合一控制器</li>
-<li>主副驾安全气囊</li>
-<li>智能气囊系统</li>
-<li>三点式安全带</li>
-<li>头枕</li>
-<li>主动紧急制动系统(AEBS)</li>
-<li>车道保持辅助系统</li>
-<li>碰撞后自动制动</li>
-<li>碰撞自动断电功能</li>
-<li>驾驶员监测系统</li>
-<li>心率监控系统</li>
-<li>BOSCH ESP9车身稳定系统</li>
-<li>电子稳定程序（ESP）</li>
-<li>坡道起步辅助系统(HSA)</li>
-<li>多颗超声波雷达</li>
-<li>TPMS胎压监测系统</li>
-<li>车辆健康实时化、可视化</li>
-<li>夜间停放健康度检测</li>
-<li>车辆安全防盗预警系统</li>
-<li>360°全景影像系统</li>
-<li>前后停车传感器与全景影像</li>
-<li>智能钥匙遗留提醒</li>
-<li>锁车自动关闭车窗功能</li>
-<li>全域自适应巡航控制系统</li>
-<li>L2级别ADAS系统</li>
-<li>车辆智能交接身份识别</li>
-<li>拖车辅助</li>
-<li>交通警示系统</li>
-<li>360°全景影像辅助识别泊车停靠场地</li>
-<li>驾驶员检测</li>
-<li>异常突发事件的自动报告功能</li>
-<li>车辆健康度自动检测</li>
-<li>夜间停放时的车辆健康度检测</li>
-<li>安全形式数据统计</li>
-<li>拖车警报、入侵警报</li>
-<li>货舱监控</li>
-<li>车辆安全监测和警报系统</li>
-<li>车辆安全防盗预警系统（车辆防盗、货仓防盗、拖车报警、位置偏移报警）</li>
-<li>驾驶员监测系统</li>
-<li>ADAS智能辅助驾驶</li>
-<li>自适应远近光灯</li>
-<li>主副驾安全气囊</li>
-<li>辅助驾驶摄像头和毫米波雷达</li>
-<li>监测系统</li>
-<li>行车记录系统</li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>信息安全 Cybersecurity</summary>
-                        <ul class="feature-list">
-                            <li>车联网云平台</li>
-<li>OTA升级系统</li>
-<li>无屏车联网系统</li>
-<li>FACE ID账户系统</li>
-<li>智能钥匙系统</li>
-<li>E-Call自动紧急呼叫系统</li>
-<li>Mercedes me connect（提供数据加密和连接安全）</li>
-<li>MBUX多媒体系统</li>
-<li>智能监控与诊断</li>
-<li>远程监控与故障处理</li>
-<li>智能化车辆交接身份识别</li>
-<li>车辆交接时状态自动检查与提醒</li>
-<li>车辆健康实时化、可视化</li>
-<li>FACE ID账户系统</li>
-<li>车辆安全防盗预警系统（包括FACE ID账户交互系统）</li>
-<li>车联网云平台（涉及数据加密与保护）</li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>智能驾驶安全 Automated Driving Safety</summary>
-                        <ul class="feature-list">
-<li>无屏车联网系统</li>
-<li>L2.5级智能驾驶辅助系统</li>
-<li>全域自适应巡航控制系统</li>
-<li>城市/高架辅助驾驶等（ICC）</li>
-<li>TSR限速提示</li>
-<li>AEB紧急制动</li>
-<li>BSD盲区监测</li>
-<li>LCA+LKA变道辅助及车道保持</li>
-<li>LDW车道偏离预警</li>
-<li>DMS疲劳监测</li>
-<li>高清360全景影像</li>
-<li>高清倒车影像</li>
-<li>智能网联系统</li>
-<li>智能管家</li>
-<li>ABS系统</li>
-<li>核心三电防护等级</li>
-<li>高级驾驶辅助系统 (ADAS)</li>
-<li>自动调光大灯</li>
-<li>侧风辅助</li>
-<li>电子稳定程序（ESP）</li>
-<li>ATTENTION ASSIST注意力辅助系统</li>
-<li>主动距离辅助系统（DISTRONIC）</li>
-<li>交通标志辅助</li>
-<li>紧急呼叫系统</li>
-<li>故障呼叫</li>
-<li>车辆健康报告</li>
-<li>驾驶数据</li>
-<li>停车位置</li>
-<li>速度警报</li>
-<li>自动泊车辅助</li>
-<li>负载自适应</li>
-<li>预碰撞辅助与主动制动（PCA）</li>
-<li>L2级智能辅助驾驶</li>
-<li>基于效率的智能返程路线自动规划，根据路况的实时调整</li>
-<li>自动泊车</li>
-<li>固定有车位的无人循迹泊车</li>
-<li>EPB自动驻车</li>
-<li>ADAS智能辅助驾驶</li>
-<li>全域自适应巡航控制系统</li>
-<li>驾驶员监测系统</li>
-<li>智能路径优化</li>
-<li>驾驶行为评估系统</li>
-<li>可监测后方车辆，并进行提醒</li>
-<li>车道居中保持</li>
-<li>交通标识识别</li>
-</ul>
-                    </details>
-                </details>
-                <details>
-                    <summary>可用性 Usability</summary>
-                    <details>
-                        <summary>空间利用率 Utilization</summary>
-                        <ul class="feature-list">
-                          <li>车内高度</li>
-<li>装载容积</li>
-<li>车内容积</li>
-<li>尾门设计</li>
-<li>侧移门宽度</li>
-<li>地板离地高度</li>
-<li>车顶型号可选</li>
-<li>座椅最大间距</li>
-<li>多元座椅布局</li>
-<li>可调节座椅</li>
-<li>中央控制台储物功能</li>
-<li>电动趟门和尾门</li>
-<li>可拆卸储物箱设计</li>
-<li>车顶搁架和可选隔间</li>
-<li>灵活的内饰布局与增加的储物空间</li>
-<li>灵活货厢空间配置</li>
-<li>Moduwork系统</li>
-<li>车厢宽度</li>
-<li>货厢容积</li>
-<li>驾驶室设计</li>
-<li>前排三人座可变单人床</li>
-<li>配送点自动识别确认</li>
-<li>货舱装载自动排序</li>
-<li>货物智能排序管理</li>
-<li>货舱监控</li>
-<li>前排多储物空间</li>
-<li>货仓和货物运输监测系统</li>
-<li>低货台高度530mm</li>
-<li>前排4个杯托</li>
-<li>车内储物空间设计（包括自定义舒适场景模式）</li>
-<li>可自定义的中控操作拓展</li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>承载性 Carrying capacity</summary>
-                        <ul class="feature-list">
-<li>车顶型号可选</li>
-<li>轴距</li>
-<li>多元座椅布局</li>
-<li>车内容积</li>
-<li>车厢宽度</li>
-<li>灵活货厢空间配置</li>
-<li>地板离地高度</li>
-<li>尾门设计</li>
-<li>最大装载量</li>
-<li>多种装载门选择</li>
-<li>高强度可伸缩负载捆绑环</li>
-<li>多种座椅布局可选</li>
-<li>电子怀挡</li>
-<li>电动侧移门+电动踏步</li>
-<li>侧移门宽度</li>
-<li>悬挂系统</li>
-<li>轻量化设计</li>
-<li>高承载隐藏式B柱设计</li>
-<li>配送订单地址导航自动匹配，路线规划</li>
-<li>依据货物配送订单完成情况，实时更新物流库存信息</li>
-<li>配送点附近停车位推荐</li>
-<li>配送点自动识别确认</li>
-<li>低货台高度530mm</li>
-<li>货仓监控系统</li>
-<li>货仓和货物运输监测系统</li>
+    <div class="page-layout">
+        <!-- 左侧内容区域 -->
+        <div class="content-left">
+            <!-- 左侧标题栏 -->
+            <div class="title-column">
+                <div class="title-box">价值分类</div>
+                <div class="title-box">价值维度一级</div>
+                <div class="title-box">价值维度二级</div>
+            </div>
 
-</ul>
-                    </details>
-                    <details>
-                        <summary>适应性 Adaptability</summary>
-                        <ul class="feature-list">
-<li>限高路段适应畅行</li>
-<li>车顶型号可选</li>
-<li>适应多种城市环境</li>
-<li>动侧移门+电动踏步</li>
-<li>悬挂系统</li>
-<li>后空气悬架自适应路况</li>
-<li>方圆之融设计</li>
-<li>超大隐私玻璃设计</li>
-<li>可定制的车载配置</li>
-<li>灵活货厢空间配置</li>
-<li>智能车队管理</li>
-<li>车身长度和高度选择</li>
-<li>微车宽体化设计</li>
-<li>智能控温管理技术</li>
-<li>液冷电池管理系统</li>
-<li>快充支持</li>
-<li>电池热管理系统与多合一控制器</li>
-<li>智能补能规划</li>
-<li>依据订单系统识别，车辆与驾驶员的自动分派</li>
-<li>任务结束自动化能耗计算</li>
-<li>基于效率的智能返程路线自动规划，根据路况的实时调整</li>
-<li>车辆健康监测系统</li>
-<li>OTA升级系统</li>
-<li>AI语音交互系统</li>
-<li>自定义舒适场景模式</li>
-<li>自定义车辆动态模式（驾驶模式、转向模式、制动模式）</li>
-<li>可自定义的中控操作拓展</li>
+            <!-- 主要内容区 -->
+            <div class="main-content">
+                <!-- 价值分类行 -->
+                <div class="category-row">
+                    <div class="category-item">行业影响</div>
+                    <div class="category-item">客户影响</div>
+                    <div class="category-item">环境影响</div>
+                    <div class="category-item">商业价值</div>
+                </div>
 
-</ul>
-                    </details>
-                </details>
-                <details>
-                    <summary>品质 Quality</summary>
-                    <details>
-                        <summary>耐用性 Durability</summary>
-                        <ul class="feature-list">
-<li>高钢性底盘一体铸造</li>
-<li>延长保修期</li>
-<li>15,000英里保养间隔</li>
-<li>高强度钢车身</li>
-<li>远程信息处理准备</li>
-<li>发动机和车身材料</li>
-<li>内饰设计</li>
-<li>全天候车辆监测</li>
-<li>预测性维保计划</li>
-<li>全天候上门服务</li>
-<li>全天候救援服务</li>
-<li>维保满意度评估</li>
-<li>远程诊断与维修</li>
-<li>定制化专业改装</li>
-<li>整车质保3年20万公里</li>
-<li>电池质保8年49万公里</li>
-<li>预测性智能维保</li>
-<li>智能保养提醒</li>
-</ul>
-                    </details>
-                    <details>
-                        <summary>可靠性 Reliability</summary>
-                        <ul class="feature-list">
-<li>MTBF（平均无故障工作时间）</li>
-<li>高强度钢车身</li>
-<li>发动机和车身材料</li>
-<li>悬挂系统</li>
-<li>现代化驾驶舱设计</li>
-<li>轮胎</li>
-<li>轨道系统</li>
-<li>货厢容积</li>
-<li>地板坚固耐磨</li>
-<li>电子稳定程序（ESP）</li>
-<li>核心部件寿命</li>
-<li>车辆健康实时化、可视化</li>
-<li>远程监控与故障处理</li>
-<li>智能化任务分配</li>
-<li>工作效果优化展示</li>
-<li>车辆使用过程全程可控、可视、可追溯</li>
-<li>车辆安全监测和警报系统</li>
-<li>车队管理系统</li>
-<li>远程控制系统</li>
-<li>预测性智能维保</li>
-<li>X-CALL系统</li>
-<li>车主APP社区</li>
+                <!-- 价值维度网格 -->
+                <div class="value-grid">
+                    <!-- 行业影响列 -->
+                    <div class="value-column">
+                        <div class="primary-box-group">
+                            安全性 | 舒适性 | 可用性 | 品质
+                        </div>
+                        <div class="secondary-boxes">
+                            <!-- 安全性 -->
+                            <div class="secondary-box" data-category="行业影响">
+                                车辆安全
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="行业影响">
+                                信息安全
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="行业影响">
+                                智能驾驶安全
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <!-- 舒适性 -->
+                            <div class="secondary-box" data-category="行业影响">
+                                驾驶舒适性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="行业影响">
+                                承载性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="行业影响">
+                                适应性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <!-- 可用性 -->
+                            <div class="secondary-box" data-category="行业影响">
+                                耐用性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="行业影响">
+                                可靠性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="行业影响">
+                                设计感
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <!-- 品质 -->
+                            <div class="secondary-box" data-category="行业影响">
+                                品质性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="行业影响">
+                                友好性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                    </div>
 
-</ul>
-                    </details>
-                    <details>
-                        <summary>设计感 Design</summary>
-                        <ul class="feature-list">
-<li>触摸屏与数字仪表盘</li>
-<li>智慧座舱系统</li>
-<li>现代化驾驶舱设计</li>
-<li>高质量的内饰材料与装饰系统</li>
-<li>多媒体系统</li>
-<li>内饰设计和空间布局</li>
-<li>可调座椅与驾驶员悬浮座椅设计</li>
-<li>工作成果可视化展现</li>
-<li>智能补能提醒、路线规划</li>
-<li>12.8寸娱乐中控屏</li>
-<li>车主APP社区</li>
-<li>车辆外观设计、内饰和舒适性</li>
+                    <!-- 客户影响列 -->
+                    <div class="value-column">
+                        <div class="primary-box-group">
+                            客制化 | 便利性 | 数智化
+                        </div>
+                        <div class="secondary-boxes">
+                            <!-- 客制化 -->
+                            <div class="secondary-box" data-category="客户影响">
+                                个性化
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="客户影响">
+                                偏好性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="客户影响">
+                                场景化
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <!-- 便利性 -->
+                            <div class="secondary-box" data-category="客户影响">
+                                便利性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="客户影响">
+                                生态便利
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <!-- 数智化 -->
+                            <div class="secondary-box" data-category="客户影响">
+                                人工智能
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="客户影响">
+                                产业互联
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="客户影响">
+                                移动端互联
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="客户影响">
+                                车辆端互联
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                    </div>
 
-</ul>
-                    </details>
-                </details>
-                <details>
-                    <summary>舒适性 Comfort</summary>
-                    <details>
-                        <summary>易用性 Ease of use</summary>
-                        <ul class="feature-list">
-<li>智能启动/停止系统</li>
-<li>EPB电子手刹</li>
-<li>信息娱乐系统</li>
-<li>后座独立空调控制</li>
-<li>智能驾驶辅助系统的集成</li>
-<li>车内与手机的无缝集成</li>
-<li>自动控制空调</li>
-<li>多功能方向盘</li>
-<li>智能钥匙系统</li>
-<li>Peugeot Connect系统</li>
-<li>触摸屏与数字仪表盘</li>
-<li>可调节座椅</li>
-<li>数字化驾驶舱和信息娱乐系统</li>
-<li>360°全景影像</li>
-<li>配送点附近停车位推荐</li>
-<li>基于效率的智能化任务分配</li>
-<li>配送订单地址导航自动匹配，路线规划</li>
-<li>全机型的手机互联系统</li>
-<li>AI语音交互系统</li>
-<li>车辆体检系统</li>
-<li>自定义舒适场景模式</li>
-<li>支持远程控制系统（例如开关空调、车窗等）</li>
+                    <!-- 环境影响列 -->
+                    <div class="value-column">
+                        <div class="primary-box-group">
+                            环保
+                        </div>
+                        <div class="secondary-boxes">
+                            <div class="secondary-box" data-category="环境影响">
+                                低碳
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="环境影响">
+                                能源有效性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="环境影响">
+                                循环性
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                    </div>
 
-</ul>
-                    </details>
-                    <details>
-                        <summary>友好性 Friendliness</summary>
-                        <ul class="feature-list">
-<li>智慧座舱系统</li>
-<li>AI语音交互系统</li>
-<li>数字化服务24小时在线</li>
-<li>可调节座椅</li>
-<li>车载多媒体系统与车内娱乐系统</li>
-<li>自动控制空调</li>
-<li>多功能方向盘</li>
-<li>静音设计</li>
-<li>座椅加热</li>
-<li>具备舒适的一键触发休息模式</li>
-<li>开门预警系统</li>
-<li>工作成果可视化展现</li>
-<li>AI语音交互系统（可进行个性化对话）</li>
-<li>车主APP社区（便于车主沟通）</li>
-<li>娱乐和全机型的手机互联系统</li>
-<li>娱乐中控屏的友好交互界面</li>
-</ul>
-                    </details>
-                </details>
+                    <!-- 商业价值列 -->
+                    <div class="value-column">
+                        <div class="primary-box-group">
+                            营利性
+                        </div>
+                        <div class="secondary-boxes">
+                            <div class="secondary-box" data-category="商业价值">
+                                成本控制
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="商业价值">
+                                效率
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="secondary-box" data-category="商业价值">
+                                省时
+                                <input type="number" class="score-input" min="0" max="10" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="category-box" id="category-2">
-            <h2>客户影响 Customer Influence</h2>
-            <div>
-                <details>
-                    <summary>客制化 Customize</summary>
-                    <details>
-                        <summary>个性化 Personalization</summary>
-                        <ul class="feature-list">
-                            <li>高清倒车影像</li>
-<li>智能钥匙系统</li>
-<li>车队管理系统和远程操作</li>
-<li>多功能方向盘</li>
-<li>车内储物系统的个性化设计</li>
-<li>可调节座椅</li>
-<li>客户车队工作量自动统计</li>
-<li>社交平台互动</li>
-<li>低碳绿色成就分享</li>
-<li>FACE ID账户系统</li>
-<li>自定义车辆动态模式（驾驶模式、转向模式、制动模式）</li>
-<li>自定义舒适场景模式</li>
-<li>AI语音交互系统</li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>偏好性 Preference</summary>
-                        <ul class="feature-list"><li>智能车载系统</li>
-<li>全机型的手机互联系统</li>
-<li>车队管理定制化服务</li>
-<li>多货舱设计</li>
-<li>可调节座椅</li>
-<li>不同材质地板与内饰设计</li>
-<li>多功能方向盘</li>
-<li>车内储物系统的个性化设计</li>
-<li>碳排量贡献计算</li>
-<li>安全形式数据统计</li>
-<li>AI语音交互系统</li>
-<li>智能路径优化</li>
-<li>车主APP社区</li>
-<li>任务分配系统</li>
-</ul>
-                    </details>
-                    <details>
-                        <summary>场景化 Scenario-based</summary>
-                        <ul class="feature-list">
-<li>智能驾驶辅助系统</li>
-<li>全域自适应巡航控制系统</li>
-<li>车队管理定制化服务</li>
-<li>货舱定制设计</li>
-<li>可定制的车载配置</li>
-<li>灵活货厢空间配置</li>
-<li>智能补能提醒</li>
-<li>配送地址路线规划</li>
-<li>基于效率的智能返程路线自动规划</li>
-<li>基于效率的智能化任务分配</li>
-<li>智能路径优化</li>
-<li>自定义舒适场景模式</li>
-<li>导航界面和智能路径优化</li>
-<li>导航停车点智能推荐</li>
-</ul>
-                    </details>
-                </details>
-
-                <details>
-                    <summary>便利性 Convenience</summary>
-                    <details>
-                        <summary>主动便利 Active convenience</summary>
-                        <ul class="feature-list">
-                           <li>远程启动</li>
-<li>车载无线充电</li>
-<li>全自动气候控制系统</li>
-<li>自动雨刷</li>
-<li>自动调节大灯</li>
-<li>多媒体系统</li>
-<li>主动紧急制动系统(AEBS)</li>
-<li>牵引力控制等安全和便利配置</li>
-<li>AI语音交互系统</li>
-<li>远程信息处理</li>
-<li>智能钥匙系统</li>
-<li>卫星定位服务系统</li>
-<li>自动泊车</li>
-<li>离车自动锁车、关窗</li>
-<li>车辆交接时状态自动检查与提醒</li>
-<li>智能辅助驾驶系统</li>
-<li>远程控制系统</li>
-<li>车联网云平台</li>
-<li>智能补能规划</li>
-<li>智能路径优化</li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>生态便利 Ecological convenience</summary>
-                        <ul class="feature-list">
-<li>集成移动电源</li>
-<li>电动驱动系统</li>
-<li>高效充电系统</li>
-<li>绿色动力选项</li>
-<li>智能停车辅助系统</li>
-<li>智能补能规划</li>
-<li>远程监控与故障处理</li>
-<li>车联网云平台</li>
-<li>充电站查询界面</li>
-
-</ul>
-                    </details>
-                </details>
-
-                <details>
-                    <summary>数智化 Intelligence</summary>
-                    <details>
-                        <summary>人工智能 AI</summary>
-                        <ul class="feature-list">
-<li>AI语音交互系统</li>
-<li>ADAS智能辅助驾驶</li>
-<li>L2级智能辅助驾驶</li>
-<li>自动刹车</li>
-<li>车道保持辅助系统</li>
-<li>碰撞后自动制动</li>
-<li>预碰撞辅助与主动制动（PCA）</li>
-<li>车辆健康监测系统</li>
-<li>基于效率的智能返程路线自动规划</li>
-<li>智能补能规划</li>
-<li>全域自适应巡航控制系统</li>
-<li>智能路径优化</li>
-
-</ul>
-                    </details>
-                    <details>
-                        <summary>产业互联 Industry Connectivity</summary>
-                        <ul class="feature-list">
-<li>车队管理系统</li>
-<li>车联网云平台</li>
-<li>远程信息处理</li>
-<li>车辆端互联</li>
-<li>移动端互联</li>
-<li>运营效率统计、分析</li>
-<li>客户车队工作量自动统计</li>
-<li>V2X万物互联</li>
-<li>任务分配系统</li>
-
-</ul>
-                    </details>
-                    <details>
-                        <summary>移动端互联 Mobile Connectivity</summary>
-                        <ul class="feature-list">
-<li>远程控制</li>
-<li>车队管理系统</li>
-<li>全机型的手机互联系统</li>
-<li>高效充电系统</li>
-<li>远程监测与诊断</li>
-<li>工作成果可视化展现</li>
-<li>远程监控与故障处理</li>
-<li>联网升级OTA</li>
-<li>V2X</li>
-<li>车主APP社区</li>
-
-</ul>
-                    </details>
-                    <details>
-                        <summary>车辆端互联 Vehicle Connectivity</summary>
-                        <ul class="feature-list">
-<li>智能车载系统</li>
-<li>AI语音交互系统</li>
-<li>全机型的手机互联系统</li>
-<li>新触控人机交互系统</li>
-<li>远程监测与诊断</li>
-<li>在线服务系统</li>
-<li>数字化驾驶舱</li>
-<li>卫星定位服务系统</li>
-<li>车辆健康实时化可视化</li>
-<li>远程诊断与维修</li>
-<li>智能化任务分配</li>
-<li>车联网云平台</li>
-<li>远程控制系统</li>
-<li>信息娱乐系统</li>
-
-</ul>
-                    </details>
-                </details>
-            </div>
-        </div>
-
-        <div class="category-box" id="category-3">
-            <h2>环境影响 Environmental Impact</h2>
-            <div>
-                <details>
-                    <summary>环保 Environmental care</summary>
-                    <details>
-                        <summary>低碳 Low Carbon</summary>
-                        <ul class="feature-list">
-<li>电动驱动系统</li>
-<li>优化的空气动力学设计</li>
-<li>智能补能规划</li>
-<li>碳排量贡献计算</li>
-<li>低碳绿色成就分享</li>
-<li>热泵空调和PM2.5过滤系统</li>
-<li>电池质保8年49万公里</li>
-<li>智能路径优化</li>
-
-</ul>
-                    </details>
-                    <details>
-                        <summary>能源有效性 Energy efficiency</summary>
-                        <ul class="feature-list">
-<li>节能驾驶模式</li>
-<li>集成移动电源</li>
-<li>高效充电系统</li>
-<li>新触控人机交互系统与车载设备的高效配合</li>
-<li>高效涡轮增压发动机</li>
-<li>高效能源使用</li>
-<li>智能补能规划</li>
-<li>基于效率的智能返程路线自动规划</li>
-<li>能源交易</li>
-<li>热泵空调和PM2.5过滤系统</li>
-<li>电池质保8年49万公里</li>
-
-</ul>
-                    </details>
-                    <details>
-                        <summary>循环性 Circularity</summary>
-                        <ul class="feature-list">
-<li>可选电池升级</li>
-<li>优化的电池和能源使用技术</li>
-<li>长效耐用的车辆配件和设计</li>
-<li>可再生材料使用</li>
-<li>高效的电池回收系统</li>
-<li>智能报废管理流程</li>
-<li>车辆残值评估与动态预测</li>
-<li>电池质保8年49万公里</li>
-<li>车辆健康监测系统</li>
-</ul>
-                    </details>
-                </details>
-            </div>
-        </div>
-
-        <div class="category-box" id="category-4">
-            <h2>商业价值 Business Success</h2>
-            <div>
-                <details>
-                    <summary>营利性 Profitability</summary>
-                    <details>
-                        <summary>成本控制 Cost control</summary>
-                        <ul class="feature-list">
-<li>智能补能规划</li>
-<li>高钢性底盘一体铸造</li>
-<li>耐用发动机</li>
-<li>低维护成本</li>
-<li>车队管理全方位服务</li>
-<li>延长保修期</li>
-<li>智能车队管理</li>
-<li>智能停车系统</li>
-<li>残值</li>
-<li>工作量统计、分析</li>
-<li>车辆使用过程全程可控、可视、可追溯</li>
-<li>任务结束自动化能耗计算</li>
-<li>预测性智能维保</li>
-<li>智能保养提醒</li>
-
-</ul>
-                    </details>
-                    <details>
-                        <summary>效率 Efficiency</summary>
-                        <ul class="feature-list">
-<li>自动变速箱</li>
-<li>高效发动机</li>
-<li>智能驾驶安全系统</li>
-<li>灵活的货舱配置和智能系统</li>
-<li>自动驾驶辅助系统</li>
-<li>智能车队管理</li>
-<li>智能停车系统</li>
-<li>全域自适应巡航控制系统</li>
-<li>360度全景影像系统</li>
-<li>任务量统计、分析</li>
-<li>基于效率的智能返程路线自动规划</li>
-<li>任务结束自动化能耗计算</li>
-<li>智能路径优化</li>
-<li>车队管理系统</li>
-<li>远程控制系统</li>
-<li>导航停车点智能推荐</li>
-
-</ul>
-                    </details>
-                    <details>
-                        <summary>省时 Time-saving</summary>
-                        <ul class="feature-list">
-<li>智能驾驶辅助系统</li>
-<li>智能钥匙系统</li>
-<li>高效充电系统</li>
-<li>车队管理系统</li>
-<li>延长的保养间隔</li>
-<li>远程控制系统</li>
-<li>智能语音助手</li>
-<li>配送路线自动规划</li>
-<li>依据订单系统识别，车辆与驾驶员的自动分派</li>
-<li>智能路径优化</li>
-<li>充电站查询界面</li>
-</ul>
-                    </details>
-                </details>
+        <!-- 右侧权重计算区域 -->
+        <div class="content-right">
+            <button class="calculate-btn" onclick="calculateWeights()">计算价值偏好</button>
+            <div class="chart-container">
+                <canvas id="weightChart"></canvas>
             </div>
         </div>
     </div>
 
     <script>
-        function goBack() {
-            window.location.href = 'index.html'; // 返回首页的逻辑
+        let myChart = null;
+
+        // 层次分析法的判断矩阵一致性比率指标
+        const RI = {
+            1: 0, 2: 0, 3: 0.58, 4: 0.90, 5: 1.12, 6: 1.24, 7: 1.32, 8: 1.41, 9: 1.45
+        };
+
+        function calculateWeights() {
+            // 二级维度权重系数
+            const secondaryWeights = {
+                '营利性': 1,
+                '环保': 1,
+                '客制化': 0.0859,
+                '便利性': 0.0430,
+                '数智化': 0.0106,
+                '安全性': 0.0218,
+                '可用性': 0.0166,
+                '品质': 0.0143,
+                '舒适性': 0.0098
+            };
+
+            // 价值分类权重系数
+            const categoryWeights = {
+                '商业价值': 0.4067,
+                '环境影响': 0.3913,
+                '客户影响': 0.1395,
+                '行业影响': 0.0625
+            };
+
+            // 收集并计算加权分数
+            const weightedScores = {
+                '商业价值': 0,
+                '环境影响': 0,
+                '客户影响': 0,
+                '行业影响': 0
+            };
+
+            // 记录每个分类下的二级维度数量
+            const categoryCount = {
+                '商业价值': 0,
+                '环境影响': 0,
+                '客户影响': 0,
+                '行业影响': 0
+            };
+
+            // 遍历所有输入框
+            document.querySelectorAll('.secondary-box').forEach(box => {
+                const category = box.dataset.category;
+                const input = box.querySelector('.score-input');
+                const score = parseFloat(input.value) || 0;
+                
+                // 获取二级维度名称（从box的文本内容中提取）
+                const dimensionName = box.textContent.trim().split('\n')[0];
+                
+                // 应用二级维度权重
+                let weightedScore = score;
+                if (secondaryWeights[dimensionName]) {
+                    weightedScore *= secondaryWeights[dimensionName];
+                }
+                
+                // 累加到对应分类
+                if (category) {
+                    weightedScores[category] += weightedScore;
+                    categoryCount[category]++;
+                }
+            });
+
+            // 计算每个分类的平均加权分数
+            for (let category in weightedScores) {
+                if (categoryCount[category] > 0) {
+                    weightedScores[category] = weightedScores[category] / categoryCount[category];
+                    // 应用价值分类权重
+                    weightedScores[category] *= categoryWeights[category];
+                }
+            }
+
+            // 计算总分
+            const total = Object.values(weightedScores).reduce((a, b) => a + b, 0);
+
+            // 计算最终权重百分比
+            const data = Object.entries(weightedScores).map(([category, score]) => ({
+                category: category,
+                weight: total > 0 ? (score / total * 100).toFixed(2) : 0
+            }));
+
+            // 更新饼图
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            const ctx = document.getElementById('weightChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: data.map(item => item.category),
+                    datasets: [{
+                        data: data.map(item => item.weight),
+                        backgroundColor: [
+                            '#FF6384', // 商业价值
+                            '#36A2EB', // 环境影响
+                            '#FFCE56', // 客户影响
+                            '#4BC0C0'  // 行业影响
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            console.log('加权分数：', weightedScores);
+            console.log('最终权重百分比：', data);
         }
+
+        // 为所有输入框添加验证
+        document.querySelectorAll('.score-input').forEach(input => {
+            input.addEventListener('input', function() {
+                let value = parseFloat(this.value);
+                if (value < 0) this.value = 0;
+                if (value > 10) this.value = 10;
+            });
+        });
     </script>
 </body>
 </html>
