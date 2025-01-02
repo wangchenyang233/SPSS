@@ -10,444 +10,1378 @@
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 0;
-                background-color: #fff;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+                background-color: #f4f4f4;
+            }
+            
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
                 padding: 20px;
             }
+            
             header {
-                width: 100%;
-                text-align: center;
-                padding: 20px 0;
-                background-color: #000000;
-                color: #fff;
-                font-size: 24px;
-                border-radius: 8px;
-            }
-            .search-container {
-                margin: 20px 0;
-                width: 80%;
-                max-width: 900px;
+                background-color: #00796b;
+                color: white;
+                padding: 20px;
+                margin-bottom: 20px;
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
             }
-            .search-container input {
-                width: 100%;
-                padding: 10px;
+            
+            header h1 {
+                flex: 1;
+                text-align: center;
+                margin: 0;
+            }
+            
+            header .return-home-btn {
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .return-home-btn {
+                background-color: #FFFFFF00;
+                color: white;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
                 font-size: 16px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
+                cursor: pointer;
+                border: none;
             }
+
+            .return-home-btn:hover {
+                background-color: #FFFFFF00;
+            }
+
+            .filter-section {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            
+            .filter-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+                color: #2c3e50;
+            }
+            
+            .value-select {
+                width: 100%;
+                max-width: 300px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+                color: #2c3e50;
+                background-color: white;
+                cursor: pointer;
+            }
+            
+            .value-select:hover {
+                border-color: #2c3e50;
+            }
+            
             .main-container {
                 display: grid;
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 gap: 20px;
-                width: 100%;
-                justify-content: center;
-                margin-top: 20px;
-                max-width: 1200px;
             }
+            
             .scene-container {
-                width: 100%;
-                padding: 10px;
-                background-color: #fff;
+                background: white;
                 border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                text-align: center;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                position: relative;
+                transition: all 0.3s ease;
                 cursor: pointer;
-                transition: transform 0.3s ease;
             }
+            
             .scene-container:hover {
-                transform: scale(1.05);
+                transform: translateY(-5px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             }
+            
             .scene-image {
                 width: 100%;
-                height: auto;
-                border-radius: 8px;
-                margin-bottom: 10px;
+                height: 200px;
+                object-fit: cover;
             }
+            
             .scene-description {
+                padding: 15px;
                 font-size: 16px;
                 color: #333;
-                margin-bottom: 10px;
             }
-            .scene-configurations {
-                text-align: left;
+            
+            .scene-weight {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba(44, 62, 80, 0.85);
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
                 font-size: 14px;
-                color: #555;
+            }
+            
+            .scene-configurations {
+                padding: 15px;
+                border-top: 1px solid #eee;
                 display: none;
+                background: #f8f9fa;
+            }
+            
+            .requirements-list {
                 margin-top: 10px;
             }
-            .scene-configurations li {
-                margin-bottom: 10px;
+            
+            .requirements-list ul {
+                margin: 10px 0;
+                padding-left: 20px;
+                list-style-type: disc;
             }
-            footer {
-                width: 100%;
-                text-align: center;
-                padding: 20px 0;
-                background-color: #00796b;
-                color: #fff;
-                font-size: 14px;
-                border-radius: 8px;
-                margin-top: 30px;
+            
+            .requirements-list li {
+                margin: 5px 0;
+                color: #2c3e50;
+            }
+            
+            .scene-container.active {
+                border: 2px solid #2c3e50;
             }
         </style>
-        </head>
-  <body>
-    <header>
-        <div class="header-container">
-            <button class="back-button" onclick="goBack()">返回首页</button>
-            <h1 class="page-title">场景展示页</h1>
-        </div>
-    </header>
-    <style>
-        header {
-            width: 100%;
-            background-color: #00796b;
-            color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .header-container {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .back-button {
-            background-color: #00796b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-right: auto; /* 保证按钮靠左对齐 */
-        }
-        .back-button:hover {
-            background-color: #004d40;
-        }
-        .page-title {
-            font-size: 24px;
-            margin: 0;
-            text-align: center;
-            flex-grow: 1;
-        }
-    </style>
-    <script>
-        function goBack() {
-            window.location.href = 'index.html'; // 返回首页的逻辑
-        }
-    </script>
-</body>
+    </head>
+    <body>
+        <header>
+            <a href="index.html" class="return-home-btn">返回主页</a>
+            <h1>场景展示页</h1>
         </header>
+        
+        <div class="container">
+            <div class="filter-section">
+                <div class="filter-title">价值筛选</div>
+                <select class="value-select" id="valueSelect" onchange="updateSceneDisplay()">
+                    <option value="">全部场景</option>
+                </select>
+                <div class="debug-info" id="debugInfo"></div>
+            </div>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="搜索场景..." oninput="filterScenes()">
-        </div>
-
-        <div class="main-container" id="mainContainer">
+            <div class="main-container" id="mainContainer">
     
-            <div class="scene-container" onclick="toggleConfig('检查车辆健康状态')">
+            <div class="scene-container" data-scene-id="S1" onclick="toggleDetails('S1', this)">
                 <img src="images/1.png" alt="检查车辆健康状态" class="scene-image">
                 <div class="scene-description">检查车辆健康状态</div>
-                <div id="config-检查车辆健康状态" class="scene-configurations">
-        <div><strong>1. 系统自动提醒功能，根据设定的时间周期推送检查提醒给管理人员和司机。:</strong><ul><li></li></ul></div><div><strong>2. 详细的检查项目清单，涵盖所有必要的检查项。:</strong><ul><li></li></ul></div><div><strong>3. 记录检查结果，并生成定期检查报告，便于数据统计与分析。:</strong><ul><li></li></ul></div><div><strong>4. 异常状态的自动警报功能，确保管理人员能够及时处理问题。:</strong><ul><li></li></ul></div><div><strong>5. 维护记录和历史数据查询功能，便于追踪车辆的维护和保养历史。:</strong><ul><li></li></ul></div><div><strong>6. 根据检查结果生成维护建议或计划，确保车辆处于最佳状态。:</strong><ul><li></li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('入车前车辆准备')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S1">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                       <ul>
+        <li>实时数据采集：通过车载传感器和智能设备实时采集车辆各系统状态数据。
+<li>多维数据分析：通过算法处理和机器学习技术分析动力、制动、转向等系统数据。
+<li>异常检测与报警：一旦发现异常情况，立即触发报警并通知司机或管理系统。
+<li>自动化健康评分：根据分析结果自动生成车辆健康评分，标识关键问题。
+<li>定期健康报告：生成详细的车辆健康报告，包括每个部件的状态和建议维护措施。
+<li>远程诊断支持：支持通过远程连接进行实时诊断，缩短维修时间。
+<li>历史数据分析：提供车辆历史健康数据查看，供用户进行趋势分析和优化。
+<li>集成第三方服务：支持与维修、保险和其他服务商的无缝对接，优化服务流程。
+<li>自动维护建议：基于数据分析自动生成维修和保养建议，减少意外故障风险。
+<li>智能决策支持：通过大数据支持车辆健康状态决策，为运营效率提供支持。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S2" onclick="toggleDetails('S2', this)">
                 <img src="images/2.png" alt="入车前车辆准备" class="scene-image">
                 <div class="scene-description">入车前车辆准备</div>
-                <div id="config-入车前车辆准备" class="scene-configurations">
-        <div><strong>1. 座椅调整功能，允许司机根据个人身高和习惯调整座椅位置及倾斜角度。:</strong><ul><li></li></ul></div><div><strong>2. 方向盘高度和角度调节功能，确保司机能获得最佳操控体验。:</strong><ul><li></li></ul></div><div><strong>3. 后视镜调节功能，提供自动或手动调整后视镜的选项，以优化视野。:</strong><ul><li></li></ul></div><div><strong>4. 空调与通风设置功能，确保司机在不同天气条件下的舒适性。:</strong><ul><li></li></ul></div><div><strong>5. 司机个性化设置保存功能，允许司机保存和调用个人偏好配置。:</strong><ul><li></li></ul></div><div><strong>6. 安全检查提示功能，在调节完成后提醒司机检查安全带和其他安全设备的状态。:</strong><ul><li></li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('轻松上下车')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S2">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>自动检测车辆状态：通过传感器实时采集动力系统、制动系统、转向系统等状态数据。
+<li>生成准备报告：根据检测结果自动生成车辆准备报告，显示关键问题和建议。
+<li>实时提醒用户：根据异常情况或准备不足，向用户发送即时提醒。
+<li>个性化设置：支持座椅位置、驾驶偏好配置的设置。
+<li>外部服务集成：支持车辆维修、清洁、加油等服务的无缝集成。
+<li>智能决策支持：根据车辆历史数据和使用习惯，自动调整车辆准备方案。
+<li>多维度数据分析：通过算法分析数据，提供全面的车辆状态评估。
+<li>安全性保障：检测车辆关键安全部件，如制动系统和轮胎，确保安全驾驶。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S3" onclick="toggleDetails('S3', this)">
                 <img src="images/3.png" alt="轻松上下车" class="scene-image">
                 <div class="scene-description">轻松上下车</div>
-                <div id="config-轻松上下车" class="scene-configurations">
-        <div><strong>1. 自动识别功能，车辆能够自动检测和识别司机的身份，确认其合法性。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>2. 无感解锁功能，司机接近车辆时，车辆自动解锁，省去手动操作的步骤。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 安全验证机制，确保只有授权用户能够进入车辆，防止未授权入侵。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>4. 状态反馈功能，当车辆处于解锁或锁定状态时，通过声音或灯光提示司机。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>5. 兼容多种识别方式，支持蓝牙、NFC、二维码等多种入车方式，满足不同用户需求。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>6. 失败报警机制，若识别失败或发生异常，系统立即报警并记录相关信息。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('随身物品收纳')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S3">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>自动座椅调整：根据用户设置自动调整座椅高度、倾角和方向。
+<li>自动门开启与关闭：感应用户靠近车辆后，自动开启或关闭车门。
+<li>无障碍进入：优化低地板或无障碍车身设计，适应不同用户群体需求。
+<li>智能踏板系统：自动升降踏板以便不同身高用户的轻松上下车。
+<li>环境感知：结合车外环境（如天气、障碍物等），调整车辆状态以确保安全。
+<li>个性化设置：支持用户自定义多种上下车方案，例如司机优先、普通乘客模式等。
+<li>多元化身份识别：通过生物识别、NFC、手机App等多种方式快速识别用户身份。
+<li>实时反馈与报警：上下车过程中涉及的关键安全部件（如门锁、扶手等）出现异常时即时提醒用户。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S4" onclick="toggleDetails('S4', this)">
                 <img src="images/4.png" alt="随身物品收纳" class="scene-image">
                 <div class="scene-description">随身物品收纳</div>
-                <div id="config-随身物品收纳" class="scene-configurations">
-        <div><strong>1. 多种连接方式支持，车辆需支持蓝牙、Wi-Fi、NFC等多种无线连接方式，以兼容不同设备。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>2. 应用程序集成，开发专用应用程序，允许乘客通过手机控制车辆功能，如空调、导航等。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>3. 数据同步功能，能够自动同步乘客设备上的联系人、日历和导航信息，以便于司机和乘客使用。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>4. 媒体共享功能，允许乘客通过个人设备将音乐、视频等内容共享至车载系统播放。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>5. 安全性保障，确保连接过程中数据传输的安全性，防止未经授权的访问和数据泄露。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>6. 远程控制功能，允许乘客通过移动设备远程监控车辆状态，如锁车、解锁、查看电量等。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('激活仪式')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S4">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>智能化储物空间：提供智能化存储区，支持自动感应与分类管理，提升物品存取效率。
+<li>多功能储物区域：根据不同需求，提供多样化的储物空间，如中央控制台、座椅下方、车门储物格等。
+<li>便捷存取体验：通过触摸屏、语音控制或自动开关等方式，简化物品存取流程。
+<li>空间优化设计：合理布局储物空间，最大限度利用车辆内部空间，提高收纳能力。
+<li>安全锁定功能：在重要区域如贵重物品存储区，提供智能安全锁定机制，确保物品安全性。
+<li>抗震防护设计：针对移动过程中的颠簸，储物空间设计需具备抗震功能，保护物品安全。
+<li>分类管理系统：支持不同类别物品的智能分类与管理，如文件、饮料、工具等。
+<li>节能环保设计：储物空间设计需考虑节能环保材料，以减少车内空间负担和重量。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S5" onclick="toggleDetails('S5', this)">
                 <img src="images/5.png" alt="激活仪式" class="scene-image">
                 <div class="scene-description">激活仪式</div>
-                <div id="config-激活仪式" class="scene-configurations">
-        <div><strong>1. 手机连接功能，支持蓝牙和Wi-Fi等多种连接方式，实现手机与车载系统的快速配对。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>2. 语音控制，支持语音指令操作车载系统，方便用户在驾驶过程中进行控制。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>3. 应用集成，车载系统应能集成多种常用应用（如导航、音乐、消息等），提供统一的操作界面。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>4. 实时数据同步，能够实时同步手机上的信息（如联系人、行程、日历等），便于用户获取和管理信息。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>5. 安全隐私保护，确保用户数据和隐私的安全，防止信息泄露。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>6. 更新与维护，系统需支持OTA（无线远程升级），确保功能和安全性能够及时更新。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>7. 车载导航和媒体控制，能够通过手机直接控制车载导航和媒体播放，实现更便捷的操作体验。:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('司机状态监测')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S5">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>身份验证：支持指纹识别、面部识别、或蓝牙与车钥匙结合的多种身份验证方式。
+<li>自动设备检测：在激活时，系统自动扫描车辆的各项设备状态，包括电池、电路系统、轮胎压力等，确保设备正常。
+<li>一键式激活：用户通过简单的按钮或语音命令，迅速完成激活流程。
+<li>数据安全性：使用加密技术保护用户身份和车辆数据，确保激活过程中的隐私安全。
+<li>自动化初始化：激活完成后，自动启用车辆相关配置，如座椅调节、空调、灯光、导航等。
+<li>反馈系统：通过视觉或语音通知用户激活成功，或出现异常情况时发出警示。
+<li>远程激活：支持通过手机APP或云端平台远程激活车辆，无需现场操作。
+<li>权限管理：根据用户身份自动控制操作权限，限制非授权人员的操作范围。
+<li>智能警报机制：在异常操作或安全风险时，触发警报系统及时提醒用户。
+<li>自动化驾驶支持：结合自动驾驶功能，提供更智能的激活流程，如自动车门解锁与设置初始化。
+<li>多重验证：支持多层次验证，包括密码、短信验证码等，确保激活流程的安全性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S6" onclick="toggleDetails('S6', this)">
                 <img src="images/6.png" alt="司机状态监测" class="scene-image">
                 <div class="scene-description">司机状态监测</div>
-                <div id="config-司机状态监测" class="scene-configurations">
-        <div><strong>1. 上车状态检测，系统能够在司机上车后自动启动，监测其生理状态（如心率、呼吸频率）和心理状态（如情绪、疲劳程度）。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>2. 实时警报，系统在检测到异常状态时，及时发出警报，提醒司机注意安全或考虑不驾驶。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 数据记录与分析，记录司机上车时的状态数据，并生成分析报告，以帮助管理者了解司机的健康趋势。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>4. 语音反馈，系统能够通过语音提示司机状态，并提供相应的安全建议。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>5. 安全评估，基于司机的状态数据，系统能够自动评估其适合驾驶的安全等级，并给出建议。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>6. 用户界面友好，提供直观易用的界面，便于司机快速查看状态信息和系统反馈。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>7. 隐私保护，确保监测数据的安全性和用户隐私，防止信息泄露。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>8. 故障自检，系统能够定期自检，确保监测功能的正常运行，保障司机的安全。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('偏好设置')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S6">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>生理监测系统：集成心率、血压、体温等生理参数的自动监测功能，以实时掌握驾驶员健康状态。
+<li>疲劳评估系统：通过眼动追踪、脑电波监测等技术评估驾驶员疲劳状态，及时发出警报或建议休息。
+<li>驾驶行为分析：记录和分析驾驶员的操作习惯，如加速、刹车、转向等，发现异常驾驶行为并及时提醒。
+<li>环境优化：根据驾驶员状态调整座椅、空调、灯光等车内环境，以提升舒适性和安全性。
+<li>智能预警系统：通过语音提示、触摸屏或视觉反馈提醒驾驶员进行相应的安全调整（如保持车距、减速等）。
+<li>实时数据同步：将监测到的数据实时上传到车队管理系统，便于集中管理和分析。
+<li>多维度分析报告：生成详细的驾驶报告，包括健康数据、驾驶习惯、事故风险等，供企业或司机参考。
+<li>联网安全服务：支持与外部医疗机构或安全服务平台的联动，以便更及时地提供应急支持。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S7" onclick="toggleDetails('S7', this)">
                 <img src="images/7.png" alt="偏好设置" class="scene-image">
                 <div class="scene-description">偏好设置</div>
-                <div id="config-偏好设置" class="scene-configurations">
-        <div><strong>1. 偏好设置，用户能够在系统中设定运输偏好，包括最优路线、最短时间、最低费用等。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>2. 实时建议，系统根据用户的运输偏好，实时提供推荐的运输方案，以满足用户的需求。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>3. 自适应调整，运输过程中系统能够根据实时情况（如交通、天气等）自动调整运输方案，保证满足用户偏好。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>4. 反馈机制，用户能够对运输服务进行反馈，以帮助系统优化和提升服务质量。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>5. 数据分析，系统能够分析用户的运输偏好，提供个性化的运输方案建议，提升用户体验。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>6. 多模式选择，支持多种运输模式（如快递、直达、货车等）选择，满足不同用户的需求。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>7. 优惠通知，基于用户的运输偏好，提供相关的优惠活动和促销信息，吸引用户使用服务。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>8. 安全保障，确保用户在设定运输偏好时，数据安全和隐私得到充分保护，防止信息泄露。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('接收订单')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S7">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>用户登录与身份识别：通过智能设备或车载系统，实现驾驶员或配送员的身份识别，确保偏好设置的安全性和唯一性。
+<li>个人化座椅设置：自动记忆座椅位置、角度、扶手高度等，支持一键切换不同偏好设置。
+<li>环境优化：根据个人偏好调节车内温度、湿度、车窗透光度等，提供舒适的驾驶环境。
+<li>导航与地图偏好：支持用户设置默认的导航模式、语言、路线偏好等，提供高效的路径规划。
+<li>驾驶模式调整：提供多种驾驶模式（如经济模式、高效模式、运输模式等），用户可以根据实际需求进行选择。
+<li>辅助功能配置：灵活调整辅助驾驶功能，如车道保持、自动泊车、碰撞预警等，以满足不同驾驶需求。
+<li>个性化快捷键设置：用户可自定义车辆功能的快捷操作键，简化操作流程，提高效率。
+<li>定制化仪表盘显示：根据用户需求定制仪表盘显示内容，优化驾驶信息的展示方式。
+<li>远程控制与同步：支持通过手机APP或PC端远程配置车辆偏好，自动同步到车载系统。
+<li>反馈与优化：定期根据驾驶习惯和反馈调整偏好设置，提升车辆的使用体验。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S8" onclick="toggleDetails('S8', this)">
                 <img src="images/8.png" alt="接收订单" class="scene-image">
                 <div class="scene-description">接收订单</div>
-                <div id="config-接收订单" class="scene-configurations">
-        <div><strong>1. 订单分类，系统能够将订单分为高薪、普通和轻松三类，方便用户快速筛选。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div><div><strong>2. 收入预估，提供每种订单类型的收入预估，帮助用户评估选择的经济效益。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div><div><strong>3. 工作强度提示，清晰标明每类订单的工作强度和时间要求，便于用户根据自身情况做出选择。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div><div><strong>4. 优先推荐，基于用户历史接单记录和偏好，智能推荐适合的订单类型，提高接单效率。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div><div><strong>5. 订单过滤，用户能够根据薪资、工作类型和地点等条件灵活设置过滤选项，快速找到符合需求的订单。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div><div><strong>6. 订单详情，提供每个订单的详细信息，包括工作内容、薪资结构、接单时间、地点等，便于用户做出决策。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div><div><strong>7. 接单历史，用户能够查看自己的接单历史记录，了解不同类型订单的完成情况及收入统计。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div><div><strong>8. 反馈机制，用户能够对订单体验进行反馈，帮助平台优化订单分配和用户体验。:</strong><ul><li>车载传感器</li><li>云服务平台（CaaS）</li><li>座椅加热调节系统</li><li>车载信息娱乐系统</li><li>人脸识别传感器/生物识别系统</li><li>车载通信模块</li><li>环境传感器</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('路线规划')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S8">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>智能订单推荐：根据货物种类和车辆匹配度推荐最合适的订单。这一功能需要系统通过AI算法分析当前订单需求与车辆的载重量、空间以及配送能力，从而为用户提供最匹配的订单推荐，减少错误订单的接收。
+<li>自动超载检测：实时检测车辆空间是否满足订单需求，避免超载。此功能通过传感器和数据分析来监测车辆载重量和空间利用率，确保车辆在接单时不会超过安全载重。
+<li>空间优化配置：动态调整车辆内部空间配置以满足不同订单的需求。此功能涉及到自动化的座椅折叠、货物摆放方案以及储物区域管理，优化车辆空间的利用，以提升订单接收效率。
+<li>路径规划与优化：提供智能化的路径规划，减少绕行，提升配送效率。这需要结合交通实时数据、路况、时间和订单优先级等因素来生成最优配送路线。
+<li>多订单接收与排序：支持接收多个订单，并智能排序，优化配送路线。系统能够通过算法自动排序多个订单，保证最优路径，同时处理多个任务，提升配送员的工作效率。
+<li>实时数据分析：通过大数据分析实时评估订单接收的经济效益与耗能。这包括对订单处理后的成本、盈利和配送时间等的智能评估，从而提供更合理的决策支持。
+<li>安全监控系统：保障接单过程中的安全性，支持异常状态报警与处理。这一功能利用摄像头、传感器以及其他安全设备，实时监控车辆状态，确保接单过程中的安全性。
+<li>多任务支持：在接单的同时，允许处理其他任务，提升工作效率。系统能够支持司机或配送员在处理接单任务的同时，处理其他辅助任务，如路径调整、客户沟通等，避免资源浪费。
+<li>用户交互与反馈：提供直观的界面和反馈机制，支持用户动态调整订单处理方式。用户可以通过触控界面或语音操作，实时调整订单参数和处理流程，提升使用体验。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S9" onclick="toggleDetails('S9', this)">
                 <img src="images/9.png" alt="路线规划" class="scene-image">
                 <div class="scene-description">路线规划</div>
-                <div id="config-路线规划" class="scene-configurations">
-        <div><strong>1. 实时数据集成，系统能够实时获取交通、天气、路况等信息，动态调整路径规划。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>2. 最优路径计算，提供多种路径选择，包括最短时间、最低成本和最优安全等方案，满足不同用户需求。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>3. 用户偏好设置，允许用户根据个人偏好设置路径规划选项，如避免高速公路、选择风景路线等。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>4. 路径更新，能够根据实时情况，如突发交通事故或天气变化，及时更新规划路径，并通知用户。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>5. 里程和费用估算，提供详细的行驶里程和费用预估，帮助用户评估运输成本。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>6. 多模态选择，支持多种运输方式（如驾车、步行、骑行等）的路径规划，满足用户多样化需求。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>7. 安全提示，系统能够提示用户沿途的安全隐患或交通管制信息，确保用户安全。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>8. 路径历史记录，用户能够查看历史路径规划记录，以便于后续相似任务的参考和选择。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('订单管理')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S9">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时交通数据整合：通过集成实时交通信息、路况数据和天气条件，自动优化路径规划。
+<li>多目标路径规划：支持基于多个需求（如距离、时间、成本）的路径优化，满足不同场景下的配送需求。
+<li>自动化路径建议：系统根据订单、需求和限制条件，自动生成最佳路径方案。
+<li>动态路况更新：路线实时调整，根据交通拥堵、事故或恶劣天气条件及时优化路径。
+<li>分时分段路径规划：支持根据订单分时或分段路径规划，例如早晚高峰期或节假日配送。
+<li>智能停靠点选择：自动识别合适的停靠位置，如卸货点、临时停车点等，提升停车与装卸效率。
+<li>离线路径优化：支持在没有网络或信号弱的环境下，依然能够提供路径规划功能，确保配送顺畅。
+<li>数据分析与回溯优化：系统自动分析过去的配送数据，基于历史路径优化未来路线规划，提高线路精度和效率。
+<li>路线风险评估：对潜在风险路段（如偏远区域、高危路段）进行风险评估，并自动规划绕行路径。
+<li>多任务协同路径规划：支持多订单、多车辆协同路径优化，降低车辆资源浪费，提升整体配送效率。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S10" onclick="toggleDetails('S10', this)">
                 <img src="images/10.png" alt="订单管理" class="scene-image">
                 <div class="scene-description">订单管理</div>
-                <div id="config-订单管理" class="scene-configurations">
-        <div><strong>1. 实时定位，系统能够实时监控车队中每辆车的位置，确保运输过程的安全与高效。:</strong><ul><li></li></ul></div><div><strong>2. 路线同步，支持为车队成员规划相同的出行路线，避免车辆之间的交通冲突，并兼顾客户需求。:</strong><ul><li></li></ul></div><div><strong>3. 信息共享，提供实时信息共享功能，使司机、客户和商户能够及时沟通，包括运输状态、到达时间、路况等信息。:</strong><ul><li></li></ul></div><div><strong>4. 集中调度，支持车队集中调度功能，便于管理人员协调司机的出行计划，并及时调整安排。:</strong><ul><li></li></ul></div><div><strong>5. 客户通知，自动向客户发送运输状态更新通知，包括出发、到达、延误等信息，提升客户体验。:</strong><ul><li></li></ul></div><div><strong>6. 商户确认，商户可以实时查看订单状态，并在需要时确认或调整接收时间，确保货物的安全和及时接收。:</strong><ul><li></li></ul></div><div><strong>7. 安全监控，提供车队行驶过程中的安全监控，实时识别潜在的安全风险，并提醒相关司机。:</strong><ul><li></li></ul></div><div><strong>8. 反馈机制，允许司机、客户和商户对出行过程中的问题进行反馈，以便于后续改进和优化。:</strong><ul><li></li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('包装')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S10">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>订单接收与分配：支持接收来自不同渠道的订单（如线上平台、电话等），并根据配送员的能力、区域、车辆适配等条件进行自动分配。
+<li>实时任务管理：实时监控订单状态，从接单、出发、配送到完成的各个环节进行状态更新，并实时通知相关参与方。
+<li>多方数据协同：集成订单、货物、仓库、客户四方数据，确保每个环节的数据同步与共享。
+<li>路径优化与导航：根据实时订单与配送员位置，提供智能路径规划，优化配送路线，减少无效路径和延迟。
+<li>库存与仓储管理：支持与仓储系统的数据同步，实时更新库存信息，避免超出库存的订单分配。
+<li>异常订单处理：提供自动化异常检测机制，如货物缺失、配送延迟等，及时处理并通知相关人员。
+<li>客户反馈与满意度管理：自动生成客户满意度调查，定期收集用户反馈数据，优化配送质量和服务水平。
+<li>任务自动分配与调整：根据订单紧急程度、配送员能力和当前任务负载，自动调整和分配任务，提升配送效率。
+<li>数据分析与报告生成：提供基于订单管理数据的报表生成功能，支持运营分析和决策支持。
+<li>安全与权限管理：支持基于角色和权限的多层次访问控制，确保不同用户对数据的访问权限合理分配。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S11" onclick="toggleDetails('S11', this)">
                 <img src="images/11.png" alt="包装" class="scene-image">
                 <div class="scene-description">包装</div>
-                <div id="config-包装" class="scene-configurations">
-        <div><strong>1. 系统应具备自动化包装外观检测功能，通过摄像头和AI图像识别技术，自动识别包装的完整性、无损坏及清洁度。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>2. 系统应能够自动检测包装材料的质量，确保其符合运输标准并降低因包装损坏而导致的货物受损风险。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>3. 系统应能够将检测结果自动记录并上传到中央管理系统，以便对包装进行追溯和质量监控。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>4. 参考功能：亚马逊的智能包装检查系统，能够自动检测包装质量并生成检测报告。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('分拣')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S11">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>货物包装防护：提供抗震、防潮、防压等专业包装，保障货物在运输过程中安全。
+<li>贴标签：为每个包装提供独立的智能标签，支持实时追踪货物状态和位置。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S12" onclick="toggleDetails('S12', this)">
                 <img src="images/12.png" alt="分拣" class="scene-image">
                 <div class="scene-description">分拣</div>
-                <div id="config-分拣" class="scene-configurations">
-        <div><strong>1. 系统应支持条形码和RFID自动扫描，能够通过自动化设备快速识别包裹信息，并将信息同步至仓储管理系统（WMS）。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>2. 系统应具备自动数据录入功能，确保每个包裹信息被准确无误地记录，避免人工操作带来的延迟或错误。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>3. 系统应能够同时处理大批量的包裹扫描工作，确保数据的实时上传和可追溯性。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>4. 参考功能：亚马逊的仓库管理系统，通过高效的条形码扫描和数据录入实现包裹信息的快速处理和同步。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('装车')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S12">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>按照订单和运输路径将包裹进行分装：系统根据订单信息和优先级，对货物进行自动匹配和排序，确保效率最高。
+数据实时同步：所有分拣过程中的数据，包括货物状态、分拣完成情况、错误分拣等，实时上传到仓库管理系统。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S13" onclick="toggleDetails('S13', this)">
                 <img src="images/13.png" alt="装车" class="scene-image">
                 <div class="scene-description">装车</div>
-                <div id="config-装车" class="scene-configurations">
-        <div><strong>1. 系统应具备自动装载顺序规划功能，根据货物的优先级、路线及交付要求，系统应自动生成最优的装载顺序，确保装载效率最大化，并减少装卸货物的时间。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>2. 系统应支持与运输管理系统（TMS）的无缝集成，能够根据实时路况、交付优先级等因素调整装载顺序，确保运输路线和装载顺序的最优化。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>3. 系统应具备灵活调整功能，允许在紧急情况下对装载顺序进行动态调整，避免固定顺序导致效率下降。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>4. 参考功能：联邦快递的智能装载系统，结合路线规划和装载顺序优化技术，自动为驾驶员提供最佳的货物装载方案。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('安全检测')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S13">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>装车规划：结合订单和路线信息，自动生成最优的装车顺序，减少无效行驶。
+<li>货舱门打开：270度打开，轻松开门。
+<li>辅助装车：升降台、传送带等将货物运到货舱。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S14" onclick="toggleDetails('S14', this)">
                 <img src="images/14.png" alt="安全检测" class="scene-image">
                 <div class="scene-description">安全检测</div>
-                <div id="config-安全检测" class="scene-configurations">
-        <div><strong>1. 系统应具备自动载重监测功能，在货物装载完成后自动检测载重情况，并对超载情况进行警报提示。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>2. 系统应能够根据不同车辆类型和货物的安全载重范围，智能调整载重标准，确保运输安全。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>3. 系统应支持远程载重监控，帮助管理者实时查看不同车辆的载重状态。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('装载优化')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S14">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>安全防护：通过智能锁定或缓冲设备，确保货物运输过程中的安全性。
+<li>载重检测：实时监测车辆负载，确保车内货物分布均匀，防止超载。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S15" onclick="toggleDetails('S15', this)">
                 <img src="images/15.png" alt="装载优化" class="scene-image">
                 <div class="scene-description">装载优化</div>
-                <div id="config-装载优化" class="scene-configurations">
-        <div><strong>1. 系统应具备实时监控货物装载重量的功能，确保每个货物的重量平衡调配，避免因重量分布不均引发的安全隐患。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>2. 系统应结合传感器和AI算法，自动为操作员提供货物摆放建议，以确保车辆的重心在安全范围内。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>3. 系统应提供载重分布的可视化显示，帮助驾驶员直观了解车厢内的重量分布情况。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('库存同步')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S15">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>自动化货物识别：通过智能扫描设备或RFID技术，实现货物的自动识别和库存采集。
+<li>智能货架管理：利用智能货架系统，根据货物体积、重量和配送需求进行空间规划和货物排序。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S16" onclick="toggleDetails('S16', this)">
                 <img src="images/16.png" alt="库存同步" class="scene-image">
                 <div class="scene-description">库存同步</div>
-                <div id="config-库存同步" class="scene-configurations">
-        <div><strong>1. 系统应能够在货物装载完成后，实时更新库存信息，确保库存数据的准确性和及时性。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>2. 系统应支持与仓储管理系统（WMS）的无缝对接，通过RFID或条形码扫描自动更新货物的出入库状态。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>3. 系统应具备多仓库同步功能，确保多个仓库之间的库存信息实时一致。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('HMI交互')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S16">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时数据同步：将装车后的库存数据与仓库系统进行实时对接，确保数据的一致性。
+<li>数据异常检测：实时监测库存数据的变化，识别并处理异常情况，如数量错误或损坏商品。
+<li>安全传输机制：使用加密和防篡改技术，保障库存数据在传输过程中的安全性。
+<li>远程库存管理：支持通过远程平台查看和管理库存信息，便于及时调整运输安排。
+<li>数据分析与报告：提供库存数据分析功能，生成实时报告，支持决策优化。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S17" onclick="toggleDetails('S17', this)">
                 <img src="images/17.png" alt="HMI交互" class="scene-image">
                 <div class="scene-description">HMI交互</div>
-                <div id="config-HMI交互" class="scene-configurations">
-        <div><strong>1. 系统应具备实时健康监控功能，能够通过传感器实时监测驾驶员的健康状态（如心率、血压、瞳孔反应等），尤其是在长时间驾驶或疲劳驾驶时提供预警提示。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>2. 系统应具备与健康管理系统的集成功能，能够自动生成健康数据报告，并根据监控结果提供驾驶建议或启动休息模式。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 系统应能够将健康数据上传至中央平台，允许管理人员查看驾驶员的健康状况，并确保长途运输的安全性。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>4. 参考功能：沃尔沃的Driver Alert系统，通过监控驾驶员状态识别疲劳驾驶并发出预警。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('常规驾驶体验')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S17">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>多模态交互：支持触摸屏、语音、实体按键等多种交互方式，实现无缝切换。
+<li>车辆状态监控：通过HMI界面实时显示车辆的各项状态，如油量、电池、电压等。
+<li>应急控制功能：支持在紧急情况下通过单一按钮或语音指令快速访问安全功能，如紧急制动、导航到最近维修点等。
+<li>自定义配置：用户可以根据个人习惯调整HMI的布局、显示内容和操作逻辑。
+<li>用户体验优化：根据驾驶员使用习惯，定期优化HMI的交互界面和操作流程。
+<li>数据同步与分析：支持HMI与远程系统的实时数据同步和分析，便于优化车辆管理。
+<li>安全性保护机制：支持HMI系统的加密保护和安全数据处理，保障用户信息隐私和系统稳定性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S18" onclick="toggleDetails('S18', this)">
                 <img src="images/18.png" alt="常规驾驶体验" class="scene-image">
                 <div class="scene-description">常规驾驶体验</div>
-                <div id="config-常规驾驶体验" class="scene-configurations">
-        <div><strong>1. 系统应支持自动云端连接功能，在车辆启动后能够自动连接到云端导航和天气预报服务，确保驾驶员随时获取最新的路况信息和天气变化情况。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>2. 系统应具备网络环境优化功能，能够在网络信号不佳的情况下继续为驾驶员提供服务，确保云服务在任何地区都能正常运行。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>3. 系统应与地图数据同步，实时更新车辆行驶路径，并提供安全驾驶建议。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>4. 参考功能：特斯拉的实时地图更新系统，能够通过云端快速更新导航和路况信息。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('途中沟通 ')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S18">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>智能驾驶辅助：支持HMI系统与自动驾驶功能的协同，提供辅助驾驶信息和操作。
+<li>安全辅助系统：集成自动刹车、车道偏离警告、盲点监测等多重驾驶辅助功能，保障行车安全。
+<li>舒适座椅与空间设计：提供灵活调节的座椅、座椅加热与通风功能，以及宽敞的驾驶舱空间，提升长时间驾驶的舒适感。
+<li>智能导航与信息管理：支持实时导航、交通信息显示以及车辆状态监控功能，提供实时路况、路径规划和语音导航功能，优化驾驶路线。
+<li>无线连接与多媒体娱乐：支持手机、平板等设备的无线连接，提供娱乐与信息服务。
+<li>智能空调系统：根据环境变化自动调整车内温度，提升驾驶体验。
+<li>环境感知与控制：支持对外部环境的实时感知，如湿滑路面、恶劣天气等，及时调整车辆行驶策略。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S19" onclick="toggleDetails('S19', this)">
                 <img src="images/19.png" alt="途中沟通 " class="scene-image">
                 <div class="scene-description">途中沟通 </div>
-                <div id="config-途中沟通 " class="scene-configurations">
-        <div><strong>1. 系统应支持车队内部的实时通信功能，确保每辆车都能够与车队管理系统和其他车辆保持实时的沟通，保证队列行驶的协调性和一致性。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>2. 系统应具备信息同步功能，包括位置、速度、导航路径等信息，能够自动同步到车队中的每辆车，确保队列行驶时的信息一致。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>3. 系统应支持紧急情况沟通功能，在队列行驶过程中若有突发情况，能够立即与车队其他车辆和指挥中心进行沟通，确保快速反应。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>4. 参考功能：福特的车队管理通信系统，能够实时同步车队中的位置信息，并支持在紧急情况下与整个车队保持沟通。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('后台实时支援')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S19">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时语音通话功能：支持语音呼叫与接听，确保配送员能够随时与相关人员进行语音沟通。
+<li>即时消息推送：通过智能屏幕或手机推送消息，及时更新任务状态或接收客户反馈。
+<li>语音助手支持：提供语音输入和响应功能，用于快速获取任务信息、路线导航等。
+<li>多方协作：支持多人视频或音频会议，提升团队协作效率。
+<li>异常事件报警：在运输过程中，一旦发生异常情况，系统自动触发报警并通知相关人员。
+<li>路线与任务共享：通过系统与客户或配送中心共享实时运输路线与任务信息，提升透明度。
+<li>远程支持：配送员可通过远程支持功能，与专家或客服进行问题诊断与处理。
+<li>自动定位功能：实时显示配送员位置，支持与团队成员共享位置，方便定位与追踪。
+<li>离线状态支持：在通信不畅的情况下，具备离线消息存储与同步功能。
+<li>安全加密机制：确保途中所有通信数据的安全性，防止信息泄露或篡改。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S20" onclick="toggleDetails('S20', this)">
                 <img src="images/20.png" alt="后台实时支援" class="scene-image">
                 <div class="scene-description">后台实时支援</div>
-                <div id="config-后台实时支援" class="scene-configurations">
-        <div><strong>1. 快速响应：救援服务需要快速响应车辆故障呼叫，及时派遣救援人员或车辆前往现场:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div><div><strong>2. 现场评估：救援人员到达现场后，对车辆故障进行初步评估，判断是否需要拖车或现场修复:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div><div><strong>3. 故障排除：对于能够现场修复的故障，救援人员会尝试进行快速修复。对于无法现场修复的故障，需要将车辆拖至修理厂:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div><div><strong>4. 拖车服务：对于无法现场修复的车辆，提供拖车服务，将车辆安全地运输到最近的修理厂:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div><div><strong>5. 安全保障：确保在整个救援过程中，驾驶员、乘客和救援人员的安全:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('车-人-货-环境互联')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S20">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>车辆故障救援：实时监控车辆状态，一旦发生故障，自动触发救援机制，通知服务团队。
+<li>紧急医疗救援：通过车辆系统紧急呼叫医疗服务，并同步位置信息，确保及时救援。
+<li>远程车辆控制：支持远程锁车、解锁、启动车辆以及控制空调等功能，提升车辆管理和安全性。
+<li>实时故障诊断：实时检测车辆系统故障，生成详细报告并发送给维修团队进行远程诊断与修复。
+<li>紧急通信通道：提供一键式紧急通信通道，确保用户能够快速联系后台支援团队。
+<li>车辆定位与跟踪：通过GPS与物联网技术实时监控车辆位置，确保运营路线的安全性。
+<li>多维度安全监控：集成摄像头、传感器等多维度设备，实时检测车辆周围环境，保障行驶安全。
+<li>智能预警系统：预测潜在故障或风险，并自动推送预警通知给后台服务团队。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S21" onclick="toggleDetails('S21', this)">
                 <img src="images/21.png" alt="车-人-货-环境互联" class="scene-image">
                 <div class="scene-description">车-人-货-环境互联</div>
-                <div id="config-车-人-货-环境互联" class="scene-configurations">
-        <div><strong>1. 语音识别系统：通过语音交互技术，允许驾驶员和乘客通过语音命令控制车辆的各种功能和服务:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>1. 车载监控技术：车载监控平台结合了物流管理、车辆管理和视频监控管理，提供了货物跟踪管理、实时监控管理、数据统计和货物安全监控等服务:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>1. 环境监测技术：实时监测环境中的各种参数，并对这些数据进行分析和处理，将分析结果反馈到中控大屏，并给出建议给司机选择:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('驾乘安全')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S21">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时数据共享：支持车辆、驾驶员、货物与各利益相关者之间的数据同步与共享。
+<li>多方协同平台：集成客户、供应链、物流中心等利益相关者，实现多方资源整合与协作。
+<li>智能决策支持：基于多方需求和数据分析，提供智能化决策支持，优化运营流程。
+<li>客户满意度管理：通过实时反馈系统提升客户体验，满足不同客户的个性化需求。
+<li>资源优化配置：通过智能资源调度，提升车辆与货物的使用效率，降低浪费。
+<li>安全与风险管理：结合利益相关者的需求，实时评估和管理操作风险，保障多方利益。
+<li>自动化协作与支持：通过自动化系统实现各利益方的高效协作，减少沟通和操作成本。
+<li>数据隐私与合规管理：确保利益相关方间的数据共享符合隐私保护和法律合规要求。
+<li>实时报告生成：生成基于多方协作的操作报告，展示各方参与度和效果。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S22" onclick="toggleDetails('S22', this)">
                 <img src="images/22.png" alt="驾乘安全" class="scene-image">
                 <div class="scene-description">驾乘安全</div>
-                <div id="config-驾乘安全" class="scene-configurations">
-        <div><strong>1. 超速提醒：当车辆超过设定的速度限制时，系统会发出警告:</strong><ul><li>车载通信模块</li><li>GPS定位设备</li><li>传感器</li><li>车辆电池管理系统</li><li>算法引擎</li><li>云计算平台</li><li>车队管理平台</li></ul></div><div><strong>2. 车道偏离警告：如果车辆在未打转向灯的情况下偏离车道，系统会提醒驾驶员:</strong><ul><li>车载通信模块</li><li>GPS定位设备</li><li>传感器</li><li>车辆电池管理系统</li><li>算法引擎</li><li>云计算平台</li><li>车队管理平台</li></ul></div><div><strong>3. 疲劳驾驶监测：通过监测驾驶员的生理信号或驾驶行为，如频繁眨眼或长时间不动，来判断是否出现疲劳迹象，并发出提醒:</strong><ul><li>车载通信模块</li><li>GPS定位设备</li><li>传感器</li><li>车辆电池管理系统</li><li>算法引擎</li><li>云计算平台</li><li>车队管理平台</li></ul></div><div><strong>4. 分心驾驶警告：通过载摄像头监测驾驶员的视线和注意力，如果检测到驾驶员注意力不集中，如长时间低头或看向侧面，系统会发出警告:</strong><ul><li>车载通信模块</li><li>GPS定位设备</li><li>传感器</li><li>车辆电池管理系统</li><li>算法引擎</li><li>云计算平台</li><li>车队管理平台</li></ul></div><div><strong>5. 跟车距离提醒：在车辆与前车距离过近时，系统会提醒驾驶员保持安全距离:</strong><ul><li>车载通信模块</li><li>GPS定位设备</li><li>传感器</li><li>车辆电池管理系统</li><li>算法引擎</li><li>云计算平台</li><li>车队管理平台</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('ADAS辅助驾驶 (l0-l2)')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S22">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时驾驶状态监测：通过传感器和智能算法实时分析驾驶员疲劳、注意力分散、急刹等行为，及时发出警示。
+<li>自动化危险预警系统：通过前方车辆、障碍物检测和道路环境分析，提前预测并提醒潜在危险。
+<li>多维安全辅助：集成自动刹车、车道保持、盲区监测等多项安全辅助功能，保障行驶稳定。
+<li>异常驾驶行为提醒：在出现异常驾驶行为时，利用AI进行诊断，自动调节车辆状态。
+<li>疲劳与分心驾驶监测：结合人体工程学数据，监测驾驶员状态，提示休息和干预措施。
+<li>实时行车数据记录与分析：将行驶数据实时传输至后台，生成行驶安全报告，供安全评估使用。
+<li>紧急事件响应系统：支持自动报警、定位及远程安全援助，确保事故处理及时高效。
+<li>多方安全整合：与交通管理系统、救援中心等外部系统集成，提升整体安全保障水平。
+<li>系统自我校准与优化：系统能够根据行驶数据和反馈不断优化和完善安全功能。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S23" onclick="toggleDetails('S23', this)">
                 <img src="images/23.png" alt="ADAS辅助驾驶 (l0-l2)" class="scene-image">
                 <div class="scene-description">ADAS辅助驾驶 (l0-l2)</div>
-                <div id="config-ADAS辅助驾驶 (l0-l2)" class="scene-configurations">
-        <div><strong>1. 自动灯光切换：能够根据交通和环境因素自动开启或关闭远光灯，实现近光灯与远光灯的自由切换:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>2. 夜视系统：夜视系统利用红外线成像技术，帮助驾驶者在黑夜中看清道路、行人和障碍物等，减少事故发生:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 远光辅助系统：远光辅助系统能够自动控制远光灯的打开和关闭，增加远光灯开启的持续时间，并确保及时关闭，以避免对其他道路使用者造成眩目:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>4. 行人和车辆检测：能够检测并识别行人和车辆，甚至在夜间或恶劣天气条件下也能提供辅助驾驶功能:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('驾驶体验')">
-                <img src="images/24.png" alt="驾驶体验" class="scene-image">
-                <div class="scene-description">驾驶体验</div>
-                <div id="config-驾驶体验" class="scene-configurations">
-        <div><strong>1. 音频/视频播放：提供音乐、广播、电影等多媒体内容的播放功能:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>2. 导航系统：集成GPS导航，提供路线规划和实时交通信息:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>3. 车载通信：包括蓝牙电话、车载Wi-Fi等，方便驾驶者和乘客进行通信:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>4. 车况监测：监测车辆的运行状态，如油耗、胎压等，并提供维护提醒:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>5. 信息娱乐系统：如Apple Carplay、Android Auto等，允许用户在车端直接使用手机里的一些应用:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>1. 空调滤芯的升级：在传统的空调风道中加装HEPA滤网和活性炭层，用以过滤车外空气中的颗粒物和吸附TVOC等有害气体:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>2. 内外循环切换：通过切换空调系统的内外循环模式，控制车内空气质量，减少污染物的进入:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div><div><strong>3. 传感器监测：利用车内外的传感器监测空气质量，智能调整空调内外循环系统，确保车内空气的清洁:</strong><ul><li>车载通信模块</li><li>4个扬声器</li><li>车队管理系统</li><li>异常分析系统</li><li>客户支持服务</li><li>车载WIFI</li><li>租用替换车辆管理系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('车内清洁')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S23">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>自动车道保持：通过摄像头和传感器实时分析车道信息，自动辅助驾驶员保持车辆在车道内行驶。
+<li>自适应巡航控制：结合雷达和传感器技术，自动调节车速以匹配前方车辆的速度，保持安全跟车距离。
+<li>紧急制动辅助：通过碰撞预警系统和自动刹车功能，在危险情况发生时进行自动干预。
+<li>前方障碍物检测与避让：实时识别前方障碍物或行人，并自动调整行驶路径。
+<li>盲区监测与预警：通过侧方摄像头和传感器，提醒驾驶员盲区内的车辆或障碍物，提升变道安全。
+<li>自动泊车功能：支持自动停泊功能，减少驾驶员泊车难度，提升停车安全性。
+<li>行驶数据记录与分析：记录车辆运行数据，支持驾驶行为分析和系统优化。
+<li>安全辅助警示：实时显示车内监测数据，如疲劳驾驶提醒、超速警告等。
+<li>高精度定位与地图服务：结合高精度导航和实时地图数据，提高辅助驾驶的精准度和安全性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S24" onclick="toggleDetails('S24', this)">
                 <img src="images/25.png" alt="车内清洁" class="scene-image">
                 <div class="scene-description">车内清洁</div>
-                <div id="config-车内清洁" class="scene-configurations">
-        <div><strong>1. 智能控制：一些新风系统配备有智能传感器和算法，能够根据车内外空气质量自动调整通风策略，实现更高效的空气净化:</strong><ul><li>自动调节逻辑算法</li><li>新风系统组件</li><li>APP远程控制</li><li>车队管理系统</li><li>悬挂</li><li>传感器</li><li>客户支持服务</li></ul></div><div><strong>2. 自然通风：汽车在行驶过程中，通过车身设计产生的动压差，实现自然通风，无需额外能源消耗:</strong><ul><li>自动调节逻辑算法</li><li>新风系统组件</li><li>APP远程控制</li><li>车队管理系统</li><li>悬挂</li><li>传感器</li><li>客户支持服务</li></ul></div><div><strong>3. 空气净化：配备空调滤清器和静电除尘装置，以净化进入车内的空气:</strong><ul><li>自动调节逻辑算法</li><li>新风系统组件</li><li>APP远程控制</li><li>车队管理系统</li><li>悬挂</li><li>传感器</li><li>客户支持服务</li></ul></div><div><strong>1. 外观清洁：对车辆的车身、车窗、轮毂、轮胎等外部部件进行清洗，去除污垢、灰尘和其他污染物:</strong><ul><li>自动调节逻辑算法</li><li>新风系统组件</li><li>APP远程控制</li><li>车队管理系统</li><li>悬挂</li><li>传感器</li><li>客户支持服务</li></ul></div><div><strong>2. 内饰清洁：对车内的座椅、地毯、仪表盘、方向盘、门板等进行清洁，去除污渍、异味和细菌:</strong><ul><li>自动调节逻辑算法</li><li>新风系统组件</li><li>APP远程控制</li><li>车队管理系统</li><li>悬挂</li><li>传感器</li><li>客户支持服务</li></ul></div><div><strong>3. 细节护理：对车辆的一些小部件，如车灯、门把手、车标等进行细致的清洁和保养:</strong><ul><li>自动调节逻辑算法</li><li>新风系统组件</li><li>APP远程控制</li><li>车队管理系统</li><li>悬挂</li><li>传感器</li><li>客户支持服务</li></ul></div><div><strong>4. 定期打蜡：对车辆漆面进行打蜡或封釉，以保护车漆并增加光泽度:</strong><ul><li>自动调节逻辑算法</li><li>新风系统组件</li><li>APP远程控制</li><li>车队管理系统</li><li>悬挂</li><li>传感器</li><li>客户支持服务</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('轻松离车')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S24">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>自动化清洁系统：实时监测车内环境，通过智能传感器自动检测污垢和灰尘，启动清洁设备。
+<li>智能吸尘与清扫功能：支持智能吸尘、拖地等功能，优化车内不同区域的清洁需求。
+<li>定时清洁与预约功能：提供定时清洁和远程预约清洁服务，满足用户不同使用场景需求。
+<li>空气净化与除菌功能：集成空气净化器，实时清除车内空气中的有害物质及细菌。
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S25" onclick="toggleDetails('S25', this)">
                 <img src="images/26.png" alt="轻松离车" class="scene-image">
                 <div class="scene-description">轻松离车</div>
-                <div id="config-轻松离车" class="scene-configurations">
-        <div><strong>1. 智能钥匙识别：智能钥匙在车辆一定范围内时，车门可以自动解锁；当钥匙带离车辆时，车门会自动上锁:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>1. 通过车载传感器、处理器和控制系统的帮助实现自动识别车位并自动完成泊车入位:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('产品使用支持')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S25">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>启动自动泊车功能：用户停车前，通过车载屏幕或语音助手选择自动泊车功能，系统根据车辆周围的环境和空闲车位自动规划停车路径。
+<li>完成精准泊车：系统通过传感器和摄像头监测车辆周围障碍物，并以安全速度自动完成停车操作，同时提示用户泊车完成。
+<li>检测车辆状态：泊车后，系统自动检测车门、车窗是否关闭，货舱是否锁定，以及车辆周围是否有未处理的安全隐患（如障碍物、未关紧的货舱门）。
+<li>一键自动锁车：用户通过车载屏幕、智能钥匙或手机APP触发一键锁车功能，系统自动完成车门锁定、车窗关闭、货舱检查，并切换至节能模式关闭非必要设备。
+<li>货物安全提醒：在锁车前，系统通过货舱传感器检测货物状态，如货物未固定或货舱门未锁紧，系统通过语音或车载屏幕提示用户处理。
+<li>离车后实时监控：车辆锁定后，用户通过手机APP查看车辆状态，包括锁车状态、实时位置及货舱安全状态；如果车辆发生异常（如车门被强行打开或货舱震动），系统第一时间推送警报通知用户。
+<li>远程控制与解锁：用户可通过手机APP随时远程查看和调整车辆状态，如解锁车门、重新锁车、开启货舱等。
+自动生成停车报告：系统记录泊车位置、时间和车辆状态，并通过手机APP生成报告供用户或车队管理者查看，帮助优化管理。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S26" onclick="toggleDetails('S26', this)">
                 <img src="images/27.png" alt="产品使用支持" class="scene-image">
                 <div class="scene-description">产品使用支持</div>
-                <div id="config-产品使用支持" class="scene-configurations">
-        <div><strong>1. 客户服务热线：提供电话支持，解答车主的疑问，处理紧急情况:</strong><ul><li>触控大屏</li><li>4个扬声器</li><li>异常分析系统</li><li>车载WIFI</li><li>小时服务网络管理</li><li>替代车到期延长管理系统</li><li>车载计算平台</li></ul></div><div><strong>2. 在线支持平台：通过网站或移动应用提供自助服务，包括常见问题解答、预约服务等:</strong><ul><li>触控大屏</li><li>4个扬声器</li><li>异常分析系统</li><li>车载WIFI</li><li>小时服务网络管理</li><li>替代车到期延长管理系统</li><li>车载计算平台</li></ul></div><div><strong>3. 道路救援服务：在车辆故障或事故时提供拖车、紧急修理或临时替换车辆等服务:</strong><ul><li>触控大屏</li><li>4个扬声器</li><li>异常分析系统</li><li>车载WIFI</li><li>小时服务网络管理</li><li>替代车到期延长管理系统</li><li>车载计算平台</li></ul></div><div><strong>4. 定期维护提醒：通过邮件、短信或应用通知提醒车主进行定期保养:</strong><ul><li>触控大屏</li><li>4个扬声器</li><li>异常分析系统</li><li>车载WIFI</li><li>小时服务网络管理</li><li>替代车到期延长管理系统</li><li>车载计算平台</li></ul></div><div><strong>5. 客户反馈机制：收集和处理客户的反馈，不断改进产品和服务:</strong><ul><li>触控大屏</li><li>4个扬声器</li><li>异常分析系统</li><li>车载WIFI</li><li>小时服务网络管理</li><li>替代车到期延长管理系统</li><li>车载计算平台</li></ul></div><div><strong>6. 车主社区：建立车主论坛或社区，促进车主之间的交流和互助:</strong><ul><li>触控大屏</li><li>4个扬声器</li><li>异常分析系统</li><li>车载WIFI</li><li>小时服务网络管理</li><li>替代车到期延长管理系统</li><li>车载计算平台</li></ul></div><div><strong>7. 技术支持和诊断：提供专业的技术支持，帮助解决复杂的技术问题:</strong><ul><li>触控大屏</li><li>4个扬声器</li><li>异常分析系统</li><li>车载WIFI</li><li>小时服务网络管理</li><li>替代车到期延长管理系统</li><li>车载计算平台</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('自定义需求')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S26">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>软件升级支持：系统自动检测车辆软件版本，提示用户是否有可用更新，用户通过车载屏幕或手机APP一键确认升级，系统自动完成下载并安装，升级完成后通知用户新版本功能和优化内容。
+<li>车主手册查询：用户通过车载中控屏或手机APP访问车主手册，支持关键字搜索并提供文本、图片和短视频形式展示，用户可将常用功能标记为“收藏”以便随时调用。
+<li>质保承诺管理：用户通过APP或车载系统查询车辆质保范围及剩余期限，系统提示质保到期时间并推荐续保方案，如车辆出现质保范围内故障，系统生成服务报告并提供最近服务网点信息。
+<li>客户支持服务：用户通过APP或车载系统启动“一键联系”功能连接客服团队，系统根据问题类型引导至相关客服模块，客服团队通过远程诊断功能检查车辆状态并提供解决方案或预约服务支持。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S27" onclick="toggleDetails('S27', this)">
                 <img src="images/28.png" alt="自定义需求" class="scene-image">
                 <div class="scene-description">自定义需求</div>
-                <div id="config-自定义需求" class="scene-configurations">
-        <div><strong>1. 车机和仪表台设计具有丰富的可扩展性，方便司机加装各种组件:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>1. 可以语音或按键交互，实现功能调节，满足个人需求:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('生态服务')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S27">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>功能扩展需求提交：用户通过车载中控或APP提交自定义需求（如新增数据接口、特定业务模块或多屏协作功能），系统自动生成需求清单并匹配可行方案。
+<li>模块扩展与安装：根据用户需求，为中控系统新增功能模块（如货物监控界面、导航优先模式等）或定制接口扩展（如USB扩展、蓝牙设备对接）。
+<li>性能自定义配置：提供用户对中控系统的处理能力、存储能力及响应速度的定制化选择，支持新增高性能处理器或内存升级。
+<li>交互界面定制：允许用户调整中控界面的布局、快捷功能键、主题风格及多语言支持，以适应不同操作习惯和业务需求。
+<li>系统调试与优化：完成定制后，通过车载智能系统对新增模块或优化性能进行调试，确保扩展模块与原系统无缝协作，性能达到最佳状态。
+<li>用户验收与上线：扩展和自定义完成后，系统提供模拟操作界面供用户测试，并通过平台或服务中心确认验收后上线使用。
+<li>动态更新与后续支持：用户可通过手机APP或服务平台提交新增需求，系统支持模块化动态更新和远程性能优化，确保中控系统持续满足未来需求。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S28" onclick="toggleDetails('S28', this)">
                 <img src="images/29.png" alt="生态服务" class="scene-image">
                 <div class="scene-description">生态服务</div>
-                <div id="config-生态服务" class="scene-configurations">
-        <div><strong>1. 软硬件集成：通过软硬件接口实现集成，包括物理的芯片引脚和逻辑的传输数据的2. 软件接口，可能通过OBD或USB口刷新，或远程OTA刷新:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>3. ECU集成：将硬件集成到机械壳体上，形成ECU或控制模块，并与传感器及执行器构成具备特定功能的系统:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>4. 车辆互联互通：包括车辆所有部分的联网，如自动驾驶、车内监控、互联网信息娱乐等，以及外部传感器、物联网、V2X、无线通信、远程控制等:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>5. V2X技术：实现车辆与周围的车、人、交通基础设施和网络等全方位连接和通信的技术，包括V2V、V2I、V2P、V2N等:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('经济用能')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S28">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>设备互联与登录同步：用户通过车载中控系统或手机APP登录生态服务平台，系统自动同步用户个人账户信息及偏好设置，支持多设备（如手机、平板、电脑）间的无缝切换与数据共享。
+<li>软件互通与任务协作：车载系统支持与常用办公软件（如邮件、日程表、任务管理工具等）的集成，通过语音助手或中控屏快速处理工作事务（如安排配送计划、发送任务更新等）。
+<li>实时消息与团队沟通：用户通过车载系统实时接收并回复来自团队成员或客户的消息，支持语音转文本及自动回复功能，确保驾驶时的沟通安全与高效。
+<li>司机社区与社交互动：用户通过车载系统访问司机社区，参与讨论、发布动态或查阅其他用户的行程分享，支持点赞、评论及兴趣小组加入功能。
+<li>行程分享与位置共享：用户可一键将实时位置、预计到达时间及行程状态分享给团队或客户，系统支持设置权限控制确保隐私安全。
+<li>娱乐与社交整合：提供集成化的娱乐和社交应用（如音乐、视频、游戏、社交媒体），用户可在停车或休息时便捷访问，丰富驾驶外的生活体验。
+<li>智能推荐与优化：基于用户行为和社交互动数据，系统智能推荐社区内容、行车路线优化、团队协作建议或娱乐内容，持续增强用户体验。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S29" onclick="toggleDetails('S29', this)">
                 <img src="images/30.png" alt="经济用能" class="scene-image">
                 <div class="scene-description">经济用能</div>
-                <div id="config-经济用能" class="scene-configurations">
-        <div><strong>1. 物理接口：如USB端口、HDMI接口、蓝牙连接、Wi-Fi热点等，用于连接智能手机、平板电脑、导航设备等:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>2. 软件接口：提供应用程序接口（API）以允许第三方软件与车辆系统交互，实现远程控制、数据监控等功能:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>3. 诊断接口：如OBD-II端口，允许对车辆的电子系统进行诊断和故障排除:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>4. 网络接口：实现车辆与互联网的连接，支持在线更新、流媒体服务、实时交通信息等:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div><div><strong>5. 通信接口：包括支持车对车（V2V）、车对基础设施（V2I）和车对网络（V2N）通信的接口，以实现智能交通系统的各种功能:</strong><ul><li>人脸识别传感器/生物识别系统</li><li>智能驾驶控制系统</li><li>电池管理系统（BMS）</li><li>车载信息娱乐系统</li><li>通风模块</li><li>座椅加热模块</li><li>个性化驾驶偏好算法</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('途中补能')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S29">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>能耗状态实时监测：车辆启动后，系统自动开启能耗监测功能，通过中控屏或语音助手实时显示油耗、电池电量、能量回收状态等关键数据，便于用户随时掌握车辆能源使用情况。
+<li>动态能耗优化：根据实时路况、车辆负载和驾驶行为，系统自动调整能量回收力度、动力输出模式及空调使用状态，并通过语音提示驾驶员优化操作（如匀速行驶或适时减速）。
+<li>智能导航与能源补充：结合导航系统和车辆能耗状态，系统动态规划最经济的行驶路线，并推荐沿途的加油站、充电桩或加气站，同时提供价格和排队情况信息。
+<li>历史数据分析与节能建议：用户可通过车载系统或手机APP查看每次行程的能耗表现，系统根据数据生成节能驾驶报告，并提供具体的驾驶优化建议（如减少急加速、优化货物装载）。
+驾驶员节能行为评分：系统对驾驶员的节能表现进行评分，基于评分提供奖励机制或节能挑战活动，激励驾驶员采用更经济的驾驶行为。
+<li>车队用能管理：车队管理者通过平台查看所有车辆的能耗数据，系统自动生成车队用能分析报告并推荐节能策略，包括车辆调度优化或驾驶员培训计划。
+<li>能源使用成本预估：系统结合实时油价、电价等数据，为用户提供当前行程的能源成本预估，并根据成本变化提醒用户适时补充能源。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S30" onclick="toggleDetails('S30', this)">
                 <img src="images/31.png" alt="途中补能" class="scene-image">
                 <div class="scene-description">途中补能</div>
-                <div id="config-途中补能" class="scene-configurations">
-        <div><strong>1. 充电基础设施建设：加快建设充电桩，提高充电桩的覆盖密度，特别是在高速公路服务区，以满足日益增长的新能源汽车充电需求 :</strong><ul><li>传感器</li><li>电池充电状态预测模型</li><li>实时通知与提醒系统</li><li>节能建议生成软件</li><li>路况实时数据获取与预测模块（如V2X通信功能）</li><li>实时数据采集与上传系统</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>2. 动力电池技术提升：研发和应用更高效的动力电池，提高电池的充电速度和能量密度，减少充电时间并提升续航能力 :</strong><ul><li>传感器</li><li>电池充电状态预测模型</li><li>实时通知与提醒系统</li><li>节能建议生成软件</li><li>路况实时数据获取与预测模块（如V2X通信功能）</li><li>实时数据采集与上传系统</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>3. 换电模式发展：推广换电站建设，提供快速换电服务，作为充电模式的补充，提高补能效率:</strong><ul><li>传感器</li><li>电池充电状态预测模型</li><li>实时通知与提醒系统</li><li>节能建议生成软件</li><li>路况实时数据获取与预测模块（如V2X通信功能）</li><li>实时数据采集与上传系统</li><li>车载计算单元（Vehicle</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('能源管理')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S30">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>剩余电量提醒：系统实时监测车辆剩余电量，当电量低于设定阈值时，通过中控屏和语音助手提醒用户查看当前续航里程和最近补能点信息。
+<li>推荐补能点：系统结合用户位置、行驶路线、补能需求和补能点实时信息（如价格、空闲状态）推荐最佳补能站点并提供详细信息。
+<li>选择和预约补能点：用户通过中控屏或手机APP筛选和选择补能点，支持在线预约充电桩或加油位以锁定补能服务。
+<li>导航和路线规划：系统根据选择的补能点规划最优行驶路线，实时调整路线并推荐备选补能点以应对交通或站点变化。
+<li>快速充电：到达补能点后，系统通过车辆与补能设备的自动对接快速启动补能，支持高功率快速充电模式并显示进度和预计完成时间。
+<li>补能完成提示与报告生成：补能完成后系统通过语音助手通知用户并生成补能报告，包括补充量、费用和续航提升情况，同步至用户APP或车队管理系统。
+<li>异常处理与备选方案：若补能点出现问题，系统实时通知用户并推荐最近备选补能点，紧急情况下提供节能驾驶模式支持以延长续航。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S31" onclick="toggleDetails('S31', this)">
                 <img src="images/32.png" alt="能源管理" class="scene-image">
                 <div class="scene-description">能源管理</div>
-                <div id="config-能源管理" class="scene-configurations">
-        <div><strong>1. 能耗显示：显示车辆的实时能耗数据，包括每公里电耗、电池剩余电量等:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>2. 电池管理：提供电池状态信息，如电池温度、充电状态、健康状态等:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 充电规划：根据车辆的能源信息，为驾驶员规划充电站点和最佳充电时间:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>4. 驾驶行为分析：分析驾驶习惯对能源消耗的影响，提供节能驾驶的建议:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>5. 能源消耗报告：生成能源消耗报告，帮助用户了解和监控长期的能源使用情况:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('车队出行')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S31">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时能耗监测：系统实时采集车辆的能耗数据，包括燃油消耗、电池电量、能量回收情况等，通过中控屏和手机APP提供可视化展示，让用户随时掌握车辆能源使用状态。
+<li>能耗异常提醒：当车辆出现能耗异常（如燃油消耗过高、电池电量快速下降）时，系统自动发出提醒并提示用户检查车辆状态或调整驾驶行为。
+<li>驾驶行为优化建议：根据实时驾驶数据（如速度、加速频率、刹车使用情况），系统通过语音或中控屏提供优化建议（如匀速行驶、减少急加速等），帮助用户提升能源使用效率。
+<li>节能模式自动切换：在能量不足或低负载场景下，系统自动切换至节能驾驶模式，通过限制动力输出、优化能量回收等方式延长续航里程。
+<li>多能源使用分析：针对混合动力或多能源车辆，系统提供各能源的使用比例、效率及成本分析，帮助用户优化能源结构并制定更经济的使用方案。
+<li>历史数据分析与报告生成：系统定期生成能耗分析报告，展示单车或车队的能耗趋势、效率指标及节能效果，并提供改进建议，用户可通过APP或车队管理系统查看。
+<li>车队集中能源管理：车队管理者可实时监控所有车辆的能耗数据，通过平台对车队整体能耗进行分析，制定节能驾驶培训计划或优化车辆调度方案。
+<li>碳排放监测与目标达成：系统实时监测车辆的碳排放量，与用户设定的节能减排目标进行比对，提供达成目标的动态建议和路线优化方案。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S32" onclick="toggleDetails('S32', this)">
                 <img src="images/33.png" alt="车队出行" class="scene-image">
                 <div class="scene-description">车队出行</div>
-                <div id="config-车队出行" class="scene-configurations">
-        <div><strong>1. 位置监控：通过卫星定位系统追踪车辆的精确位置:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>2. 移动轨迹记录：记录车辆的行驶路线和历史轨迹:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3. 速度和方向监测：实时监测车辆的行驶速度和方向变化:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>4. 状态更新：实时更新车辆的状态信息:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>5. 地理围栏：设置虚拟地理边界，当车辆进入或离开特定区域时触发通知:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>6. 异常行为警报：在检测到如超速、急转弯等异常行为时发送警报:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('停车')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S32">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>任务分配与确认：车队管理者通过管理平台为每辆车分配出行任务，系统将任务内容（如目的地、货物信息、时间要求）同步至驾驶员的车载中控屏或手机APP，驾驶员确认任务后系统自动启动行程记录。
+<li>实时位置与状态监控：系统通过车联网模块实时更新每辆车的位置、速度、燃油或电池电量等关键状态，车队管理者可通过平台地图查看所有车辆的运行状态。
+<li>优化的路线规划：系统根据任务目的地、实时路况和车辆当前状态，为每辆车生成最优行驶路线，并在途中动态调整路线以规避拥堵或突发状况，同时驾驶员可通过中控屏查看路线导航。
+<li>多车辆协作支持：在需要多辆车共同完成任务（如联合运输或交叉配送）时，系统通过智能调度功能优化车队协作方案，包括时间节点安排和车辆分工，确保任务高效完成。
+<li>实时沟通与指令下达：驾驶员可通过车载通讯系统与车队管理者或其他驾驶员实时沟通，系统支持语音转文本和群组消息功能，用于协调任务细节或传达紧急指令。
+<li>异常状况处理与提醒：当车辆发生异常状况（如偏离任务路线、车辆故障或延误），系统自动生成警报通知车队管理者，并推荐备选方案（如重新分配任务或安排紧急维修）。
+<li>任务进度与行程报告：任务完成后，系统自动生成行程报告，包括行驶里程、时间、能耗及货物配送情况，车队管理者可通过平台查看所有车辆的任务完成情况和综合分析数据。
+<li>车队整体出行分析：系统定期生成车队出行效率报告，包括平均行驶时间、能耗表现和任务完成率，提供优化建议用于提升整体运营效率。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S33" onclick="toggleDetails('S33', this)">
                 <img src="images/34.png" alt="停车" class="scene-image">
                 <div class="scene-description">停车</div>
-                <div id="config-停车" class="scene-configurations">
-        <div><strong>1. 高精度地图与定位：结合高精度地图和实时定位技术，车辆可以精确地知道自己所在的位置以及周围的环境信息，从而提前规划出合适的停车范围。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>2. 自动泊车技术：车辆可以通过激光雷达、超声波传感器和相机等装置，对周围环境进行感知，并根据预先建立的地图和路线规划，自动找寻合适的停车位。这种技术不仅提高了停车的效率和准确性，还减少了由于人为操作引起的刮蹭和事故。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3. 局部路径规划：在狭窄的街道或繁忙的停车场等复杂环境中，车辆会利用局部路径规划技术，根据实时的环境感知信息和车辆的当前状态，对全局路径进行细化和调整，以确保安全、高效地到达目的地。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>4. 智能决策系统：结合人工智能和机器学习技术，智能驾驶辅助系统能够做出更加智能的决策，如在狭窄的街道中选择合适的行驶方向、在繁忙的停车场中快速找到停车位等。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 车载摄像头与监控系统：可以实时监控车辆内部和外部的情况，来观察货物在运输过程中的状态，特别是对于那些容易破损或泄漏的物品。如果发现货物有异常，快递员可以立即停车检查，确保货物的完整性。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('货物识别与分配')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S33">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>确认配送点：系统根据配送任务信息，结合用户当前位置和目的地，自动确认最优配送点；用户通过车载中控屏或手机APP确认配送地址，并获取配送点相关信息（如接货人、联系方式、可用停车区域）。
+<li>停车位推荐：系统根据配送点的具体位置、车辆特性及用户需求（如靠近货舱装卸区域、停车时长）推荐可用停车位，提供停车位详细信息（如车位类型、价格、空闲状态）并支持排序筛选。
+<li>导航至停车位：用户选择目标停车位后，系统生成最优行驶路径并实时导航至停车区域，避免用户在配送点附近无效绕行，确保车辆停放在适合货舱门开启的区域。
+<li>智能泊车辅助：到达停车区域后，系统通过车载传感器自动检测周围空闲车位，并提供车位选择及泊车操作的实时指导；用户可选择手动泊车辅助或全自动泊车功能完成停车操作。
+<li>货舱门开启与安全检查：停车完成后，系统检测货舱周围环境，确保没有障碍物或危险状况后，允许用户通过中控屏或手机APP远程开启货舱门，同时实时监控货舱区域的安全状态，方便货物装卸。
+<li>停车安全监控：停车完成后，系统通过车载摄像头和传感器实时监控车辆及货舱周围环境，若检测到异常情况（如碰撞、非法靠近、货物被移动），立即通过APP或车载屏发出警报通知用户。
+<li>停车费用结算：系统自动记录停车时长和费用，支持无感支付功能，用户可通过车载系统或手机APP查看停车费用详情并完成在线支付。
+<li>离车导航：用户离开车辆后，系统通过手机APP记录车辆停车位置，并在返回时提供步行导航服务，帮助用户快速找到车辆和货舱位置。
+<li>停车历史记录与分析：系统保存用户的停车记录，提供使用报告（如常用停车场、平均停车时长和费用），帮助用户优化停车习惯和选择停车场。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S34" onclick="toggleDetails('S34', this)">
                 <img src="images/35.png" alt="货物识别与分配" class="scene-image">
                 <div class="scene-description">货物识别与分配</div>
-                <div id="config-货物识别与分配" class="scene-configurations">
-        <div><strong>2. 智能传感器与检测系统：可以实时监测车辆内部的各种参数，如温度、湿度、振动等，对于需要特定环境条件的货物（如易碎品、冷藏品等），快递员可以通过车载的智能传感器来监测货物的运输环境。如果环境参数超出设定范围，系统会立即发出警报，提醒快递员进行检查和处理。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>3. 车辆本身的运输安全设计：考虑各种运输安全因素，如减震设计、防撞设计等，在一定程度上减少货物在运输过程中的破损和泄漏风险，帮助减轻快递员检查快递的压力。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>1. 全景摄像头：通过车身四周的摄像头提供车辆周围的全方位视图。这些系统通常与泊车辅助功能相结合，可以在停车时提供实时的距离提示和障碍物检测。驾驶员可以利用全景摄像头系统查看车辆周围的环境，选择开阔且无障碍物的停车地点。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('卸货')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S34">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>确认送货任务：系统根据车辆当前位置匹配当前送货点的任务信息，显示该点订单清单、货物详情及任务要求，用户通过车载中控屏或APP确认送货任务。
+<li>货物信息快速识别：通过条形码扫描仪、RFID读取器或货物标签图像识别设备，对货物进行信息提取，识别货物编号、订单号、重量、目的地等详细信息，并实时在系统中记录和显示。
+<li>动态任务分配：系统根据订单需求和任务要求自动分配货物至对应分区，并提供分配状态提示（如灯光、声音或显示屏引导），确保货物信息与任务要求一致。
+<li>分配准确性校验：在货物分配完成后，系统自动核对已分配货物与订单要求，提醒用户检查遗漏或错误分配情况，确保所有货物都处于正确的分配状态。
+<li>实时数据更新与反馈：分配过程中的货物数据实时同步至车队管理平台，驾驶员可通过中控屏查看分配进度及任务完成情况，确保后续流程顺畅。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S35" onclick="toggleDetails('S35', this)">
                 <img src="images/36.png" alt="卸货" class="scene-image">
                 <div class="scene-description">卸货</div>
-                <div id="config-卸货" class="scene-configurations">
-        <div><strong>2. 泊车辅助:泊车辅助功能则可以帮助驾驶员更准确地控制车辆，确保车辆停放在合适的位置。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 物流管理系统：具备智能调度功能，可以根据货物的类型、重量和尺寸等信息，自动分配最合适的搬运工具和运输车辆。这些系统通常与车辆管理系统和搬运工具管理系统相连，实现数据的实时共享和智能调度。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 自动化搬运系统：如AGV（自动导引车）和AMR（自主移动机器人）等。这些系统可以与车辆管理系统相连，实现货物的自动装卸和搬运。通过与车辆管理系统的协同工作，这些系统可以根据货物的类型、重量和尺寸等信息，自动选择合适的搬运工具进行作业。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>2. 智能搬运器：集成了传感器、控制器和执行器等技术的先进搬运工具。它们可以根据货物的特征和运输需求进行自适应调整，如夹持力、升降高度和移动速度等。通过与车辆管理系统的连接，智能搬运器可以接收来自车辆的指令和数据，实现与车辆的协同作业。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 智能语音提醒系统：识别并理解快递员的语音指令，对于特殊的交付要求（如客户要求送货上楼、需要额外包装等），系统能够主动进行语音提醒，确保快递员不会遗漏这些关键信息。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('配送')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S35">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>场地检测与准备引导：系统通过传感器扫描卸货区域，检测空间大小、地面状况（如湿滑、障碍物）及卸货台高度，向用户提供调整建议（如优化车辆位置或清理场地）以确保安全的卸货操作环境。
+<li>智能工具推荐与操作支持：根据货物重量、尺寸和卸货需求，系统智能推荐最适合的卸货工具（如电动叉车、手推车、滑轨系统等），通过指示灯或屏幕定位工具存放位置并提供操作提示。
+<li>货物识别与动态分配：通过条形码、RFID或图像识别技术快速确认货物信息，系统根据交付优先级和货舱布局动态生成最佳卸货顺序，并实时指引用户精准定位目标货物。
+<li>智能搬运辅助：针对过重或大件货物，系统自动启动智能搬运设备（如电动推车、机械臂），结合搬运路径规划实现货物从货舱到卸货台的安全转移，同时动态监控货物稳定性并提示调整。
+<li>实时进度监控与提醒：系统记录卸货任务进度，显示已完成和待完成的货物清单；若发生遗漏、搬运错误或异常（如货物滑落或卡滞），系统通过语音或屏幕发出提醒并提供解决建议。
+<li>货舱管理与安全检查：卸货完成后，系统检查货舱内的剩余货物和工具归位情况，通过自动扫描确认无遗漏，并提示用户完成一键式货舱门关闭操作，确保门锁状态安全无误。
+<li>任务完成确认与报告生成：卸货完成后，系统自动生成详细报告，包括货物清单、搬运时间、使用工具记录和异常情况处理，报告同步至车队管理平台供用户查看和存档。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S36" onclick="toggleDetails('S36', this)">
                 <img src="images/37.png" alt="配送" class="scene-image">
                 <div class="scene-description">配送</div>
-                <div id="config-配送" class="scene-configurations">
-        <div><strong>2. 车载信息系统：显示订单的详细信息，包括特殊交付要求。当快递员接近目的地时，系统会自动弹出相关提醒，确保快递员能够及时处理这些特殊要求。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>1. 物联网技术：通过在货车上安装传感器和通信模块，物联网技术能够将车辆的运行状态和位置信息实时传输到物联网平台。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('配送信息同步更新')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S36">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>任务确认与路线规划：系统根据配送任务列表和目的地信息，结合实时交通状况和配送时间要求，自动生成最优配送路线，并在中控屏显示分段导航及预计到达时间。
+<li>动态任务调整：根据实时交通、客户临时变更需求或优先级调整，系统支持动态更新配送顺序，并通过导航系统重新规划路线，确保任务完成效率和灵活性。
+<li>智能交付支持：到达配送点后，系统通过扫码、GPS定位或NFC技术确认交付地点和收货人身份，支持电子签收和自动生成交付记录，确保货物交付的精准性与安全性。
+<li>客户实时通知：系统向客户实时推送配送进度（如预计到达时间、当前配送位置），并在接近交付时发送提醒以确保客户准备接货。
+<li>异常处理与支持：在配送过程中，如发生突发事件（如车辆故障、无法接收货物），系统提供备选解决方案（如联系备用车辆、重新安排交付时间）并同步更新客户信息。
+<li>任务完成记录与报告生成：配送任务完成后，系统生成详细报告，包括配送时间、货物状态、交付反馈和异常处理记录，报告同步至车队管理平台供后续审阅。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S37" onclick="toggleDetails('S37', this)">
                 <img src="images/38.png" alt="配送信息同步更新" class="scene-image">
                 <div class="scene-description">配送信息同步更新</div>
-                <div id="config-配送信息同步更新" class="scene-configurations">
-        <div><strong>2. 移动网络定位技术：安装支持移动网络的智能设备，通过与基站的通信来确定位置。将位置数据上传至云端服务器，用户通过手机应用或网页端就能轻松获取车辆和货物的实时位置。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3. 智能导航：通过分析路况、车速、红绿灯等因素，导航系统能够计算出更准确的预计送达时间，并实时更新给车主或客户。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>4. 人工干预与调整：在某些情况下，如遇到交通事故、道路封闭等突发情况，派送员或物流公司可以通过人工方式调整预计送达时间。这些调整会立即反映在物流管理系统和客户的通知中，确保信息的准确性和及时性。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 智能装载规划：结合先进的算法和数据分析技术，车辆可以根据货品的尺寸、重量和形状等信息，自动规划最优的装载方案，包括货品的摆放位置和顺序。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('货舱整理')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S37">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>任务启动与同步：配送任务开始时，系统将配送任务清单（包括货物详情、目的地、优先级）和推荐路线同步至驾驶员的车载系统，同时推送任务起始状态至车队管理平台与客户系统，确保各方同步了解配送任务的初始信息。
+<li>车辆位置与进度更新：通过GPS模块实时跟踪车辆位置，系统将车辆当前所在位置、行驶路径及预计到达时间动态同步至车队管理平台和客户系统，并在客户端展示配送剩余时间和当前状态。
+<li>货物状态同步：货舱传感器监测货物环境（如温度、湿度、振动等）和位置状态，将监测数据实时同步至车队管理平台，若货物出现异常（如倾斜、超温），立即发送警报并向相关方（驾驶员、管理者）推送建议解决方案。
+<li>异常状况实时通知：若配送过程中出现延误（如交通拥堵、车辆故障）或客户变更需求，系统实时推送异常信息至车队管理平台，同时向驾驶员提供备选路线或调整任务的指令，客户端也收到预计延迟或调整后的新配送时间。
+<li>交付确认与记录同步：在完成配送点的交付后，系统通过电子签名、扫码确认或NFC识别自动记录交付完成信息，并将签收记录（包括交付时间、收货人确认等）实时同步至车队管理平台和客户系统。
+<li>客户端进度透明化：系统为客户提供实时配送信息推送，包括车辆位置、预计到达时间、当前进度，并在交付前发送提醒通知，确保客户提前做好接货准备。
+<li>任务完成总结与报告生成：配送任务完成后，系统自动生成总结报告，包括行驶路径、实际交付时间、货物状态及异常处理记录，报告同步至车队管理平台供管理者分析和优化调度。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S38" onclick="toggleDetails('S38', this)">
                 <img src="images/39.png" alt="货舱整理" class="scene-image">
                 <div class="scene-description">货舱整理</div>
-                <div id="config-货舱整理" class="scene-configurations">
-        <div><strong>1. 车辆管理系统集成AGV货架系统：能够根据预设指令或实时信息自动完成货物的入库、出库、搬运、分拣及存储等作业流程。与汽车的运输和配送系统相结合，提高整体运营效率并降低人力成本。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>1. 紧急按钮与报警系统：驾驶员可以通过紧急按钮触发报警，将车辆位置、状态等信息立即发送给后台或指定的应急响应团队。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('现场问题处理')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S38">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>工具收纳：系统实时监控卸货工具（如手推车、电动滑轨、机械臂等）的状态，并在工具使用完成后，通过货舱内的存放指引灯和中控屏提供合理的工具归位方案，确保工具的便捷收纳和快速取用。
+<li>工具维护与状态监测：系统监控工具的使用状态（如电量、损耗程度），提醒用户对工具进行必要的维护或充电，并记录工具归位的时间和位置，避免遗漏或损坏。
+<li>整理完成确认与同步：货架整理和工具收纳完成后，系统生成整理确认信息，包括货物位置、工具归位状态及货舱布局图，并同步至车队管理平台，支持后续配送任务的高效执行。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S39" onclick="toggleDetails('S39', this)">
                 <img src="images/40.png" alt="现场问题处理" class="scene-image">
                 <div class="scene-description">现场问题处理</div>
-                <div id="config-现场问题处理" class="scene-configurations">
-        <div><strong>2. 自动报告功能：当车辆发生故障或事故时，车载系统可以自动收集相关信息（如事故时间、地点、车辆状态等），并生成报告发送给后台或相关责任人。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>远程故障诊断：通过车载信息系统，后台技术人员可以对车辆进行远程故障诊断，提供初步的解决方案或维修建议。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 知识库与解决方案库：车载系统或后台平台可以集成知识库和解决方案库，为驾驶员提供常见问题的解答和解决方案。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>4. 实时通讯工具：车载系统可以集成即时通讯工具（如对讲机、车载电话、短信或移动应用），确保驾驶员与客户、平台之间的实时沟通。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>5. 状态更新与通知：驾驶员可以通过车载系统向平台和客户提供实时的状态更新和通知，如到达现场时间、处理进展等。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>1. 车载安全警报系统：当车辆遭受非法入侵（如破窗、非法开门等）时，系统会立即触发警报，如闪烁车灯、响起警报声，以此吓阻盗贼并吸引周围注意。将警报通知发送到车主的手机应用上，让车主能够实时了解车辆的安全状况。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('防盗防抢')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S39">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>问题实时识别与提醒：系统通过多传感器和环境监测技术实时监控货物、车辆和外部环境状态，识别异常情况（如货物损坏、温湿度异常、车辆抛锚或道路拥堵），并通过车载中控屏或语音警报提醒驾驶员。
+<li>问题分类与优先级判断：系统根据问题类型（如货物问题、车辆问题或任务变更）和影响程度，自动分级问题的优先级，提示用户紧急处理方案或继续当前任务的最佳操作流程。
+<li>提供解决方案建议：系统结合问题类型和任务数据，自动生成可行的解决方案，例如：货物问题时推荐最近的维修点或备用<li>货物操作流程；车辆故障时提供道路救援服务；道路受阻时动态规划绕行路线；客户变更需求时重新调整配送计划。
+<li>远程支持与协作：系统支持驾驶员通过车载系统直接联系车队管理平台或技术支持中心，实时获取人工协助或远程指导，必要时推送问题信息至相关方（如客户或合作方），协调多方协同解决问题。
+<li>工具与设备调动：系统根据问题需求引导用户取用适合的工具（如卸货工具、货物修复装置）或激活车载辅助设备（如智能搬运设备、货舱调节系统），并提供具体使用指引以辅助问题处理。
+<li>处理进度跟踪与更新：在问题解决过程中，系统实时记录处理进展，向车队管理平台同步进度信息，并向客户推送预计处理完成时间和后续交付状态。
+<li>问题解决确认与记录：突发问题解决后，系统自动生成完整的处理记录，包括问题描述、解决方案、耗时及相关责任方确认，记录同步至车队管理平台，用于后续审查和优化问题应对流程。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S40" onclick="toggleDetails('S40', this)">
                 <img src="images/41.png" alt="防盗防抢" class="scene-image">
                 <div class="scene-description">防盗防抢</div>
-                <div id="config-防盗防抢" class="scene-configurations">
-        <div><strong>2. GPS定位与追踪：能够实时追踪车辆的位置信息。一旦车辆被盗，车主可以通过与汽车防盗系统相连接的手机应用或计算机远程追踪车辆的位置，为警方提供准确的追踪信息，增加追回被盗车辆的机会。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3. 自动报警功能：当车辆遭受非法入侵或发生其他异常情况时，车载系统会自动向警方或指定的安全机构发送报警信息，包括车辆位置、异常类型等关键数据。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>这有助于警方迅速响应并采取相应的行动。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>4. 车辆状态监控：车载系统实时监控车辆的运行状态，包括车门、车窗、发动机等部件的开关状态。一旦发现异常情况，系统会立即向车主发送通知，让车主能够及时了解并采取应对措施。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>5. 智能分析与预警：通过设置预警规则，系统能够在异常情况发生前向车主发送预警信息，让车主有足够的时间准备和应对。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 车辆状态监测与提醒：通过车辆内置的传感器和智能系统，实时监测车辆的关键部件（如发动机、刹车系统、轮胎等）的状态，并在出现异常时及时提醒驾驶员。系统将监测到的数据与预设的阈值进行比较，一旦超出正常范围，便会通过仪表盘显示、声音警报或手机APP推送等方式提醒驾驶员。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('配送后检查')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S40">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时环境监测与威胁识别：系统通过传感器、摄像头及周边环境扫描，实时监测车辆周围活动（如人员靠近、车辆撞击、异常移动），自动识别潜在威胁并触发相应的应对机制。
+<li>智能预警与提示：当检测到潜在风险时，系统通过车载显示屏、声音提示或手机APP向用户发出警告，说明威胁类型（如货舱异常、车窗破损）并建议用户采取相应措施。
+<li>自动防护机制：系统在检测到突发情况时自动关闭车窗、货舱门及锁定车辆，阻止外部侵害，并启动防护功能（如货物固定装置、货舱温度调节）以保障货物安全。
+<li>车辆防盗与定位：在车辆遭受非法开门或移动时，系统立即触发警报并锁定车辆，同时通过GPS模块实时追踪车辆位置，将信息推送至用户和管理平台以便快速定位和响应。
+<li>高清摄像与录像存储：系统在突发事件发生时，启动内外高清摄像头进行录像，记录威胁发生过程，并将视频存储至云端以供后续取证或分析。
+<li>智能报警灯与外部威慑：当车辆或货舱受到威胁时，系统自动启动智能报警灯并发出声光警示，对周围环境形成威慑效果，同时争取用户反应时间。
+<li>多方通知与协同：在威胁确认后，系统自动向用户、车队管理平台及必要的紧急服务（如报警中心或道路救援服务）发送实时通知，确保相关方能及时响应和协同处理。
+<li>数据记录与报告生成：事件处理结束后，系统自动生成报告，包括事件类型、处理时间、车辆状态及相关影像记录，并同步至管理平台供后续分析和优化。
+<li>电子围栏监控报警功能：监控和控制物体、人员或车辆的活动。当设备或人员进出设定的区域时，系统会自动触发警报或采取相应的行动。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S41" onclick="toggleDetails('S41', this)">
                 <img src="images/42.png" alt="配送后检查" class="scene-image">
                 <div class="scene-description">配送后检查</div>
-                <div id="config-配送后检查" class="scene-configurations">
-        <div><strong>2. 安全检查提醒：针对车辆的安全性能进行定期检查，并在需要时提醒驾驶员进行相关的安全检查和维修。系统根据车辆的行驶状况和历史维修记录，智能判断哪些安全部件可能存在问题，并提醒驾驶员进行相应的检查和维修。:</strong><ul><li>车载通信模块</li><li>智能语音助手</li><li>车载传感器</li><li>车载信息娱乐系统</li><li>车载设备</li><li>司机状态检测系统</li><li>实时路况数据集成系统</li></ul></div><div><strong>3. 故障诊断与代码读取：当车辆出现故障时，智能化系统能够读取车辆的故障码，并初步判断故障的原因和位置。通过车载电脑与车辆各部件的通信接口连接，系统能够实时读取故障码，并根据预设的故障库进行匹配和分析。:</strong><ul><li>车载通信模块</li><li>智能语音助手</li><li>车载传感器</li><li>车载信息娱乐系统</li><li>车载设备</li><li>司机状态检测系统</li><li>实时路况数据集成系统</li></ul></div><div><strong>4. 维修方案建议：根据故障诊断的结果，智能化系统能够提供相应的维修方案或建议，帮助驾驶员或维修人员快速解决问题。系统根据故障的类型和严重程度，智能推荐相应的维修步骤、所需材料、预计工时等信息，为维修人员提供参考。:</strong><ul><li>车载通信模块</li><li>智能语音助手</li><li>车载传感器</li><li>车载信息娱乐系统</li><li>车载设备</li><li>司机状态检测系统</li><li>实时路况数据集成系统</li></ul></div><div><strong>5. 远程技术支持：车辆智能化系统提供远程技术支持服务，通过远程连接车辆电脑，专业技术人员能够实时了解车辆状况，并远程指导驾驶员或维修人员进行故障排除。通过车载通讯模块与远程服务器建立连接，实现数据的实时传输和远程指导。:</strong><ul><li>车载通信模块</li><li>智能语音助手</li><li>车载传感器</li><li>车载信息娱乐系统</li><li>车载设备</li><li>司机状态检测系统</li><li>实时路况数据集成系统</li></ul></div><div><strong>1. 精准的数据采集功能：车辆应配备高精度的能耗相关传感器，对于电动车，需有准确测量电池电量消耗的传感器；车辆运行状态传感器：包括车速传感器、电机工作状态传感器等以便全面了解车辆在运行过程中的状态，为准确计算能耗提供数据支持:</strong><ul><li>车载通信模块</li><li>智能语音助手</li><li>车载传感器</li><li>车载信息娱乐系统</li><li>车载设备</li><li>司机状态检测系统</li><li>实时路况数据集成系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('量化计算ESG')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S41">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>系统数据同步与任务关闭：在检查完成后，系统对配送任务进行总结，包括交付状态、工具归位情况、车辆状态等，自动同步至车队管理平台并生成配送任务报告供管理者审阅。
+<li>后续任务准备状态提示：系统在检查完成后提供车辆的下一任务准备状态（如燃油、电量、工具配置等），提醒用户是否需要补充或调整，确保车辆始终处于良好运行状态。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S42" onclick="toggleDetails('S42', this)">
                 <img src="images/43.png" alt="量化计算ESG" class="scene-image">
                 <div class="scene-description">量化计算ESG</div>
-                <div id="config-量化计算ESG" class="scene-configurations">
-        <div><strong>2. 数据传输功能：车辆应具备稳定的无线数据传输模块，如 4G/5G 通信模块，能够在配送结束后及时将采集到的数据传输到后台服务器。在车辆停放场可能存在信号干扰的情况下，也能保证数据传输的完整性和及时性。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>3. 车辆识别与定位功能：每辆车应有唯一的识别码，便于在数据采集和分析过程中准确区分不同车辆的能耗数据；配备 GPS 或北斗等高精度定位系统，能够精确记录车辆的行驶路线和位置信息，这对于结合路线分析能耗情况至关重要。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>4. 车辆自诊断功能：车辆应具备自诊断功能，能够实时监测车辆各系统的运行状况。在能耗数据出现异常时，能够及时提示可能存在的车辆故障，例如电池管理系统故障（电动车）导致的能耗异常升高。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div><div><strong>1. 数据采集与展示功能：智能商用车需要能够准确采集与绿色配送相关的数据，如能耗、排放、行驶里程等，并能够以直观的方式展示给用户，方便他们在分享时提供准确的数据支持。:</strong><ul><li>数据分析软件</li><li>数据采集软件</li><li>智能语音助手</li><li>成本分析软件</li><li>数据传输硬件</li><li>决策支持软件</li><li>实时通知与提醒系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('虚拟社区互动')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S42">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>实时能耗与碳排放数据采集：通过传感器监测燃油消耗、电力使用及行驶距离，系统实时采集能耗和排放数据并计算车辆的单位里程能耗及碳排量。
+<li>碳排放绩效对比与优化建议：基于车辆历史运行数据和同行业平均值，生成碳排放绩效对比图，自动识别碳排放过高的运行环节，并提供碳减排优化建议（如调整驾驶行为或优化路线规划）。
+<li>安全驾驶行为分析：利用驾驶辅助系统记录驾驶行为（如急刹车、急加速、超速），系统自动分析不安全驾驶行为的发生频率与分布，生成驾驶安全评分并提供行为改进建议。
+<li>运营效率智能分析：结合车辆运营时间、停机时间和行驶距离，系统计算车辆运输效率（如单位时间的载货量、总行驶里程），识别效率低下的运营环节并建议调整任务规划或路线优化。
+<li>工作量动态核算与分布：通过对配送任务和运营数据的动态整合，系统量化每辆车的完成任务量（如货物总量、完成的订单数）和时间分配，并生成工作量分布报告供车队管理者参考。
+<li>趋势分析与可视化呈现：系统将能耗、碳排放、安全行驶、效率和工作量等数据进行长期趋势分析，并通过可视化图表（如折线图、柱状图）展示，帮助用户直观了解车辆ESG绩效变化情况。
+<li>异常检测与通知：实时监测运营过程中异常数据（如异常能耗、超标碳排放或频繁不安全驾驶行为），触发警报并推送通知给驾驶员和管理者，避免持续性问题影响运营表现。
+<li>报告生成与合规支持：基于系统计算结果生成标准化的ESG报告，包括能耗、碳排放、安全行驶表现和效率等指标，并提供符合企业社会责任和监管要求的分析支持。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S43" onclick="toggleDetails('S43', this)">
                 <img src="images/44.png" alt="虚拟社区互动" class="scene-image">
                 <div class="scene-description">虚拟社区互动</div>
-                <div id="config-虚拟社区互动" class="scene-configurations">
-        <div><strong>2. 远程通信功能：车辆应具备稳定的远程通信功能，以便在配送结束后及时将数据传输到虚拟社区平台或相关管理系统，实现实时分享和交流。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>3. 节能与环保技术集成：车辆应集成先进的节能和环保技术，如高效的电动驱动系统、能量回收系统、低滚阻轮胎等，以实现真正的绿色配送，并为分享提供有价值的内容。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>1. 实时通信能力，车辆需要配备高质量的无线通信模块，以便与智能调度系统实时通信，传输车辆位置、状态和任务进度等信息。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('入库补能')">
-                <img src="images/45.png" alt="入库补能" class="scene-image">
-                <div class="scene-description">入库补能</div>
-                <div id="config-入库补能" class="scene-configurations">
-        <div><strong>2、车辆需要配备高精度定位系统（如GPS），以便实时获取车辆位置信息，为智能调度系统提供准确的数据支持。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3、车辆需要具备一定的自动规划能力，能够根据智能调度系统提供的路径规划信息，自动调整行驶路线，实现最优配送和入库补能。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 智能调度系统：能够实时接收并处理路况信息、交通法规、天气条件等，自动规划并更新返程路径。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('结束返程')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S43">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>智能成就数据采集与整合：系统自动从车辆运营数据中提取绿色配送相关指标（如碳排放减少、燃油节约、配送效率提升），帮助用户快速生成数据基础的成就分享内容。
+<li>动态可视化展示：系统将用户上传的绿色配送成就数据转化为图表、卡片或短视频形式，通过可视化动态展示强化用户成就的直观性与传播性。
+<li>一键式成就分享：用户通过系统快速生成成就内容后，可以一键分享到社区的公共展示区，并支持选择指定主题分类，确保内容展示的高效与精准。
+<li>高质量评论与互动推荐：系统根据用户分享的成就内容分析互动留言质量，并智能推荐优质评论或用户问题，帮助分享者高效参与互动。
+<li>个性化成就推荐：系统基于用户行为和兴趣标签，为用户推荐与其车辆、配送模式相似的绿色配送成就案例，帮助其获得灵感并优化实践。
+<li>积分与激励管理：系统记录用户的互动行为（如分享、评论、点赞），提供积分奖励和成就徽章，提升用户的社区参与感和分享动力。
+<li>互动统计与分析：系统为分享者提供成就内容的互动数据统计（如点赞数、评论数、转发数），并通过数据分析反馈用户的影响力，促进内容改进和持续分享。
+<li>互动场景安全保障：系统通过自然语言处理技术实时审核评论内容，过滤低质或不友好的评论，确保社区环境的健康与互动的积极性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S44" onclick="toggleDetails('S44', this)">
                 <img src="images/46.png" alt="结束返程" class="scene-image">
                 <div class="scene-description">结束返程</div>
-                <div id="config-结束返程" class="scene-configurations">
-        <div><strong>2. 车辆状态监控：实时监控车辆状态，包括电量、轮胎压力、发动机温度等，确保返程过程中的安全性。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 远程控制系统：在必要时，允许配送员或调度中心通过远程方式调整返程路径:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>1. GPS定位系统：能够实时获取车辆当前位置，并准确识别目标停车库或停车位的位置。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('车辆入库')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S44">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>返程路径智能规划：根据车辆当前位置、剩余能源和实时交通状况，生成最优返程路径，并动态调整以应对路况变化。
+<li>补能需求分析与推荐：结合返程路径和车辆能源状态，智能推荐沿途补能点（如充电站或加油站），并提供导航指引。
+<li>驾驶辅助支持：返程过程中启用自动巡航、车道保持、碰撞预警及盲区监测功能，确保驾驶安全。
+<li>实时状态监控与提醒：系统监测车辆能源水平、轮胎压力、发动机温度等状态，如发现异常及时提醒驾驶员调整计划或停车检查。
+<li>停车与任务完成确认：车辆到达基地或指定停放区域后，系统确认停车状态并自动标记返程任务完成。
+<li>车辆状态检查与报告生成：返程完成后，系统自动检测车辆外观、货舱清理及设备归位状态，并生成车辆检查报告。
+<li>返程数据记录与总结：记录返程过程中的里程、耗时、能耗等数据，生成返程报告并同步至车队管理平台，用于运营优化。
+<li>车辆维护提醒：根据返程数据分析车辆运行状况，若发现保养或维修需求，系统自动生成维护提醒并推荐维修服务点。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S45" onclick="toggleDetails('S45', this)">
                 <img src="images/47.png" alt="车辆入库" class="scene-image">
                 <div class="scene-description">车辆入库</div>
-                <div id="config-车辆入库" class="scene-configurations">
-        <div><strong>2. 智能调度系统：能够自动规划并导航车辆至指定的停车库或停车位，同时考虑路况、交通法规等因素。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>3. 车辆通信系统：能够与停车场管理系统进行通信，实时获取停车场状态信息，如剩余车位数量、车位位置等。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div><div><strong>1. 高精度传感器集成：车辆应集成高精度雷达、摄像头、激光雷达等多种传感器，以实现全方位、高精度的环境感知。这些传感器能够实时捕捉车辆周围的信息，为智能识别提供数据支持。:</strong><ul><li>传感器</li><li>远程车辆状态监控软件</li><li>数据传输硬件</li><li>摄像头</li><li>传感器组件</li><li>车辆电池管理系统</li><li>算法引擎</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('车辆交接')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S45">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>入库任务分配与通知：系统根据车辆状态（如位置、能源水平、任务完成情况）和仓库泊位空闲情况，自动分配入库任务并通过车载系统通知驾驶员。
+<li>动态路径导航与引导：结合车辆当前位置、仓库布局和实时环境数据，生成入库路径，系统实时动态更新导航指令并提供清晰路径引导。
+<li>自动避障与安全监测：车辆进入仓库过程中，系统通过传感器实时监测周围障碍物（如其他车辆、行人、障碍物），并提供主动避障或紧急制动支持，确保入库安全。
+<li>精准泊车定位：车辆通过自动驾驶功能，根据泊位大小和位置精准调整停车路径，确保车辆安全停放到指定泊位，避免偏移或占用多余空间。
+<li>夜间入库支持：在低光或夜间条件下，系统自动激活红外感知和辅助照明功能，为驾驶员或自动驾驶模块提供清晰的环境感知，保障夜间入库操作的安全性和准确性。
+<li>泊车完成确认：停车完成后，系统自动检查泊位对齐情况及环境状态，并确认停车完成信息同步至车队管理平台。
+<li>车辆状态检测与提醒：完成泊车后，系统自动检测车辆外观状况（如划痕、损伤）和运行状态（如胎压、电量、货舱状况），并提示驾驶员进行后续检查或维护。
+<li>入库数据记录与同步：系统记录停车位置、时间、车辆状态及任务完成信息，实时同步至车队管理平台，为后续调度和车辆运营优化提供支持。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S46" onclick="toggleDetails('S46', this)">
+                <img src="images/45.png" alt="入库补能" class="scene-image">
+                <div class="scene-description">入库补能</div>
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S46">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>智能调度与任务分配：系统根据车辆的任务进展、电量/燃油状态和仓库补能设备空闲情况，自动分配补能任务并通知驾驶员。
+<li>路径规划与自动导航：车辆根据系统规划的路径导航至指定补能仓库，并在接近仓库时切换至自动驾驶模式完成入库。
+<li>自动入库与精准停靠：车辆通过激光雷达、摄像头或超声波传感器实现避障、精准入库操作，并准确停靠在指定补能设备前。
+<li>补能设备自动对接：车辆与充电桩或加油设备自动完成接口连接，系统检测连接状态并启动补能操作。
+<li>动态补能控制：根据车辆能量需求，系统实时调节充电功率或燃料流速，优化补能效率并显示剩余补能时间。
+<li>补能状态实时监控：系统通过传感器监控补能进度、电量增加、功率波动等，并将状态同步到车载屏幕和管理平台。
+<li>异常检测与安全响应：系统实时检测补能设备与车辆连接状态、环境温度、电流波动等，发现异常立即停止操作并通知用户与管理人员。
+<li>补能完成与断开接口：补能完成后，系统自动断开设备与车辆接口，确认补能完成并生成数据报告。
+<li>出库引导与路径优化：车辆完成补能后，系统引导车辆安全离开仓库，并规划后续任务的最优路径。
+<li>补能数据记录与分析：系统记录补能耗时、充电量、费用等数据，同步到车队管理平台，用于设备利用率分析和优化运营策略。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S47" onclick="toggleDetails('S47', this)">
                 <img src="images/48.png" alt="车辆交接" class="scene-image">
                 <div class="scene-description">车辆交接</div>
-                <div id="config-车辆交接" class="scene-configurations">
-        <div><strong>2. 车牌与车型识别：车辆应具备车牌与车型识别能力，能够准确识别交接双方的车牌号码和车型信息，确保交接双方的身份信息准确无误，防止交接过程中的身份混淆。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 驾驶员身份验证：车辆应通过人脸识别、指纹识别等技术手段，对驾驶员进行身份验证，确保只有经过授权的驾驶员才能驾驶车辆，提高交接过程的安全性。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>1. 支持与PSS研究系统无缝对接，获取评估任务信息:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('工作量评估')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S47">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>交接任务智能分配与通知：根据车辆状态和需求，系统分配交接任务并通知交接双方。
+<li>车辆状态全面检查：自动检测车辆电量、燃油、胎压、发动机温度等关键参数并生成检测报告。
+<li>车辆货舱与工具检查：提醒双方检查货舱清理及工具归位，标记异常项。
+<li>车辆外观影像记录：通过高清摄像头拍摄车辆外观，记录划痕和损伤情况。
+<li>交接过程全程记录：启动车载摄像头实时记录交接过程，确保交接透明可追溯。
+<li>电子交接单生成与确认：自动生成交接单，包含车辆状态、外观记录及双方签署信息。
+<li>交接异常提醒与责任划分：发现异常时自动提醒并记录，生成责任界定提示。
+<li>交接数据同步与归档：将交接相关数据实时同步至车队管理平台并存档。
+<li>后续任务分配：根据车辆状态推送下一任务（如补能、保养或配送任务）。
+<li>车辆状态更新与通知：完成交接后更新车辆状态并通知相关人员。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S48" onclick="toggleDetails('S48', this)">
                 <img src="images/49.png" alt="工作量评估" class="scene-image">
                 <div class="scene-description">工作量评估</div>
-                <div id="config-工作量评估" class="scene-configurations">
-        <div><strong>2. 具备智能决策能力，根据任务难度、车辆类型等因素进行任务分配:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>1. 集成物联网传感器，实时采集车辆状态与评估任务进度数据:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>2. 支持远程监控与数据可视化，方便项目经理与监控人员实时掌握进度:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>1. 提供丰富的数据接口，支持数据挖掘与算法分析:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>2. 支持自定义统计维度与报表生成，方便数据分析师进行工作量统计与分析:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div><div><strong>1. 车辆需要具备稳定的停靠和卸货功能，确保在卸货过程中不会造成货物损坏或人员伤害。:</strong><ul><li>GPS定位设备</li><li>Web管理平台</li><li>API接口与外部系统对接技术</li><li>订单管理系统</li><li>人脸识别传感器/生物识别系统</li><li>ECU）</li><li>车载计算单元（Vehicle</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('安全评估')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S48">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>工作量数据输入：用户可以录入每个运输任务的基本信息，包括起止地点、运输物品类型、预计时间、所需车种等，确保任务数据完整。
+<li>车队资源监控：系统能够实时监控车队中每辆车的工作状态，包括任务量、运行时间、休息时间等，确保车队资源得到合理利用。
+<li>工作量分配算法：系统通过分析每辆车的当前工作量、历史表现以及驾驶员的工作时长，自动推荐最佳的任务分配方案，避免任务过度集中或不均衡分配。
+<li>工作量预测与规划：基于历史任务数据和当前工作负载，系统能够预测未来的工作量，并帮助用户合理安排车辆和驾驶员的任务，提高车队运作的效率。
+<li>超载与低效提示：系统根据实时监控数据，自动识别潜在的超载或低效运作情况，并及时提醒用户采取措施进行调整。
+驾驶员工作量分析：系统能够分析每个驾驶员的工作量，包括工作时间、任务类型、运输距离等，确保驾驶员的工作强度处于合理范围。
+<li>动态调整与优化：在任务进行过程中，系统可以根据实时反馈（如交通状况、天气等）动态调整任务安排，优化工作量分配。
+<li>报表与数据可视化：系统自动生成工作量报告，并通过图表、数据分析等形式展示工作量分布、车队负载情况等，帮助用户深入理解工作量情况。
+<li>任务优先级设置：用户可以为不同的任务设置优先级，系统根据任务的紧急程度和重要性自动调整工作量分配，确保关键任务优先完成。
+<li>历史数据对比分析：系统能够通过对比历史工作量数据，帮助用户评估车队工作效率和资源利用率，为未来的决策提供数据支持。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S49" onclick="toggleDetails('S49', this)">
                 <img src="images/50.png" alt="安全评估" class="scene-image">
                 <div class="scene-description">安全评估</div>
-                <div id="config-安全评估" class="scene-configurations">
-        <div><strong>2. 车辆应配备先进的传感器和监控系统，以实时监测卸货过程的安全性:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>1. 车辆需要具备自我诊断和故障预警功能，以便及时发现并报告车辆故障。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>2. 车辆应配备先进的传感器和监控系统，以实时监测车辆的运行状态和安全性。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div><div><strong>1. 车辆应支持远程数据访问和传输功能，以便审核人员能够方便地获取工作日志数据。:</strong><ul><li>摄像头</li><li>GPS定位设备</li><li>车载传感器</li><li>数据分析软件</li><li>车载显示屏</li><li>3D扫描仪或激光扫描仪</li><li>车载主机设备</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('工作日志')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S49">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>安全评估模块：用户可以根据车辆类型和使用场景，选择合适的评估模板，确保评估标准化、科学化。
+安全检查项配置：系统允许用户根据车辆的关键安全部件（如刹车系统、转向系统、车身结构等）设置检查项，确保评估的全面性。
+<li>驾驶员行为评估：系统能够记录和分析驾驶员的驾驶行为，如急刹车、急加速、超速等，并评估其对安全的影响。
+<li>实时数据采集与监控：通过车载传感器、GPS、行车记录仪等设备，系统能够实时采集车辆运行数据，监控关键安全指标，如车辆速度、胎压、油温等。
+<li>风险评估与预警：基于实时数据和历史记录，系统自动进行安全风险评估，并发出预警信号，提示用户潜在的安全问题。
+<li>安全评分与报告生成：系统通过评估结果生成安全评分，并自动生成详细的安全评估报告，报告包括各个检查项的状态、存在的安全隐患及建议的改进措施。
+<li>故障记录与跟踪：对于在评估过程中发现的安全隐患，系统能够自动记录并跟踪其处理进度，确保隐患得到及时解决。
+<li>多维度数据分析：系统通过对历史数据的分析，提供安全趋势预测，帮助用户识别长期存在的安全问题和改进方向。
+<li>安全培训建议：根据评估结果，系统能够为驾驶员提供个性化的安全培训建议，帮助其改进不当驾驶习惯，提升整体安全水平。
+<li>评估报告共享与协作：用户可以将安全评估报告分享给相关部门或团队，支持协作处理安全问题，并根据反馈进行调整优化。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S50" onclick="toggleDetails('S50', this)">
                 <img src="images/51.png" alt="工作日志" class="scene-image">
                 <div class="scene-description">工作日志</div>
-                <div id="config-工作日志" class="scene-configurations">
-        <div><strong>2. 车辆内置的数据记录系统应具备良好的数据完整性和准确性保障机制。:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div><div><strong>1. 车辆应支持远程数据访问和传输功能，以便接收和响应反馈报告和建议。:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div><div><strong>2. 车辆内置的数据分析系统应能够根据反馈报告和建议进行自动调整和优化:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div><div><strong>1. 车辆需具备完善的传感器系统，能够实时监测关键性能指标。:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('结束后检查')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S50">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>记录工作日志：用户可以手动输入每天的工作内容，包括任务描述、进展情况、所花时间等。
+<li>日志分类：用户可以为每条日志添加标签，如“项目进展”、“会议记录”、“待办事项”等，便于后续查询和管理。
+<li>自动化总结：系统能够根据用户输入的日志自动生成周报或月报，并以可视化的方式展示工作进展。
+<li>日志检索：用户可以根据日期、标签或关键字进行日志搜索，快速找到需要的内容。
+<li>提醒功能：系统能够设置日志记录的提醒，确保用户按时更新工作日志，避免遗漏。
+<li>日志共享与协作：用户可以选择将日志分享给团队成员或管理者，支持评论与反馈，促进团队协作。
+<li>与日程同步：系统与日历或任务管理工具进行同步，自动从日程中提取任务并生成工作日志，避免重复输入。
+<li>日志编辑与更新：用户可以随时编辑已录入的日志，修改进展、增加补充说明，确保记录的准确性。
+<li>数据分析：系统提供工作日志的数据分析功能，生成工作效率、任务完成度等报告，帮助用户分析工作表现。
+<li>多设备同步：用户可以在不同设备上访问和更新工作日志，确保数据实时同步，方便随时查看和记录。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S51" onclick="toggleDetails('S51', this)">
                 <img src="images/52.png" alt="结束后检查" class="scene-image">
                 <div class="scene-description">结束后检查</div>
-                <div id="config-结束后检查" class="scene-configurations">
-        <div><strong>2. 车辆需支持远程数据传输功能，以便将检测数据实时上传至云端进行分析:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>1. 实时监测与预警，车辆应配备高精度传感器和智能算法，实时监测关键部件的运行状态，并在发现潜在故障时及时预警。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>2. 健康度评估系统，开发一套完善的车辆健康度评估系统，能够综合分析车辆各项数据，生成准确的评估报告。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>3. 远程数据传输，车辆应支持远程数据传输功能，确保评估数据能够实时、准确地传输至云端或用户指定的接收端。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>4. 用户交互界面，设计简洁、直观的用户交互界面，便于用户查看车辆健康状况和评估报告。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div><div><strong>1. 实时监测与数据传输：车辆应具备实时监测关键部件运行状态的能力，并将数据传输至云端或指定的数据分析中心。:</strong><ul><li>车辆状态远程检索软件</li><li>GPS定位设备</li><li>车载通信模块</li><li>服务器</li><li>智能语音助手</li><li>车载传感器</li><li>摄像头</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('维保支持')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S51">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>检查项录入：用户可以根据商用车的不同部件和系统（如发动机、刹车、轮胎等）设定检查项，确保检查全面。
+<li>标准化检查流程：系统提供标准化的检查流程模板，用户按照既定流程逐项进行检查，避免遗漏。
+<li>实时记录检查结果：用户可以实时记录每个检查项的结果，包括“正常”、“异常”、“待处理”等状态，确保记录精准。
+<li>问题预警与提示：系统通过对检查结果的智能分析，自动识别潜在问题并向用户发出预警提示，帮助及时发现隐患。
+<li>维护历史关联：用户可以查看与车辆相关的历史维护记录，参考过往问题及解决方案，辅助当前检查和决策。
+<li>语音识别与录入：用户可通过语音输入方式记录检查结果，减少手动输入的时间和工作量，提高检查效率。
+<li>自动生成报告：系统能够根据检查记录自动生成详细的检查报告，包括检查项、结果、建议等，方便后续查看和共享。
+<li>报告共享与反馈：用户可以将检查报告分享给相关人员或团队，支持反馈和意见收集，以便进一步改进车辆维护策略。
+<li>跨设备同步：系统支持跨设备（如手机、平板、电脑等）同步，确保检查记录在不同设备上随时更新和查看。
+<li>故障跟踪与处理：对于检查中发现的异常问题，系统能够跟踪后续的故障处理过程，并记录解决方案和修复时间。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S52" onclick="toggleDetails('S52', this)">
                 <img src="images/53.png" alt="维保支持" class="scene-image">
                 <div class="scene-description">维保支持</div>
-                <div id="config-维保支持" class="scene-configurations">
-        <div><strong>2. 故障预警与诊断：车辆应能够基于实时监测数据进行故障预警和初步诊断，以便及时发现潜在问题。:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div><div><strong>3. 远程访问与控制：车辆应支持远程访问和控制功能，以便维保人员可以在远程进行诊断和维修操作。:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div><div><strong>1. 高精度数据采集系统：车辆应配备高精度的传感器和数据采集设备，能够准确记录车辆的行驶里程、运行工况、关键零部件的工作状态等数据，减少数据误差。:</strong><ul><li>智能GPS与RFID追踪系统</li><li>车辆数据采集硬件</li><li>小时服务网络硬件</li><li>维修技师管理软件</li><li>免费道路救援软件</li><li>智能门窗控制系统软件平台</li><li>车辆安全检测传感器</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('残值评估')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S52">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>车辆健康监测与诊断系统：通过车辆传感器和车载诊断系统实时监控车辆状态，检测发动机、刹车系统、电池、轮胎等重要部件的健康状况。在发现潜在问题时，系统自动向驾驶员或车队管理者发送预警信息，提醒进行检查或维修。
+<li>维保提醒与周期管理：系统根据车辆的行驶里程或使用时间，自动计算并提醒用户进行定期保养。用户可以设置自定义的维保周期，并且能够查看每一项维保记录，以便优化维保策略。
+<li>一键预约维修服务：用户通过车载系统或移动应用可以直接一键预约维修服务，选择服务站和维修时间。系统提供维修进度跟踪功能，用户可以实时查看维修状态，并获得完成时间的预估。
+<li>在线故障诊断与远程支持：提供远程故障诊断服务，用户可通过车载屏幕或手机App将车辆的故障信息传送给技术支持团队，获取专业的诊断结果。若问题较为复杂，系统可直接安排工程师进行远程指导，或者指引用户前往指定的维修站点。
+<li>维修记录与历史查询：系统会保存车辆的所有维修记录，供用户随时查询。
+提供历史维保数据分析报告，帮助车队管理者了解每辆车的维修频率、维修项目、费用等，便于后续管理决策。
+<li>应急救援服务：提供24/7的应急救援服务，驾驶员可以通过系统请求拖车、现场修理等服务。系统会根据车辆的当前位置自动调度最近的救援服务，缩短响应时间。
+<li>维保服务评分与反馈：用户可对每次维修服务进行评价，帮助其他用户做出选择。系统根据评分提供改进建议，确保服务质量的不断提高。
+<li>车队管理平台：为车队管理者提供统一的平台，能够查看车队所有车辆的健康状态、维修记录和维保需求。平台支持多车辆调度与资源分配，优化维修与保养安排，提高车队管理效率。
+<li>智能配件管理与采购：系统会根据车辆使用情况和维保记录，智能推荐需要更换或补充的配件。
+提供便捷的配件采购渠道，确保用户能够快速获得所需零件，并减少停运时间。
+<li>维保报告与费用透明：每次维修服务后，用户可以获得详细的维保报告，包括维修内容、使用的配件、工时及费用清单，确保费用的透明度。提供报表导出功能，便于车队管理者做财务分析与管理。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S53" onclick="toggleDetails('S53', this)">
                 <img src="images/54.png" alt="残值评估" class="scene-image">
                 <div class="scene-description">残值评估</div>
-                <div id="config-残值评估" class="scene-configurations">
-        <div><strong>数据存储与备份功能:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div><div><strong>2. 具备足够的数据存储容量，以存储车辆长期的运行和维护数据，并支持数据的定期备份，防止数据丢失。:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div><div><strong>3. 数据传输安全保障：车辆的数据传输模块应采用加密技术，确保车辆数据在传输到车队管理系统或维修站系统过程中的安全性，防止数据泄露和被篡改。:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div><div><strong>4. 车辆健康监测系统：集成车辆健康监测系统，能够实时分析车辆的运行数据，对潜在的故障进行预警，并将相关信息记录在车辆使用与维护记录中，为残值评估提供更全面的参考。:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div><div><strong>1. 车辆数据记录与存储功能：智能商用车应具备完整记录车辆运行数据的功能，包括行驶里程、运行工况、故障记录等，并能够长期存储这些数据，便于评估时提取和分析。:</strong><ul><li>客户关系管理系统</li><li>检测设备</li><li>车载设备</li><li>替代车辆库存</li><li>设计软件</li><li>3D</li><li>车门</li></ul></div></div></div>
-            <div class="scene-container" onclick="toggleConfig('报废、改装或转售')">
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S53">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>车辆数据输入：用户通过简单的界面输入商用车的基本信息，如品牌、型号、生产年份、行驶里程、车辆状态等。提供选择框或填写栏，用户可以快速输入或选择车辆信息。支持车辆VIN码扫描识别自动填充信息。
+<li>自动化残值估算：系统基于输入数据，结合市场数据、同类车型的价格、需求趋势等，自动计算并输出商用车的残值。实时获取市场数据与二手车交易价格，确保评估准确性。提供即时估值，并显示评估依据与算法来源。
+<li>多维度车辆健康评估：系统根据车辆的维修历史、保养记录和车况，自动判断车辆的实际健康状态，并生成评估报告。整合车辆保养记录、事故历史与检查数据，提供详细的车辆健康评估。如果车辆存在重大故障或事故，系统自动减值，实时更新评估。
+<li>市场趋势分析：系统提供当前市场上类似车型的供需情况、价格变化趋势等，帮助用户理解车辆残值受市场影响的情况。提供图表和数据分析，展示市场价格走势及区域差异。支持按时间段查看历史数据，帮助用户做出更精准决策。
+<li>残值预测与建议：基于车辆的当前状况和市场趋势，系统预测未来的残值走势，并给出具体的处置建议，如是否保养、维修、报废或转售。
+系统会根据预测数据推荐合适的操作方案，例如是否进行维修以提升残值。提供不同决策路径的成本-效益分析，帮助用户做出更理性的决策。
+<li>一键生成报告：用户可以生成详细的残值评估报告，包括所有评估数据、市场趋势分析和建议，报告支持打印或导出。自动生成报告格式，包含所有计算依据、市场数据和推荐方案。提供报告的自定义功能，用户可根据需求选择报告内容的展示方式。
+<li>与车队管理系统的整合：对于车队管理用户，系统能够与车队管理软件进行集成，实现评估数据与车队档案的同步。支持与车队管理系统（如车辆调度、维修、库存等）的无缝对接。实时更新车队车辆的残值状况，便于车队整体资产管理。
+<li>客户咨询与二手车市场链接：在评估完成后，系统可以为用户提供与二手车市场的对接信息，如合适的买家、经销商等联系方式。提供二手车市场的推荐，包括经销商、买家和拍卖平台的联系方式。提供一键转售功能，用户可直接向平台提交车辆销售信息。
+<li>安全性与数据隐私保护：确保所有用户输入的信息得到严格的隐私保护，系统采用加密存储与传输方式。支持数据加密保护，确保个人与车辆信息的隐私安全。提供数据备份和恢复功能，保障信息不会丢失。
+<li>智能客服与支持：系统内置智能客服，能够回答用户在残值评估过程中遇到的常见问题，并提供操作指引。
+提供FAQ模块，解答常见问题。在线客服支持，用户可以随时咨询相关问题。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="scene-container" data-scene-id="S54" onclick="toggleDetails('S54', this)">
                 <img src="images/55.png" alt="报废、改装或转售" class="scene-image">
                 <div class="scene-description">报废、改装或转售</div>
-                <div id="config-报废、改装或转售" class="scene-configurations">
-        <div><strong>2. 自检与预警功能：车辆能够进行自我检测，对关键零部件的磨损情况、性能下降情况等进行预警，为评估人员提供初步的车辆状况信息。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>3. 数据安全与共享功能：在保障车辆数据安全的前提下，能够方便地将数据共享给专业评估机构和相关人员，提高评估效率。:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div><div><strong>:</strong><ul><li>摄像头</li><li>评估与鉴定软件</li><li>司机状态检测系统</li><li>项目管理系统</li><li>3D</li><li>车辆定位指引软件</li><li>累计行驶信息系统</li></ul></div></div></div>
+                <div class="scene-weight"></div>
+                <div class="scene-configurations" id="config-S54">
+                    <div class="requirements-list">
+                        <strong>功能要求：</strong>
+                        <ul>
+        <li>车辆评估与检测：提供自动化评估工具，根据车辆的使用年限、故障情况、残值等因素自动判断车辆是否适合报废、改装或转售。提供详细的车辆检测报告，涵盖机械、电子系统、车身等各个方面，帮助用户了解车辆的健康状况。
+<li>合法合规流程指导：提供报废、改装或转售的法律法规解读，确保用户在操作过程中遵循所有地方和国家的相关规定。自动生成所需的相关法律文件，如车辆报废证明、改装认证或二手车销售合同。
+<li>改装方案管理：提供多种改装方案选项，包括动力系统、车身外观、内饰设计、载重配置等，以提升车辆性能、舒适性或安全性。提供改装的详细成本预算和市场需求预测，帮助用户做出决策。
+<li>一键预约改装服务：用户可以选择合适的改装服务商，通过平台预约改装服务，方便快捷。提供改装服务进度跟踪，确保用户了解改装的实时状态。
+<li>车辆维修与整备：对于转售车辆，提供完整的维修服务，包括动力系统、刹车系统、空调系统、车身修复等，确保车辆达到可销售状态。提供技术认证与质量保证，确保转售车辆符合市场需求与法律标准。
+<li>市场价值评估与销售支持：提供二手车市场的价值评估工具，帮助用户判断车辆的转售价格，并给出具体建议。提供线上销售平台，连接潜在买家与卖家，支持车辆展示、价格谈判、合同签订等环节。提供车辆交付和物流支持，确保转售交易顺利进行。
+<li>维修保养与售后服务：对于改装后的车辆，提供定期的维修和保养服务，确保改装后的车辆长期稳定运行。提供售后服务，处理因车辆故障引发的售后问题，保障用户权益。
+<li>突发状况应急处理：在报废、改装或转售过程中，提供应急救援服务，快速处理任何突发的技术问题或法律问题。
+客户支持与反馈：提供客户支持服务，解答用户在整个流程中的疑问，并根据用户反馈优化服务质量。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            </div>
         </div>
 
-        <footer>
-            场景展示页面 | 版权所有
-        </footer>
-
         <script>
-            function toggleConfig(scene) {
-                const configDiv = document.getElementById("config-" + scene);
-                configDiv.style.display = configDiv.style.display === "none" || configDiv.style.display === "" ? "block" : "none";
+            const valueScenes = {"V1": {"价值名称": "车辆安全  Vehicle safty", "场景权重": {"S33": {"权重": 0.52950215}, "S40": {"权重": 0.5077342}, "S41": {"权重": 0.4945284}, "S49": {"权重": 0.37592003}, "S14": {"权重": 0.37284678}, "S23": {"权重": 0.33134228}, "S22": {"权重": 0.30102047}, "S1": {"权重": 0.29227558}, "S51": {"权重": 0.29061177}, "S34": {"权重": 0.27076954}, "S10": {"权重": 0.25329247}, "S21": {"权重": 0.2457457}, "S28": {"权重": 0.23313282}, "S45": {"权重": 0.22270443}, "S32": {"权重": 0.2183741}, "S26": {"权重": 0.2095603}, "S44": {"权重": 0.20910653}, "S9": {"权重": 0.20035101}, "S5": {"权重": 0.19996014}, "S37": {"权重": 0.19869731}, "S11": {"权重": 0.19344431}, "S16": {"权重": 0.18830337}, "S46": {"权重": 0.1865592}, "S2": {"权重": 0.17953117}, "S36": {"权重": 0.17944281}, "S38": {"权重": 0.1790641}, "S18": {"权重": 0.17868}, "S47": {"权重": 0.17671502}, "S43": {"权重": 0.1742307}, "S4": {"权重": 0.1732362}, "S24": {"权重": 0.16648166}, "S3": {"权重": 0.1653878}, "S6": {"权重": 0.16523275}, "S15": {"权重": 0.16262579}, "S20": {"权重": 0.15314716}, "S8": {"权重": 0.15140827}, "S29": {"权重": 0.15128359}, "S31": {"权重": 0.15107988}, "S50": {"权重": 0.1474379}, "S35": {"权重": 0.14675641}, "S53": {"权重": 0.14508745}, "S48": {"权重": 0.14455986}, "S13": {"权重": 0.1396845}, "S30": {"权重": 0.13944963}, "S25": {"权重": 0.13944271}, "S39": {"权重": 0.136049}, "S19": {"权重": 0.129886}, "S42": {"权重": 0.122099966}, "S54": {"权重": 0.117771186}, "S17": {"权重": 0.10809904}, "S7": {"权重": 0.09102603}, "S52": {"权重": 0.080744274}, "S27": {"权重": 0.066179074}, "S12": {"权重": 0.050579537}}}, "V10": {"价值名称": "易用性 Ease of use", "场景权重": {"S54": {"权重": 0.52964175}, "S50": {"权重": 0.5212671}, "S30": {"权重": 0.5185485}, "S42": {"权重": 0.51705533}, "S53": {"权重": 0.5153018}, "S38": {"权重": 0.48439777}, "S35": {"权重": 0.4825794}, "S36": {"权重": 0.4740443}, "S46": {"权重": 0.46493477}, "S31": {"权重": 0.46186337}, "S43": {"权重": 0.43809438}, "S29": {"权重": 0.4302886}, "S51": {"权重": 0.4204806}, "S48": {"权重": 0.4173212}, "S52": {"权重": 0.41658142}, "S32": {"权重": 0.412225}, "S49": {"权重": 0.40247238}, "S39": {"权重": 0.39040697}, "S28": {"权重": 0.38679573}, "S41": {"权重": 0.38231564}, "S45": {"权重": 0.37833205}, "S44": {"权重": 0.37777358}, "S14": {"权重": 0.34711853}, "S47": {"权重": 0.34047267}, "S34": {"权重": 0.32529488}, "S40": {"权重": 0.31164244}, "S27": {"权重": 0.29976892}, "S15": {"权重": 0.2843845}, "S37": {"权重": 0.2796616}, "S1": {"权重": 0.27594873}, "S4": {"权重": 0.27109286}, "S33": {"权重": 0.24415028}, "S7": {"权重": 0.22649667}, "S13": {"权重": 0.22346798}, "S8": {"权重": 0.21736604}, "S2": {"权重": 0.20180616}, "S9": {"权重": 0.19413018}, "S10": {"权重": 0.18464606}, "S3": {"权重": 0.18095548}, "S22": {"权重": 0.16701515}, "S21": {"权重": 0.15943336}, "S20": {"权重": 0.15270378}, "S26": {"权重": 0.15007032}, "S6": {"权重": 0.14425409}, "S24": {"权重": 0.14277707}, "S17": {"权重": 0.13848773}, "S19": {"权重": 0.13627023}, "S23": {"权重": 0.13560216}, "S18": {"权重": 0.13015456}, "S25": {"权重": 0.12766139}, "S12": {"权重": 0.12575419}, "S5": {"权重": 0.10613593}, "S16": {"权重": 0.10332758}, "S11": {"权重": 0.08733395}}}, "V11": {"价值名称": "友好性 Friendliness", "场景权重": {"S38": {"权重": 0.52654684}, "S35": {"权重": 0.5054007}, "S48": {"权重": 0.5025257}, "S54": {"权重": 0.46187258}, "S51": {"权重": 0.44432327}, "S44": {"权重": 0.43113393}, "S36": {"权重": 0.39407408}, "S30": {"权重": 0.39175165}, "S42": {"权重": 0.38220406}, "S34": {"权重": 0.36894646}, "S46": {"权重": 0.36509353}, "S49": {"权重": 0.35515064}, "S45": {"权重": 0.33789322}, "S52": {"权重": 0.33622798}, "S29": {"权重": 0.32292995}, "S53": {"权重": 0.31012288}, "S39": {"权重": 0.30581194}, "S40": {"权重": 0.30357775}, "S4": {"权重": 0.28946945}, "S50": {"权重": 0.2721561}, "S43": {"权重": 0.26935348}, "S28": {"权重": 0.26874542}, "S37": {"权重": 0.25700888}, "S31": {"权重": 0.23910652}, "S22": {"权重": 0.23644097}, "S32": {"权重": 0.2346849}, "S8": {"权重": 0.23269208}, "S3": {"权重": 0.22352737}, "S9": {"权重": 0.21949007}, "S27": {"权重": 0.20364793}, "S7": {"权重": 0.19042516}, "S47": {"权重": 0.18960233}, "S14": {"权重": 0.18939823}, "S33": {"权重": 0.1814867}, "S41": {"权重": 0.16604193}, "S1": {"权重": 0.15292606}, "S19": {"权重": 0.13822457}, "S20": {"权重": 0.12785564}, "S13": {"权重": 0.12235137}, "S12": {"权重": 0.12086093}, "S26": {"权重": 0.12053861}, "S23": {"权重": 0.11846269}, "S21": {"权重": 0.11157355}, "S2": {"权重": 0.11156823}, "S10": {"权重": 0.11051826}, "S5": {"权重": 0.10652439}, "S24": {"权重": 0.10301876}, "S15": {"权重": 0.098661296}, "S17": {"权重": 0.09579864}, "S6": {"权重": 0.09445563}, "S18": {"权重": 0.08304837}, "S11": {"权重": 0.07728881}, "S25": {"权重": 0.0474699}, "S16": {"权重": -0.019872846}}}, "V12": {"价值名称": "个性化 Personalization", "场景权重": {"S27": {"权重": 0.8562487}, "S52": {"权重": 0.5804773}, "S48": {"权重": 0.5408662}, "S39": {"权重": 0.53272665}, "S35": {"权重": 0.4480116}, "S38": {"权重": 0.36956564}, "S4": {"权重": 0.30935514}, "S26": {"权重": 0.30089068}, "S46": {"权重": 0.28800336}, "S34": {"权重": 0.285752}, "S11": {"权重": 0.28026515}, "S8": {"权重": 0.2781014}, "S36": {"权重": 0.27546483}, "S44": {"权重": 0.2737644}, "S20": {"权重": 0.2698573}, "S32": {"权重": 0.25940707}, "S24": {"权重": 0.2558179}, "S37": {"权重": 0.25433213}, "S45": {"权重": 0.25429747}, "S19": {"权重": 0.25035602}, "S6": {"权重": 0.24144584}, "S30": {"权重": 0.23522606}, "S42": {"权重": 0.23250495}, "S54": {"权重": 0.23156261}, "S9": {"权重": 0.22678468}, "S53": {"权重": 0.21816288}, "S1": {"权重": 0.21207345}, "S28": {"权重": 0.21015017}, "S3": {"权重": 0.20385838}, "S16": {"权重": 0.20254648}, "S5": {"权重": 0.18646437}, "S2": {"权重": 0.18508607}, "S17": {"权重": 0.17540625}, "S18": {"权重": 0.17464705}, "S23": {"权重": 0.17275381}, "S25": {"权重": 0.17204025}, "S31": {"权重": 0.17017765}, "S10": {"权重": 0.16584116}, "S12": {"权重": 0.16266134}, "S13": {"权重": 0.15835045}, "S29": {"权重": 0.14724623}, "S21": {"权重": 0.13717866}, "S43": {"权重": 0.13712409}, "S40": {"权重": 0.135353}, "S41": {"权重": 0.13269925}, "S33": {"权重": 0.13056655}, "S7": {"权重": 0.12784843}, "S50": {"权重": 0.1268246}, "S22": {"权重": 0.1254299}, "S47": {"权重": 0.11772595}, "S15": {"权重": 0.090767324}, "S14": {"权重": 0.08170936}, "S51": {"权重": 0.0730285}, "S49": {"权重": 0.06252513}}}, "V13": {"价值名称": "偏好性 Preference", "场景权重": {"S48": {"权重": 0.516274}, "S8": {"权重": 0.47228298}, "S19": {"权重": 0.44549754}, "S3": {"权重": 0.43248117}, "S35": {"权重": 0.40111217}, "S6": {"权重": 0.36840898}, "S38": {"权重": 0.3659242}, "S2": {"权重": 0.36396933}, "S12": {"权重": 0.36175632}, "S13": {"权重": 0.34914717}, "S26": {"权重": 0.3462878}, "S5": {"权重": 0.3461283}, "S11": {"权重": 0.34523734}, "S18": {"权重": 0.33041614}, "S10": {"权重": 0.3254117}, "S21": {"权重": 0.31008565}, "S25": {"权重": 0.29975548}, "S16": {"权重": 0.29503965}, "S1": {"权重": 0.2896971}, "S44": {"权重": 0.2893412}, "S20": {"权重": 0.28685993}, "S4": {"权重": 0.28642353}, "S46": {"权重": 0.28583926}, "S27": {"权重": 0.2825738}, "S24": {"权重": 0.28257358}, "S17": {"权重": 0.2787997}, "S37": {"权重": 0.27275833}, "S23": {"权重": 0.27264252}, "S15": {"权重": 0.26937994}, "S50": {"权重": 0.26919934}, "S22": {"权重": 0.26243392}, "S9": {"权重": 0.25780252}, "S39": {"权重": 0.25534555}, "S7": {"权重": 0.23591323}, "S52": {"权重": 0.23386535}, "S33": {"权重": 0.22157021}, "S42": {"权重": 0.21747297}, "S30": {"权重": 0.21043894}, "S31": {"权重": 0.2061207}, "S32": {"权重": 0.2030369}, "S54": {"权重": 0.20028488}, "S51": {"权重": 0.19869335}, "S40": {"权重": 0.19379134}, "S36": {"权重": 0.1887525}, "S29": {"权重": 0.18560657}, "S45": {"权重": 0.17865765}, "S41": {"权重": 0.16385774}, "S47": {"权重": 0.15562353}, "S49": {"权重": 0.15193866}, "S34": {"权重": 0.14925916}, "S14": {"权重": 0.14263467}, "S53": {"权重": 0.13753203}, "S43": {"权重": 0.13511069}, "S28": {"权重": 0.123968914}}}, "V14": {"价值名称": "场景化 Scenario", "场景权重": {"S48": {"权重": 0.6548982}, "S35": {"权重": 0.5249754}, "S27": {"权重": 0.5089818}, "S38": {"权重": 0.48672998}, "S39": {"权重": 0.37541604}, "S8": {"权重": 0.3557634}, "S52": {"权重": 0.35574684}, "S36": {"权重": 0.34595522}, "S44": {"权重": 0.31527638}, "S54": {"权重": 0.31234428}, "S34": {"权重": 0.30944318}, "S42": {"权重": 0.29987666}, "S37": {"权重": 0.2978695}, "S46": {"权重": 0.29613483}, "S3": {"权重": 0.28148267}, "S45": {"权重": 0.28042072}, "S30": {"权重": 0.27822328}, "S28": {"权重": 0.2781041}, "S1": {"权重": 0.27045646}, "S19": {"权重": 0.2600333}, "S21": {"权重": 0.2542113}, "S11": {"权重": 0.24437371}, "S4": {"权重": 0.24435629}, "S9": {"权重": 0.2436552}, "S22": {"权重": 0.24256794}, "S12": {"权重": 0.23960657}, "S53": {"权重": 0.23899758}, "S51": {"权重": 0.23593107}, "S29": {"权重": 0.2328986}, "S24": {"权重": 0.23101847}, "S32": {"权重": 0.22457477}, "S31": {"权重": 0.2211424}, "S49": {"权重": 0.2200382}, "S47": {"权重": 0.21981819}, "S2": {"权重": 0.21239151}, "S26": {"权重": 0.21035312}, "S17": {"权重": 0.2095613}, "S10": {"权重": 0.20874402}, "S6": {"权重": 0.19313219}, "S20": {"权重": 0.19183299}, "S25": {"权重": 0.18695891}, "S43": {"权重": 0.1792234}, "S18": {"权重": 0.17400113}, "S5": {"权重": 0.17154191}, "S40": {"权重": 0.16872235}, "S7": {"权重": 0.15937272}, "S15": {"权重": 0.15151313}, "S13": {"权重": 0.14392348}, "S41": {"权重": 0.14127149}, "S33": {"权重": 0.135628}, "S16": {"权重": 0.13345426}, "S50": {"权重": 0.13016589}, "S23": {"权重": 0.12606323}, "S14": {"权重": 0.06440831}}}, "V15": {"价值名称": "主动便利 Active convenience", "场景权重": {"S39": {"权重": 0.6884781}, "S52": {"权重": 0.64850676}, "S27": {"权重": 0.45884028}, "S26": {"权重": 0.36250383}, "S30": {"权重": 0.36028376}, "S48": {"权重": 0.35577887}, "S20": {"权重": 0.34917843}, "S54": {"权重": 0.3480983}, "S46": {"权重": 0.33556193}, "S42": {"权重": 0.32522884}, "S35": {"权重": 0.32340047}, "S19": {"权重": 0.31854013}, "S36": {"权重": 0.31526414}, "S44": {"权重": 0.30615452}, "S53": {"权重": 0.29564175}, "S43": {"权重": 0.29137447}, "S38": {"权重": 0.28876808}, "S24": {"权重": 0.28406906}, "S2": {"权重": 0.28165683}, "S9": {"权重": 0.27793202}, "S4": {"权重": 0.27122098}, "S11": {"权重": 0.2686714}, "S1": {"权重": 0.26228675}, "S17": {"权重": 0.25448886}, "S29": {"权重": 0.25282544}, "S22": {"权重": 0.24346511}, "S3": {"权重": 0.23957077}, "S49": {"权重": 0.23214012}, "S34": {"权重": 0.23100534}, "S31": {"权重": 0.22844484}, "S23": {"权重": 0.2243741}, "S7": {"权重": 0.2239255}, "S6": {"权重": 0.22196934}, "S10": {"权重": 0.21867625}, "S45": {"权重": 0.20768389}, "S12": {"权重": 0.20041153}, "S8": {"权重": 0.19923949}, "S5": {"权重": 0.19769928}, "S25": {"权重": 0.19516936}, "S51": {"权重": 0.19140504}, "S13": {"权重": 0.17707855}, "S18": {"权重": 0.17015755}, "S16": {"权重": 0.1645319}, "S50": {"权重": 0.15383072}, "S21": {"权重": 0.14191014}, "S40": {"权重": 0.13946313}, "S32": {"权重": 0.13744693}, "S14": {"权重": 0.13253915}, "S41": {"权重": 0.1254277}, "S15": {"权重": 0.12509005}, "S47": {"权重": 0.103636175}, "S37": {"权重": 0.09774678}, "S33": {"权重": 0.089021586}, "S28": {"权重": 0.07916677}}}, "V16": {"价值名称": "生态便利 Ecological convenience", "场景权重": {"S54": {"权重": 0.4762098}, "S52": {"权重": 0.4567947}, "S30": {"权重": 0.43386114}, "S46": {"权重": 0.42137653}, "S45": {"权重": 0.42047817}, "S48": {"权重": 0.40993267}, "S42": {"权重": 0.4088697}, "S50": {"权重": 0.4077437}, "S32": {"权重": 0.39966628}, "S47": {"权重": 0.39671266}, "S41": {"权重": 0.39518392}, "S44": {"权重": 0.3948089}, "S36": {"权重": 0.39356562}, "S39": {"权重": 0.39280498}, "S43": {"权重": 0.38143846}, "S35": {"权重": 0.38061017}, "S28": {"权重": 0.3790278}, "S53": {"权重": 0.37473685}, "S38": {"权重": 0.3611937}, "S51": {"权重": 0.338547}, "S34": {"权重": 0.33493966}, "S37": {"权重": 0.32448435}, "S29": {"权重": 0.311263}, "S33": {"权重": 0.2889472}, "S27": {"权重": 0.2811695}, "S40": {"权重": 0.27176204}, "S31": {"权重": 0.26302594}, "S49": {"权重": 0.2597686}, "S1": {"权重": 0.23140274}, "S3": {"权重": 0.2226928}, "S14": {"权重": 0.2217202}, "S2": {"权重": 0.21827002}, "S19": {"权重": 0.21551332}, "S12": {"权重": 0.21357861}, "S10": {"权重": 0.1929807}, "S6": {"权重": 0.19223438}, "S13": {"权重": 0.19056824}, "S21": {"权重": 0.18511052}, "S20": {"权重": 0.18436997}, "S22": {"权重": 0.18115506}, "S26": {"权重": 0.1735065}, "S4": {"权重": 0.17273945}, "S9": {"权重": 0.16286147}, "S24": {"权重": 0.14840505}, "S17": {"权重": 0.13651715}, "S11": {"权重": 0.13101205}, "S5": {"权重": 0.1251287}, "S23": {"权重": 0.12482705}, "S7": {"权重": 0.123438664}, "S8": {"权重": 0.1109268}, "S18": {"权重": 0.10145543}, "S25": {"权重": 0.1013059}, "S15": {"权重": 0.10115276}, "S16": {"权重": 0.065725796}}}, "V17": {"价值名称": "人工智能 Artificial Intelligence Degree", "场景权重": {"S32": {"权重": 0.5865758}, "S28": {"权重": 0.51933867}, "S44": {"权重": 0.50078017}, "S37": {"权重": 0.4940008}, "S33": {"权重": 0.46336135}, "S36": {"权重": 0.42957664}, "S47": {"权重": 0.41642708}, "S46": {"权重": 0.41624677}, "S19": {"权重": 0.39586306}, "S35": {"权重": 0.3931824}, "S17": {"权重": 0.3890641}, "S1": {"权重": 0.37777713}, "S45": {"权重": 0.37703472}, "S54": {"权重": 0.3663434}, "S34": {"权重": 0.36146647}, "S41": {"权重": 0.35234568}, "S4": {"权重": 0.34849057}, "S16": {"权重": 0.34143516}, "S21": {"权重": 0.33755076}, "S18": {"权重": 0.33620256}, "S12": {"权重": 0.33617005}, "S20": {"权重": 0.33402234}, "S5": {"权重": 0.33079165}, "S6": {"权重": 0.3304436}, "S3": {"权重": 0.32434303}, "S40": {"权重": 0.32165518}, "S27": {"权重": 0.3191975}, "S42": {"权重": 0.31714398}, "S7": {"权重": 0.30345848}, "S50": {"权重": 0.29797587}, "S30": {"权重": 0.29717198}, "S11": {"权重": 0.29572904}, "S24": {"权重": 0.29214475}, "S9": {"权重": 0.28045487}, "S8": {"权重": 0.2802036}, "S22": {"权重": 0.2771146}, "S10": {"权重": 0.26368517}, "S25": {"权重": 0.26286986}, "S48": {"权重": 0.26278847}, "S23": {"权重": 0.2597826}, "S2": {"权重": 0.2512976}, "S26": {"权重": 0.24617691}, "S38": {"权重": 0.24449666}, "S15": {"权重": 0.21765788}, "S43": {"权重": 0.21693718}, "S13": {"权重": 0.20431009}, "S52": {"权重": 0.20283748}, "S53": {"权重": 0.18586129}, "S51": {"权重": 0.17739253}, "S39": {"权重": 0.17338921}, "S31": {"权重": 0.17246221}, "S49": {"权重": 0.15771863}, "S14": {"权重": 0.15052895}, "S29": {"权重": 0.14772788}}}, "V18": {"价值名称": "产业互联 Industrial connectivity", "场景权重": {"S50": {"权重": 0.70661914}, "S28": {"权重": 0.5180216}, "S32": {"权重": 0.48878905}, "S47": {"权重": 0.46944195}, "S41": {"权重": 0.45221063}, "S45": {"权重": 0.4484054}, "S37": {"权重": 0.42429137}, "S33": {"权重": 0.33928096}, "S1": {"权重": 0.29972103}, "S44": {"权重": 0.2911549}, "S19": {"权重": 0.29029694}, "S36": {"权重": 0.28237483}, "S9": {"权重": 0.27408442}, "S46": {"权重": 0.2524868}, "S10": {"权重": 0.2464379}, "S20": {"权重": 0.23936109}, "S54": {"权重": 0.21183802}, "S6": {"权重": 0.20929737}, "S40": {"权重": 0.1991025}, "S14": {"权重": 0.19654515}, "S34": {"权重": 0.1960801}, "S30": {"权重": 0.1922215}, "S12": {"权重": 0.18424371}, "S42": {"权重": 0.18341422}, "S17": {"权重": 0.17793187}, "S16": {"权重": 0.17117082}, "S53": {"权重": 0.16923597}, "S43": {"权重": 0.167563}, "S51": {"权重": 0.1636726}, "S5": {"权重": 0.16111471}, "S31": {"权重": 0.15811777}, "S2": {"权重": 0.15779236}, "S21": {"权重": 0.15671256}, "S35": {"权重": 0.15611432}, "S38": {"权重": 0.15559255}, "S52": {"权重": 0.14292377}, "S49": {"权重": 0.1269254}, "S25": {"权重": 0.12458338}, "S27": {"权重": 0.12369759}, "S7": {"权重": 0.123255566}, "S24": {"权重": 0.12252695}, "S18": {"权重": 0.12221551}, "S39": {"权重": 0.1218355}, "S3": {"权重": 0.11206071}, "S8": {"权重": 0.10385675}, "S15": {"权重": 0.10266078}, "S13": {"权重": 0.102392174}, "S48": {"权重": 0.09220013}, "S26": {"权重": 0.08990058}, "S22": {"权重": 0.08179268}, "S29": {"权重": 0.078123875}, "S11": {"权重": 0.07464306}, "S4": {"权重": 0.07370984}, "S23": {"权重": 0.06563803}}}, "V19": {"价值名称": "移动端互联 Mobile connectivity", "场景权重": {"S47": {"权重": 0.6315619}, "S28": {"权重": 0.5709273}, "S32": {"权重": 0.5276945}, "S45": {"权重": 0.5270976}, "S41": {"权重": 0.5232661}, "S37": {"权重": 0.48039368}, "S33": {"权重": 0.47698182}, "S50": {"权重": 0.4081169}, "S19": {"权重": 0.38884002}, "S1": {"权重": 0.37071577}, "S18": {"权重": 0.34183294}, "S5": {"权重": 0.3362233}, "S36": {"权重": 0.3301215}, "S17": {"权重": 0.3114321}, "S20": {"权重": 0.2903434}, "S14": {"权重": 0.28847876}, "S6": {"权重": 0.2812488}, "S40": {"权重": 0.27921507}, "S9": {"权重": 0.27712953}, "S25": {"权重": 0.27673215}, "S10": {"权重": 0.2725186}, "S21": {"权重": 0.25341895}, "S12": {"权重": 0.24665834}, "S44": {"权重": 0.24600436}, "S23": {"权重": 0.23732682}, "S11": {"权重": 0.22116575}, "S2": {"权重": 0.2159052}, "S16": {"权重": 0.21283802}, "S35": {"权重": 0.21246572}, "S3": {"权重": 0.20964721}, "S46": {"权重": 0.2085886}, "S48": {"权重": 0.20457743}, "S22": {"权重": 0.2037357}, "S4": {"权重": 0.2023576}, "S13": {"权重": 0.20113404}, "S34": {"权重": 0.19955052}, "S24": {"权重": 0.1913168}, "S54": {"权重": 0.168603}, "S43": {"权重": 0.16554649}, "S8": {"权重": 0.15535602}, "S30": {"权重": 0.15461007}, "S26": {"权重": 0.14888719}, "S7": {"权重": 0.14348496}, "S53": {"权重": 0.1380113}, "S27": {"权重": 0.13300566}, "S42": {"权重": 0.13202932}, "S49": {"权重": 0.12968354}, "S38": {"权重": 0.122886054}, "S15": {"权重": 0.119285}, "S31": {"权重": 0.11861592}, "S39": {"权重": 0.10024387}, "S29": {"权重": 0.09954693}, "S51": {"权重": 0.096481405}, "S52": {"权重": 0.06572258}}}, "V2": {"价值名称": "信息安全 Cybersecurity", "场景权重": {"S50": {"权重": 0.5467646}, "S47": {"权重": 0.43646002}, "S9": {"权重": 0.4156844}, "S28": {"权重": 0.39801013}, "S45": {"权重": 0.38398167}, "S33": {"权重": 0.37925723}, "S41": {"权重": 0.368545}, "S14": {"权重": 0.3464651}, "S1": {"权重": 0.30002743}, "S5": {"权重": 0.29959944}, "S21": {"权重": 0.29710534}, "S20": {"权重": 0.2949464}, "S6": {"权重": 0.28912717}, "S18": {"权重": 0.28444663}, "S23": {"权重": 0.2815087}, "S32": {"权重": 0.28017527}, "S13": {"权重": 0.27966306}, "S19": {"权重": 0.26827213}, "S12": {"权重": 0.25292957}, "S40": {"权重": 0.25286794}, "S11": {"权重": 0.248227}, "S17": {"权重": 0.23572572}, "S22": {"权重": 0.22891133}, "S37": {"权重": 0.22835335}, "S25": {"权重": 0.22246657}, "S7": {"权重": 0.21534021}, "S8": {"权重": 0.21452637}, "S16": {"权重": 0.20627327}, "S24": {"权重": 0.19853832}, "S15": {"权重": 0.18921894}, "S10": {"权重": 0.18816371}, "S36": {"权重": 0.1804313}, "S26": {"权重": 0.17396733}, "S3": {"权重": 0.17150827}, "S43": {"权重": 0.17115371}, "S49": {"权重": 0.16573879}, "S38": {"权重": 0.15292746}, "S2": {"权重": 0.14961725}, "S51": {"权重": 0.14665857}, "S44": {"权重": 0.13922723}, "S48": {"权重": 0.12612978}, "S53": {"权重": 0.121209495}, "S27": {"权重": 0.11512076}, "S46": {"权重": 0.11446814}, "S4": {"权重": 0.110350154}, "S54": {"权重": 0.10885243}, "S39": {"权重": 0.10702067}, "S42": {"权重": 0.10701877}, "S30": {"权重": 0.10700091}, "S34": {"权重": 0.104605004}, "S31": {"权重": 0.10180494}, "S35": {"权重": 0.07832928}, "S29": {"权重": 0.07039304}, "S52": {"权重": 0.06613165}}}, "V20": {"价值名称": "车辆端互联 HMI connectivity", "场景权重": {"S28": {"权重": 0.6126201}, "S32": {"权重": 0.54901284}, "S47": {"权重": 0.53852916}, "S37": {"权重": 0.5339547}, "S36": {"权重": 0.5028189}, "S44": {"权重": 0.43946874}, "S45": {"权重": 0.42680743}, "S41": {"权重": 0.3975352}, "S33": {"权重": 0.38932765}, "S18": {"权重": 0.36626098}, "S46": {"权重": 0.34323478}, "S1": {"权重": 0.33705008}, "S50": {"权重": 0.33605027}, "S21": {"权重": 0.32735234}, "S19": {"权重": 0.32148457}, "S35": {"权重": 0.32142633}, "S5": {"权重": 0.30841783}, "S20": {"权重": 0.30039066}, "S54": {"权重": 0.298892}, "S6": {"权重": 0.287342}, "S25": {"权重": 0.28595197}, "S9": {"权重": 0.28202504}, "S30": {"权重": 0.28002772}, "S17": {"权重": 0.26848269}, "S42": {"权重": 0.2646103}, "S12": {"权重": 0.26285544}, "S34": {"权重": 0.25382453}, "S16": {"权重": 0.2443046}, "S10": {"权重": 0.24405287}, "S26": {"权重": 0.23251355}, "S22": {"权重": 0.22701374}, "S23": {"权重": 0.21998627}, "S4": {"权重": 0.21973017}, "S40": {"权重": 0.21717516}, "S3": {"权重": 0.21527623}, "S53": {"权重": 0.21030462}, "S13": {"权重": 0.2101173}, "S43": {"权重": 0.2073369}, "S15": {"权重": 0.19574502}, "S48": {"权重": 0.19370271}, "S29": {"权重": 0.19363663}, "S8": {"权重": 0.1870394}, "S38": {"权重": 0.18274295}, "S11": {"权重": 0.179771}, "S2": {"权重": 0.17406708}, "S31": {"权重": 0.16323218}, "S27": {"权重": 0.16305822}, "S7": {"权重": 0.15649919}, "S24": {"权重": 0.15357207}, "S39": {"权重": 0.12775694}, "S51": {"权重": 0.11158256}, "S14": {"权重": 0.10193427}, "S52": {"权重": 0.09750907}, "S49": {"权重": 0.0933012}}}, "V21": {"价值名称": "低碳 Low Carbon", "场景权重": {"S53": {"权重": 0.7935025}, "S30": {"权重": 0.768325}, "S43": {"权重": 0.7678968}, "S31": {"权重": 0.7140753}, "S42": {"权重": 0.7123593}, "S54": {"权重": 0.689186}, "S46": {"权重": 0.6138948}, "S29": {"权重": 0.5365233}, "S36": {"权重": 0.43642598}, "S35": {"权重": 0.41388357}, "S51": {"权重": 0.29280168}, "S44": {"权重": 0.22778937}, "S14": {"权重": 0.2256282}, "S49": {"权重": 0.22513148}, "S40": {"权重": 0.22422624}, "S39": {"权重": 0.22182645}, "S38": {"权重": 0.21061976}, "S15": {"权重": 0.19334489}, "S34": {"权重": 0.17791346}, "S45": {"权重": 0.17497039}, "S28": {"权重": 0.17484406}, "S32": {"权重": 0.16434409}, "S41": {"权重": 0.16389374}, "S4": {"权重": 0.1547057}, "S52": {"权重": 0.1528855}, "S47": {"权重": 0.15200599}, "S33": {"权重": 0.14971593}, "S13": {"权重": 0.14898477}, "S22": {"权重": 0.14569475}, "S9": {"权重": 0.13369256}, "S21": {"权重": 0.13183862}, "S2": {"权重": 0.12600014}, "S48": {"权重": 0.12239639}, "S23": {"权重": 0.10731956}, "S50": {"权重": 0.104930416}, "S18": {"权重": 0.095393024}, "S11": {"权重": 0.09497566}, "S7": {"权重": 0.0933875}, "S5": {"权重": 0.08874154}, "S27": {"权重": 0.08688438}, "S24": {"权重": 0.08342716}, "S37": {"权重": 0.08194504}, "S10": {"权重": 0.07710597}, "S19": {"权重": 0.07030282}, "S16": {"权重": 0.07016234}, "S17": {"权重": 0.070089854}, "S3": {"权重": 0.06439884}, "S8": {"权重": 0.057997286}, "S12": {"权重": 0.05728212}, "S25": {"权重": 0.05711616}, "S6": {"权重": 0.056425747}, "S26": {"权重": 0.03203089}, "S1": {"权重": 0.028557267}, "S20": {"权重": 0.002400929}}}, "V22": {"价值名称": "能源有效性 Energy efficiency", "场景权重": {"S53": {"权重": 0.8126331}, "S31": {"权重": 0.8044805}, "S30": {"权重": 0.7975344}, "S42": {"权重": 0.7957484}, "S43": {"权重": 0.71604013}, "S54": {"权重": 0.6659497}, "S46": {"权重": 0.6537594}, "S29": {"权重": 0.6065202}, "S36": {"权重": 0.5351983}, "S35": {"权重": 0.51356614}, "S44": {"权重": 0.36084545}, "S51": {"权重": 0.24310249}, "S39": {"权重": 0.23124811}, "S15": {"权重": 0.212054}, "S49": {"权重": 0.20587401}, "S32": {"权重": 0.20564988}, "S38": {"权重": 0.19679134}, "S41": {"权重": 0.18958278}, "S28": {"权重": 0.18628891}, "S40": {"权重": 0.18499877}, "S9": {"权重": 0.17579304}, "S47": {"权重": 0.1644221}, "S45": {"权重": 0.1565098}, "S13": {"权重": 0.15536323}, "S3": {"权重": 0.1521779}, "S27": {"权重": 0.14918965}, "S48": {"权重": 0.14490667}, "S11": {"权重": 0.14437407}, "S34": {"权重": 0.1355455}, "S33": {"权重": 0.13371159}, "S6": {"权重": 0.13183609}, "S14": {"权重": 0.13113302}, "S37": {"权重": 0.12188299}, "S52": {"权重": 0.12028763}, "S4": {"权重": 0.11934256}, "S19": {"权重": 0.111163795}, "S17": {"权重": 0.11075279}, "S22": {"权重": 0.11042583}, "S50": {"权重": 0.10901111}, "S12": {"权重": 0.10778246}, "S16": {"权重": 0.103751644}, "S25": {"权重": 0.10097841}, "S1": {"权重": 0.1005896}, "S2": {"权重": 0.09809759}, "S21": {"权重": 0.075060956}, "S18": {"权重": 0.069996424}, "S5": {"权重": 0.06665804}, "S26": {"权重": 0.066057295}, "S7": {"权重": 0.061772462}, "S23": {"权重": 0.061020575}, "S10": {"权重": 0.06052858}, "S24": {"权重": 0.045384407}, "S8": {"权重": 0.01763249}, "S20": {"权重": -0.013156254}}}, "V23": {"价值名称": "循环性 Circularity", "场景权重": {"S53": {"权重": 0.71502274}, "S42": {"权重": 0.71029335}, "S31": {"权重": 0.69868684}, "S30": {"权重": 0.6952127}, "S43": {"权重": 0.693205}, "S54": {"权重": 0.6174156}, "S46": {"权重": 0.5749145}, "S29": {"权重": 0.51800936}, "S49": {"权重": 0.47586825}, "S35": {"权重": 0.46689525}, "S36": {"权重": 0.45595425}, "S51": {"权重": 0.45586923}, "S38": {"权重": 0.38828933}, "S44": {"权重": 0.34724203}, "S40": {"权重": 0.33457235}, "S34": {"权重": 0.31881818}, "S39": {"权重": 0.303966}, "S15": {"权重": 0.2703747}, "S41": {"权重": 0.2671672}, "S52": {"权重": 0.25743255}, "S48": {"权重": 0.23977153}, "S13": {"权重": 0.23611523}, "S33": {"权重": 0.22133283}, "S14": {"权重": 0.22047381}, "S32": {"权重": 0.21841675}, "S27": {"权重": 0.20628509}, "S50": {"权重": 0.19790916}, "S45": {"权重": 0.19663917}, "S3": {"权重": 0.19148345}, "S2": {"权重": 0.1862887}, "S4": {"权重": 0.18270436}, "S9": {"权重": 0.15484741}, "S23": {"权重": 0.15456367}, "S28": {"权重": 0.13362528}, "S37": {"权重": 0.13055803}, "S47": {"权重": 0.12641087}, "S22": {"权重": 0.123662144}, "S17": {"权重": 0.11457945}, "S19": {"权重": 0.09617265}, "S20": {"权重": 0.08682457}, "S5": {"权重": 0.08350214}, "S7": {"权重": 0.07719666}, "S1": {"权重": 0.073309004}, "S10": {"权重": 0.06421014}, "S24": {"权重": 0.056484476}, "S8": {"权重": 0.051880725}, "S21": {"权重": 0.05086021}, "S11": {"权重": 0.04603922}, "S26": {"权重": 0.040407043}, "S18": {"权重": 0.037427373}, "S12": {"权重": 0.036095507}, "S25": {"权重": 0.034909535}, "S16": {"权重": 0.03127277}, "S6": {"权重": 0.024223767}}}, "V24": {"价值名称": "成本控制 Cost Control", "场景权重": {"S30": {"权重": 0.7550608}, "S43": {"权重": 0.744739}, "S53": {"权重": 0.728098}, "S42": {"权重": 0.6942882}, "S54": {"权重": 0.68468}, "S46": {"权重": 0.68392295}, "S31": {"权重": 0.68186307}, "S36": {"权重": 0.59143573}, "S29": {"权重": 0.5585837}, "S35": {"权重": 0.5332293}, "S44": {"权重": 0.47747964}, "S39": {"权重": 0.3663803}, "S28": {"权重": 0.31197473}, "S45": {"权重": 0.3041617}, "S49": {"权重": 0.30001232}, "S52": {"权重": 0.2909875}, "S9": {"权重": 0.26399994}, "S41": {"权重": 0.26092136}, "S34": {"权重": 0.256423}, "S32": {"权重": 0.25010887}, "S50": {"权重": 0.24412985}, "S38": {"权重": 0.23434709}, "S37": {"权重": 0.2299216}, "S48": {"权重": 0.21394518}, "S51": {"权重": 0.21214962}, "S4": {"权重": 0.20648955}, "S40": {"权重": 0.19269633}, "S47": {"权重": 0.19108757}, "S15": {"权重": 0.18344174}, "S3": {"权重": 0.17872033}, "S17": {"权重": 0.17694417}, "S1": {"权重": 0.17184249}, "S27": {"权重": 0.16606072}, "S33": {"权重": 0.15296604}, "S20": {"权重": 0.14192729}, "S19": {"权重": 0.14004871}, "S6": {"权重": 0.13841495}, "S25": {"权重": 0.13606817}, "S11": {"权重": 0.13336399}, "S22": {"权重": 0.1332211}, "S2": {"权重": 0.11723592}, "S16": {"权重": 0.11665879}, "S21": {"权重": 0.11591887}, "S26": {"权重": 0.1131774}, "S14": {"权重": 0.11108133}, "S24": {"权重": 0.11028939}, "S12": {"权重": 0.108845755}, "S13": {"权重": 0.10473101}, "S23": {"权重": 0.09811081}, "S5": {"权重": 0.08473655}, "S10": {"权重": 0.07136649}, "S8": {"权重": 0.07094901}, "S18": {"权重": 0.068463065}, "S7": {"权重": 0.067629606}}}, "V25": {"价值名称": "效率 Efficiency", "场景权重": {"S42": {"权重": 0.7736668}, "S30": {"权重": 0.73864645}, "S29": {"权重": 0.7204151}, "S54": {"权重": 0.688938}, "S46": {"权重": 0.6745868}, "S53": {"权重": 0.6254512}, "S31": {"权重": 0.6117137}, "S43": {"权重": 0.58916306}, "S36": {"权重": 0.58229375}, "S35": {"权重": 0.5665977}, "S44": {"权重": 0.43332797}, "S15": {"权重": 0.31000796}, "S39": {"权重": 0.27262792}, "S51": {"权重": 0.262011}, "S49": {"权重": 0.26034993}, "S48": {"权重": 0.23985904}, "S41": {"权重": 0.23798814}, "S37": {"权重": 0.23247747}, "S38": {"权重": 0.22965506}, "S28": {"权重": 0.22515978}, "S52": {"权重": 0.22240905}, "S32": {"权重": 0.22078815}, "S9": {"权重": 0.21709499}, "S13": {"权重": 0.20414183}, "S4": {"权重": 0.20325722}, "S11": {"权重": 0.19522218}, "S34": {"权重": 0.17775036}, "S12": {"权重": 0.17737977}, "S14": {"权重": 0.16911632}, "S47": {"权重": 0.16464026}, "S45": {"权重": 0.15276925}, "S17": {"权重": 0.15107039}, "S25": {"权重": 0.14890336}, "S27": {"权重": 0.14575058}, "S22": {"权重": 0.14533018}, "S33": {"权重": 0.14021732}, "S40": {"权重": 0.13636278}, "S16": {"权重": 0.13523623}, "S19": {"权重": 0.13410677}, "S2": {"权重": 0.12837924}, "S21": {"权重": 0.116018355}, "S23": {"权重": 0.11558952}, "S50": {"权重": 0.10565954}, "S26": {"权重": 0.101984195}, "S7": {"权重": 0.08958308}, "S8": {"权重": 0.083070226}, "S3": {"权重": 0.08204933}, "S5": {"权重": 0.08016139}, "S6": {"权重": 0.06669608}, "S10": {"权重": 0.055533074}, "S18": {"权重": 0.04599509}, "S20": {"权重": 0.045894027}, "S1": {"权重": 0.033773154}, "S24": {"权重": -0.010564736}}}, "V26": {"价值名称": "省时 Time saving", "场景权重": {"S54": {"权重": 0.66650534}, "S30": {"权重": 0.66104555}, "S42": {"权重": 0.6507865}, "S46": {"权重": 0.64332736}, "S35": {"权重": 0.60371447}, "S36": {"权重": 0.5846399}, "S29": {"权重": 0.56451833}, "S44": {"权重": 0.56263894}, "S53": {"权重": 0.5230017}, "S31": {"权重": 0.50504017}, "S43": {"权重": 0.46632913}, "S48": {"权重": 0.3916939}, "S34": {"权重": 0.37329045}, "S28": {"权重": 0.354699}, "S39": {"权重": 0.34960926}, "S37": {"权重": 0.34724084}, "S38": {"权重": 0.33606794}, "S52": {"权重": 0.32140538}, "S49": {"权重": 0.32088467}, "S45": {"权重": 0.3119504}, "S51": {"权重": 0.29953757}, "S40": {"权重": 0.2913863}, "S32": {"权重": 0.28256375}, "S41": {"权重": 0.24351409}, "S15": {"权重": 0.2332553}, "S9": {"权重": 0.21250501}, "S11": {"权重": 0.18814781}, "S47": {"权重": 0.18272041}, "S50": {"权重": 0.18178375}, "S1": {"权重": 0.17993605}, "S22": {"权重": 0.17955866}, "S19": {"权重": 0.17670411}, "S27": {"权重": 0.17572562}, "S33": {"权重": 0.15873262}, "S16": {"权重": 0.1516077}, "S25": {"权重": 0.14714631}, "S3": {"权重": 0.14664012}, "S8": {"权重": 0.14471804}, "S4": {"权重": 0.14090605}, "S5": {"权重": 0.13580802}, "S21": {"权重": 0.1284411}, "S20": {"权重": 0.12117885}, "S17": {"权重": 0.11911317}, "S6": {"权重": 0.11614241}, "S12": {"权重": 0.107434645}, "S26": {"权重": 0.102074854}, "S7": {"权重": 0.09246612}, "S13": {"权重": 0.0847472}, "S23": {"权重": 0.08239772}, "S14": {"权重": 0.08186871}, "S2": {"权重": 0.079825185}, "S18": {"权重": 0.07967395}, "S10": {"权重": 0.06680566}, "S24": {"权重": 0.06123017}}}, "V3": {"价值名称": "智能驾驶安全 Automated Driving Safety", "场景权重": {"S41": {"权重": 0.5745641}, "S40": {"权重": 0.497341}, "S33": {"权重": 0.4666125}, "S51": {"权重": 0.46137464}, "S43": {"权重": 0.4565954}, "S42": {"权重": 0.4233093}, "S54": {"权重": 0.4151713}, "S53": {"权重": 0.41046897}, "S30": {"权重": 0.40785825}, "S45": {"权重": 0.40330216}, "S46": {"权重": 0.40308002}, "S14": {"权重": 0.396374}, "S49": {"权重": 0.37625167}, "S44": {"权重": 0.36137384}, "S29": {"权重": 0.35805836}, "S36": {"权重": 0.33736262}, "S9": {"权重": 0.33336622}, "S38": {"权重": 0.33228555}, "S35": {"权重": 0.3181034}, "S31": {"权重": 0.30569857}, "S13": {"权重": 0.29798928}, "S34": {"权重": 0.2961442}, "S21": {"权重": 0.2929823}, "S8": {"权重": 0.28352135}, "S47": {"权重": 0.2721031}, "S39": {"权重": 0.26544186}, "S1": {"权重": 0.25906733}, "S48": {"权重": 0.25512156}, "S28": {"权重": 0.24273866}, "S32": {"权重": 0.24260026}, "S10": {"权重": 0.23450789}, "S5": {"权重": 0.22689123}, "S20": {"权重": 0.22499464}, "S4": {"权重": 0.2249149}, "S15": {"权重": 0.22224307}, "S6": {"权重": 0.21507306}, "S52": {"权重": 0.21498276}, "S37": {"权重": 0.21391688}, "S3": {"权重": 0.20366533}, "S22": {"权重": 0.20360953}, "S18": {"权重": 0.20156123}, "S2": {"权重": 0.19231053}, "S23": {"权重": 0.18139623}, "S50": {"权重": 0.17813522}, "S17": {"权重": 0.1708899}, "S11": {"权重": 0.15898338}, "S19": {"权重": 0.15676229}, "S25": {"权重": 0.1566979}, "S27": {"权重": 0.14344342}, "S24": {"权重": 0.13989313}, "S26": {"权重": 0.10276516}, "S7": {"权重": 0.09614499}, "S12": {"权重": 0.06415134}, "S16": {"权重": 0.056429334}}}, "V4": {"价值名称": "空间利用率 Utilization", "场景权重": {"S53": {"权重": 0.64895993}, "S43": {"权重": 0.60142463}, "S30": {"权重": 0.51484424}, "S42": {"权重": 0.5067193}, "S29": {"权重": 0.5042188}, "S54": {"权重": 0.4955876}, "S51": {"权重": 0.47504777}, "S31": {"权重": 0.47366148}, "S49": {"权重": 0.4652479}, "S46": {"权重": 0.46329567}, "S14": {"权重": 0.43074697}, "S15": {"权重": 0.37045035}, "S35": {"权重": 0.35934776}, "S38": {"权重": 0.35167202}, "S36": {"权重": 0.3462584}, "S2": {"权重": 0.34543136}, "S23": {"权重": 0.34458283}, "S22": {"权重": 0.31526685}, "S3": {"权重": 0.3042229}, "S40": {"权重": 0.2888328}, "S9": {"权重": 0.28394723}, "S13": {"权重": 0.27837336}, "S12": {"权重": 0.27716023}, "S17": {"权重": 0.27220806}, "S21": {"权重": 0.2672842}, "S34": {"权重": 0.2636868}, "S16": {"权重": 0.25484467}, "S5": {"权重": 0.24746463}, "S7": {"权重": 0.24704881}, "S45": {"权重": 0.24009597}, "S19": {"权重": 0.23469436}, "S18": {"权重": 0.22407553}, "S11": {"权重": 0.22081405}, "S41": {"权重": 0.21865743}, "S50": {"权重": 0.21837988}, "S52": {"权重": 0.21298613}, "S10": {"权重": 0.21236777}, "S8": {"权重": 0.20881985}, "S20": {"权重": 0.20736293}, "S4": {"权重": 0.20347212}, "S39": {"权重": 0.19200857}, "S33": {"权重": 0.18836324}, "S25": {"权重": 0.18225656}, "S1": {"权重": 0.18194656}, "S37": {"权重": 0.1763345}, "S32": {"权重": 0.17515187}, "S6": {"权重": 0.1751079}, "S48": {"权重": 0.17040452}, "S24": {"权重": 0.16984437}, "S44": {"权重": 0.16896585}, "S47": {"权重": 0.13058132}, "S28": {"权重": 0.1288627}, "S26": {"权重": 0.11049542}, "S27": {"权重": 0.07855376}}}, "V5": {"价值名称": "承载性Carrying capacity", "场景权重": {"S51": {"权重": 0.48874408}, "S49": {"权重": 0.47156596}, "S53": {"权重": 0.43888927}, "S13": {"权重": 0.4367141}, "S15": {"权重": 0.40698555}, "S29": {"权重": 0.37675348}, "S30": {"权重": 0.34549785}, "S42": {"权重": 0.34279937}, "S19": {"权重": 0.31804088}, "S23": {"权重": 0.31439084}, "S31": {"权重": 0.31328085}, "S34": {"权重": 0.30473986}, "S9": {"权重": 0.30296612}, "S21": {"权重": 0.30286372}, "S2": {"权重": 0.29690787}, "S8": {"权重": 0.29167232}, "S40": {"权重": 0.28876948}, "S38": {"权重": 0.28329512}, "S43": {"权重": 0.2825073}, "S14": {"权重": 0.28139907}, "S5": {"权重": 0.2745337}, "S54": {"权重": 0.2717205}, "S7": {"权重": 0.2644551}, "S22": {"权重": 0.2554128}, "S18": {"权重": 0.25268453}, "S16": {"权重": 0.2511567}, "S11": {"权重": 0.24447018}, "S52": {"权重": 0.24043244}, "S17": {"权重": 0.2398737}, "S36": {"权重": 0.23354268}, "S41": {"权重": 0.23327076}, "S12": {"权重": 0.22474623}, "S46": {"权重": 0.21838234}, "S10": {"权重": 0.2114108}, "S39": {"权重": 0.20872682}, "S3": {"权重": 0.2073663}, "S4": {"权重": 0.2068987}, "S24": {"权重": 0.19987987}, "S35": {"权重": 0.19891337}, "S1": {"权重": 0.19667469}, "S48": {"权重": 0.17414446}, "S33": {"权重": 0.15656103}, "S20": {"权重": 0.15062921}, "S26": {"权重": 0.14708328}, "S37": {"权重": 0.14426467}, "S32": {"权重": 0.12490497}, "S27": {"权重": 0.11316724}, "S6": {"权重": 0.09968359}, "S25": {"权重": 0.09912367}, "S44": {"权重": 0.0974795}, "S50": {"权重": 0.09585112}, "S45": {"权重": 0.060074616}, "S47": {"权重": 0.037604358}, "S28": {"权重": 0.023456661}}}, "V6": {"价值名称": "适应性 Adaptability", "场景权重": {"S49": {"权重": 0.45211154}, "S44": {"权重": 0.4089174}, "S39": {"权重": 0.4063085}, "S52": {"权重": 0.4043702}, "S4": {"权重": 0.3982495}, "S51": {"权重": 0.39743787}, "S40": {"权重": 0.39726448}, "S53": {"权重": 0.38004497}, "S38": {"权重": 0.3792282}, "S48": {"权重": 0.3781254}, "S35": {"权重": 0.3776775}, "S45": {"权重": 0.37280303}, "S42": {"权重": 0.36247754}, "S33": {"权重": 0.35488793}, "S43": {"权重": 0.34654504}, "S54": {"权重": 0.34629864}, "S34": {"权重": 0.33952755}, "S30": {"权重": 0.3290113}, "S7": {"权重": 0.32691014}, "S46": {"权重": 0.32438964}, "S14": {"权重": 0.3126433}, "S2": {"权重": 0.31143147}, "S31": {"权重": 0.31139845}, "S8": {"权重": 0.31117213}, "S36": {"权重": 0.3044504}, "S41": {"权重": 0.2887751}, "S27": {"权重": 0.2883318}, "S29": {"权重": 0.28663942}, "S20": {"权重": 0.2756242}, "S13": {"权重": 0.27496567}, "S22": {"权重": 0.2683779}, "S37": {"权重": 0.26503927}, "S28": {"权重": 0.261856}, "S19": {"权重": 0.24789248}, "S23": {"权重": 0.24754252}, "S24": {"权重": 0.2460524}, "S15": {"权重": 0.24565382}, "S1": {"权重": 0.23862895}, "S26": {"权重": 0.23761195}, "S9": {"权重": 0.23745373}, "S50": {"权重": 0.22692783}, "S17": {"权重": 0.2190451}, "S6": {"权重": 0.21354473}, "S32": {"权重": 0.20167953}, "S18": {"权重": 0.20150593}, "S25": {"权重": 0.19111729}, "S5": {"权重": 0.18920319}, "S12": {"权重": 0.18664826}, "S11": {"权重": 0.18516281}, "S16": {"权重": 0.17325725}, "S47": {"权重": 0.17187549}, "S21": {"权重": 0.15880783}, "S3": {"权重": 0.15561225}, "S10": {"权重": 0.12269345}}}, "V7": {"价值名称": "耐用性 Leading", "场景权重": {"S51": {"权重": 0.6820141}, "S49": {"权重": 0.6078689}, "S38": {"权重": 0.5581849}, "S34": {"权重": 0.5104789}, "S40": {"权重": 0.4416232}, "S23": {"权重": 0.3574978}, "S22": {"权重": 0.35243925}, "S53": {"权重": 0.3441352}, "S1": {"权重": 0.31654775}, "S54": {"权重": 0.31226844}, "S48": {"权重": 0.30840728}, "S42": {"权重": 0.30166018}, "S30": {"权重": 0.29871666}, "S35": {"权重": 0.28532398}, "S29": {"权重": 0.26707798}, "S2": {"权重": 0.26339552}, "S46": {"权重": 0.25562653}, "S36": {"权重": 0.25285703}, "S43": {"权重": 0.24913317}, "S31": {"权重": 0.23709546}, "S41": {"权重": 0.23173389}, "S44": {"权重": 0.22976923}, "S3": {"权重": 0.22908956}, "S19": {"权重": 0.22032931}, "S13": {"权重": 0.21774998}, "S24": {"权重": 0.21679528}, "S20": {"权重": 0.2115431}, "S14": {"权重": 0.20134015}, "S52": {"权重": 0.19415835}, "S9": {"权重": 0.1904822}, "S10": {"权重": 0.1872297}, "S45": {"权重": 0.18598026}, "S26": {"权重": 0.18281667}, "S15": {"权重": 0.18243866}, "S4": {"权重": 0.18199469}, "S17": {"权重": 0.17076789}, "S33": {"权重": 0.17030096}, "S39": {"权重": 0.1636217}, "S11": {"权重": 0.14722864}, "S32": {"权重": 0.14493342}, "S7": {"权重": 0.14155447}, "S28": {"权重": 0.12774454}, "S25": {"权重": 0.12498324}, "S37": {"权重": 0.12445858}, "S18": {"权重": 0.12286036}, "S16": {"权重": 0.12107773}, "S8": {"权重": 0.1115374}, "S6": {"权重": 0.111191615}, "S5": {"权重": 0.110337496}, "S47": {"权重": 0.10352236}, "S50": {"权重": 0.09905568}, "S21": {"权重": 0.09014511}, "S12": {"权重": 0.08355088}, "S27": {"权重": 0.078071624}}}, "V8": {"价值名称": "可靠 Reliability", "场景权重": {"S49": {"权重": 0.5220835}, "S40": {"权重": 0.49298543}, "S53": {"权重": 0.47778967}, "S54": {"权重": 0.44378185}, "S51": {"权重": 0.42477617}, "S42": {"权重": 0.40051925}, "S30": {"权重": 0.38601217}, "S46": {"权重": 0.3855913}, "S29": {"权重": 0.38022226}, "S38": {"权重": 0.3719519}, "S43": {"权重": 0.36761853}, "S39": {"权重": 0.35543174}, "S36": {"权重": 0.34495056}, "S41": {"权重": 0.33638388}, "S34": {"权重": 0.33559752}, "S23": {"权重": 0.3317472}, "S31": {"权重": 0.31805035}, "S14": {"权重": 0.3164255}, "S33": {"权重": 0.31028605}, "S52": {"权重": 0.29064184}, "S2": {"权重": 0.27308106}, "S44": {"权重": 0.26317942}, "S35": {"权重": 0.26058128}, "S13": {"权重": 0.2555229}, "S22": {"权重": 0.24212153}, "S1": {"权重": 0.2371269}, "S48": {"权重": 0.23121323}, "S15": {"权重": 0.21705668}, "S21": {"权重": 0.21591283}, "S4": {"权重": 0.21362612}, "S10": {"权重": 0.19771788}, "S24": {"权重": 0.19499446}, "S47": {"权重": 0.19487703}, "S45": {"权重": 0.1948159}, "S26": {"权重": 0.19068433}, "S37": {"权重": 0.1823795}, "S17": {"权重": 0.18217887}, "S50": {"权重": 0.16840123}, "S5": {"权重": 0.16705531}, "S3": {"权重": 0.16556688}, "S27": {"权重": 0.16371776}, "S12": {"权重": 0.15418261}, "S20": {"权重": 0.1535907}, "S28": {"权重": 0.15336014}, "S9": {"权重": 0.1504528}, "S6": {"权重": 0.14488746}, "S32": {"权重": 0.13110614}, "S7": {"权重": 0.11369033}, "S25": {"权重": 0.11289098}, "S16": {"权重": 0.11246161}, "S18": {"权重": 0.109731965}, "S19": {"权重": 0.10252888}, "S11": {"权重": 0.085414834}, "S8": {"权重": 0.037991088}}}, "V9": {"价值名称": "设计感 Design", "场景权重": {"S35": {"权重": 0.5907832}, "S38": {"权重": 0.5537134}, "S54": {"权重": 0.5432119}, "S29": {"权重": 0.5380231}, "S42": {"权重": 0.53681815}, "S49": {"权重": 0.5364937}, "S30": {"权重": 0.52865756}, "S51": {"权重": 0.51764965}, "S39": {"权重": 0.5134993}, "S52": {"权重": 0.5059738}, "S53": {"权重": 0.5045717}, "S46": {"权重": 0.5007123}, "S36": {"权重": 0.49719808}, "S48": {"权重": 0.48725697}, "S31": {"权重": 0.44324753}, "S43": {"权重": 0.43000403}, "S44": {"权重": 0.41173407}, "S34": {"权重": 0.36732945}, "S40": {"权重": 0.34332335}, "S45": {"权重": 0.31951323}, "S27": {"权重": 0.30090392}, "S14": {"权重": 0.28067604}, "S15": {"权重": 0.25788996}, "S41": {"权重": 0.23606017}, "S37": {"权重": 0.22399104}, "S4": {"权重": 0.22084948}, "S2": {"权重": 0.21927296}, "S22": {"权重": 0.19298434}, "S28": {"权重": 0.19136125}, "S50": {"权重": 0.18969212}, "S23": {"权重": 0.18841943}, "S13": {"权重": 0.18540585}, "S32": {"权重": 0.171476}, "S33": {"权重": 0.16513409}, "S26": {"权重": 0.16415651}, "S24": {"权重": 0.15868556}, "S1": {"权重": 0.14068359}, "S20": {"权重": 0.13795497}, "S3": {"权重": 0.13730113}, "S47": {"权重": 0.13529275}, "S8": {"权重": 0.13093506}, "S9": {"权重": 0.12660302}, "S19": {"权重": 0.11180394}, "S21": {"权重": 0.10228382}, "S17": {"权重": 0.080801114}, "S18": {"权重": 0.06928319}, "S10": {"权重": 0.067608446}, "S25": {"权重": 0.06527698}, "S16": {"权重": 0.05813814}, "S7": {"权重": 0.05566358}, "S6": {"权重": 0.054866508}, "S12": {"权重": 0.05335129}, "S11": {"权重": 0.040423766}, "S5": {"权重": 0.03816437}}}};
+            
+            function initializeValueSelect() {
+                const select = document.getElementById('valueSelect');
+                for (const valueId in valueScenes) {
+                    const valueName = valueScenes[valueId]["价值名称"];
+                    const option = document.createElement('option');
+                    option.value = valueId;
+                    option.textContent = valueName;
+                    select.appendChild(option);
+                }
             }
-
-            function filterScenes() {
-                const input = document.getElementById("searchInput").value.toLowerCase();
-                const scenes = document.querySelectorAll(".scene-container");
-                scenes.forEach(scene => {
-                    const description = scene.querySelector(".scene-description").innerText.toLowerCase();
-                    scene.style.display = description.includes(input) ? "block" : "none";
+            
+            function toggleDetails(sceneId, element) {
+                const configDiv = document.getElementById(`config-${sceneId}`);
+                const allConfigs = document.querySelectorAll('.scene-configurations');
+                const allScenes = document.querySelectorAll('.scene-container');
+                
+                allScenes.forEach(scene => scene.classList.remove('active'));
+                
+                allConfigs.forEach(config => {
+                    if (config.id !== `config-${sceneId}`) {
+                        config.style.display = 'none';
+                    }
                 });
+                
+                if (configDiv.style.display === 'none' || configDiv.style.display === '') {
+                    configDiv.style.display = 'block';
+                    element.classList.add('active');
+                } else {
+                    configDiv.style.display = 'none';
+                    element.classList.remove('active');
+                }
             }
+            
+            function updateSceneDisplay() {
+                const selectedValue = document.getElementById('valueSelect').value;
+                const scenes = document.querySelectorAll('.scene-container');
+                const debugInfo = document.getElementById('debugInfo');
+                
+                scenes.forEach(scene => {
+                    const sceneId = scene.dataset.sceneId;
+                    const weightDiv = scene.querySelector('.scene-weight');
+                    
+                    if (!selectedValue) {
+                        scene.style.display = '';
+                        weightDiv.textContent = '';
+                        return;
+                    }
+                    
+                    const valueData = valueScenes[selectedValue];
+                    if (valueData && valueData.场景权重 && valueData.场景权重[sceneId]) {
+                        const weight = valueData.场景权重[sceneId].权重;
+                        weightDiv.textContent = weight.toFixed(4);
+                        scene.style.display = '';
+                    } else {
+                        weightDiv.textContent = '';
+                        scene.style.display = 'none';
+                    }
+                });
+                
+                document.querySelectorAll('.scene-configurations').forEach(config => {
+                    config.style.display = 'none';
+                });
+                
+                if (selectedValue && valueScenes[selectedValue]) {
+                    const valueData = valueScenes[selectedValue];
+                    debugInfo.textContent = `当前选择: ${valueData.价值名称} (${selectedValue}), ` +
+                        `关联场景数: ${Object.keys(valueData.场景权重).length}`;
+                } else {
+                    debugInfo.textContent = '显示所有场景';
+                }
+                
+                sortScenes();
+            }
+            
+            function sortScenes() {
+                const container = document.getElementById('mainContainer');
+                const scenes = Array.from(container.children).filter(
+                    scene => scene.style.display !== 'none'
+                );
+                
+                scenes.sort((a, b) => {
+                    const weightA = parseFloat(a.querySelector('.scene-weight').textContent) || 0;
+                    const weightB = parseFloat(b.querySelector('.scene-weight').textContent) || 0;
+                    return weightB - weightA;
+                });
+                
+                scenes.forEach(scene => container.appendChild(scene));
+            }
+            
+            initializeValueSelect();
         </script>
     </body>
     </html>
